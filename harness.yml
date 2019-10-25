@@ -1,0 +1,12 @@
+harness('inviqa/go'):
+  description: A docker based development environment for Go
+  require:
+    services:
+      - proxy
+    confd:
+      - harness:/
+---
+import:
+  - harness/config/*.yml
+  - harness/attributes/*.yml
+  - harness/attributes/environment/={env('MY127WS_ENV','local')}.yml

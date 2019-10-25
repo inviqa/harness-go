@@ -1,0 +1,16 @@
+attributes.default:
+  app:
+    binary: app
+    src_path: .
+    module_path: = @('app.src_path')
+    port: 80
+    health_port: 80
+
+  domain: my127.site
+  hostname: = @('namespace') ~ '.' ~ @('domain')
+
+  docker:
+    repository: = @("workspace.name")
+
+  go:
+    version: 1.13

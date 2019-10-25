@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    image: {{ @('docker.repository') ~ ':' ~ @('app.version') }}
+    labels:
+      - traefik.backend={{ @('workspace.name') }}
+      - traefik.frontend.rule=Host:{{ @('hostname') }}
+      - traefik.docker.network=my127ws
+      - traefik.port={{ @('app.port') }}
+    networks:
+      - shared
+    expose:
+      - {{ @('app.port') }}
+    environment:
+      LOG_LEVEL: debug
+
+networks:
+  shared:
+    external:
+      name: my127ws

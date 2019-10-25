@@ -1,0 +1,50 @@
+command('enable'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)
+    source .my127ws/harness/scripts/enable.sh
+
+command('disable'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)
+    source .my127ws/harness/scripts/disable.sh
+
+command('destroy'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)
+    source .my127ws/harness/scripts/destroy.sh
+
+command('build'): |
+  #!bash(workspace:/)|@
+  passthru docker build -t @('docker.repository'):@('app.version') -f .my127ws/docker/app/Dockerfile .
+
+command('rebuild'):
+  #!php
+  $ws->run('destroy');
+  $ws->run('install');
+
+command('go test'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T app go test ./...
+
+command('go vet'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T app go vet ./...
+
+command('go fmt check'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru test -z $(docker-compose exec -T app gofmt -l .)

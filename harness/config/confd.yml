@@ -1,0 +1,6 @@
+confd('harness:/'):
+  - { src: application/overlay/Jenkinsfile }
+  - { src: docker/app/Dockerfile }
+  - { src: docker/app/Dockerfile.prod }
+  - { src: docker/app/root/ssh-keys.sh }
+  - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }

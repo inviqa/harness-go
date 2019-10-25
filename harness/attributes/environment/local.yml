@@ -1,0 +1,4 @@
+attributes:
+  app:
+    version: develop
+    build: develop

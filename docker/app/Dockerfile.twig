@@ -1,0 +1,30 @@
+FROM golang:{{ @('go.version')}} AS golang
+
+ENV CGO_ENABLED=0
+ENV GOPRIVATE=github.com/inviqa/*
+
+COPY .my127ws/docker/app/root /
+{% if @('github.oauth_token') %}
+RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
+{% elseif @('github.ssh_deploy_key') %}
+RUN chmod a+x /ssh-keys.sh
+RUN /ssh-keys.sh
+RUN git config --system url."ssh://git@github.com/inviqa".insteadOf "https://github.com/inviqa"
+{% endif %}
+
+WORKDIR /app
+
+COPY {{ @('app.module_path') }}/go.mod .
+COPY {{ @('app.module_path') }}/go.sum .
+RUN go mod download
+
+COPY . .
+{% if @('app.build') == 'production' %}
+RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+{% else %}
+RUN GOOS=linux GOARCH=amd64 go build -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+{% endif %}
+
+ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
+EXPOSE {{ @('app.port') }}
+EXPOSE {{ @('app.health_port') }}

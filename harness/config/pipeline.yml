@@ -1,0 +1,10 @@
+command('build-prod'): |
+  #!bash(workspace:/)|@
+  passthru docker build -t @('docker.repository'):@('app.version') -f .my127ws/docker/app/Dockerfile.prod .
+
+command('app publish'): |
+  #!bash(workspace:/)|@
+  run docker login -u="@('docker.username')" -p="@('docker.password')" @('docker.repository')
+  run docker push @('docker.repository'):@('app.version')
+  run docker logout @('docker.repository')
+
