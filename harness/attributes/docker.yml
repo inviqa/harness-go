@@ -1,23 +1,8 @@
-attributes.default:
-  app:
-    binary: app
-    src_path: .
-    module_path: = @('app.src_path')
-    port: 80
-    health_port: 80
-
-  domain: my127.site
-  hostname: = @('namespace') ~ '.' ~ @('domain')
-
-  docker:
-    repository: = @("workspace.name")
-    config: null
-
-  go:
-    version: 1.13
-  
-  helm:
-    timeout: 300
+attributes:
+  services:
+    app:
+      environment:
+        APP_HOST: = @('hostname')
 
   pipeline:
     publish:
@@ -29,8 +14,16 @@ attributes.default:
     base:
       resourcePrefix: ~
       hostname: = @('pipeline.base.namespace') ~ '.example.com'
+      services:
+        app:
+          environment:
+            APP_HOST: = @('pipeline.base.hostname')
     qa:
       enabled: no
       namespace: = @('workspace.name') 
       hostname: = @('pipeline.qa.namespace') ~ '.' ~ @('domain')
       resourcePrefix: ~
+      services:
+        app:
+          environment:
+            APP_HOST: = @('pipeline.qa.hostname')

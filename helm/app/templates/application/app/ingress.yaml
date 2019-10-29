@@ -1,0 +1,19 @@
+{{ if eq .Values.ingress "standard" }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  creationTimestamp: null
+  labels:
+    app.service: {{ .Values.resourcePrefix }}app
+  name: {{ .Values.resourcePrefix }}app
+spec:
+  rules:
+  - host: {{ .Values.docker.services.app.environment.APP_HOST }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .Values.resourcePrefix }}app
+          servicePort: {{ .Values.port }}
+status:
+  loadBalancer: {}
+{{ end }}

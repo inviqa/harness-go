@@ -4,3 +4,8 @@ confd('harness:/'):
   - { src: docker/app/Dockerfile.prod }
   - { src: docker/app/root/ssh-keys.sh }
   - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }
+  - { src: helm/app/Chart.yaml }
+  - { src: helm/app/values.yaml }
+  - { src: helm/qa/Chart.yaml }
+  - { src: helm/qa/requirements.yaml }
+  - { src: helm/qa/values.yaml }
