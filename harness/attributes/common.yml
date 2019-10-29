@@ -18,6 +18,10 @@ attributes.default:
   
   helm:
     timeout: 300
+  
+  jenkins:
+    credentials:
+      my127ws_key: = @('workspace.name') ~ '-my127ws-key'
 
   pipeline:
     publish:
