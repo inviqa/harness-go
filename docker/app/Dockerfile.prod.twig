@@ -1,4 +1,4 @@
-FROM {{ @('docker.repository')}}:{{ @('app.version') }} AS source
+FROM {{ @('docker.repository')}}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} AS source
 
 FROM scratch
 

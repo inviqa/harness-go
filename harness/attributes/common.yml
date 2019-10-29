@@ -11,6 +11,7 @@ attributes.default:
 
   docker:
     repository: = @("workspace.name")
+    tagPrefix: = ''
     config: null
 
   go:

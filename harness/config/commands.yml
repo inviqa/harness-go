@@ -21,7 +21,7 @@ command('destroy'):
 
 command('build'): |
   #!bash(workspace:/)|@
-  passthru docker build -t @('docker.repository'):@('app.version') -f .my127ws/docker/app/Dockerfile .
+  passthru docker build -t @('docker.repository'):@('docker.tagPrefix')@('app.version') -f .my127ws/docker/app/Dockerfile .
 
 command('rebuild'):
   #!php
