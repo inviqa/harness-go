@@ -1,0 +1,23 @@
+  app:
+    image: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
+    build:
+      context: ./
+      dockerfile: .my127ws/docker/image/app/Dockerfile
+{% if @('github.oauth_token') %}
+      args:
+        GITHUB_TOKEN: {{ @('github.oauth_token') }}
+{% endif %}
+    labels:
+      - traefik.backend={{ @('workspace.name') }}
+      - traefik.frontend.rule=Host:{{ @('hostname') }}
+      - traefik.docker.network=my127ws
+      - traefik.port={{ @('app.port') }}
+    networks:
+      private:
+        aliases:
+          - {{ @('hostname') }}
+      shared: {}
+    expose:
+      - {{ @('app.port') }}
+    environment:
+{{ to_yaml(@('services.app.environment'), 2, 6) | raw }}

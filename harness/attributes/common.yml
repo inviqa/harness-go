@@ -5,9 +5,19 @@ attributes.default:
     module_path: = @('app.src_path')
     port: 80
     health_port: 80
+    services: []
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')
+
+  database:
+    # possible platforms are mysql, postgres or ~ for none
+    platform: postgres
+    host: postgres
+    user: app
+    pass: app
+    name: app
+    root_pass: DV6RdNY3QcFsBk7V
 
   docker:
     repository: = @("workspace.name")
@@ -23,6 +33,18 @@ attributes.default:
   jenkins:
     credentials:
       my127ws_key: = @('workspace.name') ~ '-my127ws-key'
+
+  # these settings are only relevant when the respective service is enabled in
+  # app.services
+  persistence:
+    mysql:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 4Gi
+    postgres:
+      enabled: true
+      accessMode: ReadWriteOnce
+      size: 4Gi
 
   pipeline:
     publish:

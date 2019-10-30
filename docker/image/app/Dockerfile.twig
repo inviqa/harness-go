@@ -3,8 +3,9 @@ FROM golang:{{ @('go.version')}} AS golang
 ENV CGO_ENABLED=0
 ENV GOPRIVATE=github.com/inviqa/*
 
-COPY .my127ws/docker/app/root /
+COPY .my127ws/docker/image/app/root /
 {% if @('github.oauth_token') %}
+ARG GITHUB_TOKEN=
 RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
 {% elseif @('github.ssh_deploy_key') %}
 RUN chmod a+x /ssh-keys.sh
