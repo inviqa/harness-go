@@ -1,5 +1,12 @@
   app:
-    image: {{ @('docker.repository') ~ ':' ~ @('app.version') }}
+    image: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
+    build:
+      context: ./
+      dockerfile: .my127ws/docker/image/app/Dockerfile
+{% if @('github.oauth_token') %}
+      args:
+        GITHUB_TOKEN: {{ @('github.oauth_token') }}
+{% endif %}
     labels:
       - traefik.backend={{ @('workspace.name') }}
       - traefik.frontend.rule=Host:{{ @('hostname') }}
