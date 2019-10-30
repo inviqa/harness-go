@@ -1,0 +1,55 @@
+{{ if .Values.service.mysql }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.resourcePrefix }}mysql
+  labels:
+    app.service: {{ .Values.resourcePrefix }}mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.service: {{ .Values.resourcePrefix }}mysql
+  template:
+    metadata:
+      labels:
+        app.service: {{ .Values.resourcePrefix }}mysql
+    spec:
+      containers:
+      - env:
+        {{- range $key, $value := .Values.docker.services.mysql.environment }}
+        - name: {{ $key | quote }}
+          value: {{ $value | quote }}
+        {{- end }}
+        image: mysql:5.7
+        imagePullPolicy: Always
+        name: mysql
+        args:
+        - --ignore-db-dir
+        - lost+found
+        ports:
+        - containerPort: 3306
+        resources:
+          limits:
+            memory: {{ .Values.resources.limits.memory.mysql }}
+          requests:
+            memory: {{ .Values.resources.requests.memory.mysql }}
+        readinessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - {{ .Values.resourcePrefix }}name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      restartPolicy: Always
+      volumes:
+      - {{ .Values.resourcePrefix }}name: mysql-persistent-storage
+{{- if .Values.persistence.mysql.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.resourcePrefix }}mysql-pv-claim
+{{- else }}
+        emptyDir: {}
+{{- end }}
+status: {}
+{{ end }}

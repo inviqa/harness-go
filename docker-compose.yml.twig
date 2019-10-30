@@ -1,20 +1,22 @@
+{% set blocks  = '_twig/docker-compose.yml/' %}
+{% set dockersync = false %}
+{% if @('host.os') == 'darwin' and @('docker-sync') == 'yes' %}
+{% set dockersync = true %}
+{% endif %}
 version: '3'
 services:
-  app:
-    image: {{ @('docker.repository') ~ ':' ~ @('app.version') }}
-    labels:
-      - traefik.backend={{ @('workspace.name') }}
-      - traefik.frontend.rule=Host:{{ @('services.app.environment.APP_HOST') }}
-      - traefik.docker.network=my127ws
-      - traefik.port={{ @('app.port') }}
-    networks:
-      - shared
-    expose:
-      - {{ @('app.port') }}
-    environment:
-      LOG_LEVEL: debug
-
+{% include blocks ~ 'application.yml.twig' %}
+{% for service in @('app.services') %}
+{% include blocks ~ 'service/' ~ service ~ '.yml.twig' %}
+{% endfor %}
 networks:
+  private:
+    external: false
   shared:
     external:
       name: my127ws
+{% if dockersync %}
+volumes:
+  {{ @('workspace.name') }}-sync:
+    external: true
+{% endif %}

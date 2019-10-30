@@ -4,6 +4,11 @@ docker:
 {{ deep_merge_to_yaml([@('services'), @('pipeline.base.services')], 2, 4) | raw }}
   image:
     app: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
+
+service:
+  mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
+  postgres: {{ ("postgres" in @('app.services')) ? 'true' : 'false' }}
+
 port: {{ @('app.port') }}
 health_port: {{ @('app.health_port') }}
 ingress: "standard" # standard or istio
