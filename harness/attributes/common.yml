@@ -6,6 +6,11 @@ attributes.default:
     port: 80
     health_port: 80
     services: []
+    ingress:
+      # possible ingress types are standard, istio, or ~ for none
+      # note istio requires a cluster that has istio configured as the ingress controller
+      type: standard
+      protocol: http
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')

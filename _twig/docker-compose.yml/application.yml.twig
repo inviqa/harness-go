@@ -8,15 +8,24 @@
         GITHUB_TOKEN: {{ @('github.oauth_token') }}
 {% endif %}
     labels:
+{% if @('app.ingress.type') is null %}
+      - traefik.enable=false
+{% else %}
       - traefik.backend={{ @('workspace.name') }}
       - traefik.frontend.rule=Host:{{ @('hostname') }}
       - traefik.docker.network=my127ws
       - traefik.port={{ @('app.port') }}
+{% if @('app.ingress.protocol') %}
+      - traefik.protocol={{ @('app.ingress.protocol') }}
+{% endif %}
+{% endif %}
     networks:
       private:
         aliases:
           - {{ @('hostname') }}
+{% if @('app.ingress.type') is not null %}
       shared: {}
+{% endif %}
     expose:
       - {{ @('app.port') }}
     environment:

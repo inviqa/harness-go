@@ -1,9 +1,12 @@
-{{ if eq .Values.ingress "standard" }}
+{{ if eq .Values.ingress.type "standard" }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   creationTimestamp: null
   labels:
+{{- if .Values.ingress.protocol }}  
+    ingress.kubernetes.io/protocol: {{ .Values.ingress.protocol }}
+{{- end }}
     app.service: {{ .Values.resourcePrefix }}app
   name: {{ .Values.resourcePrefix }}app
 spec:
