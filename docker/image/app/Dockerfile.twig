@@ -3,6 +3,11 @@ FROM golang:{{ @('go.version')}} AS golang
 ENV CGO_ENABLED=0
 ENV GOPRIVATE=github.com/inviqa/*
 
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    unzip \
+ && rm -rf /var/lib/apt/lists/*
+
 COPY .my127ws/docker/image/app/root /
 {% if @('github.oauth_token') %}
 ARG GITHUB_TOKEN=
@@ -15,11 +20,16 @@ RUN git config --system url."ssh://git@github.com/inviqa".insteadOf "https://git
 
 WORKDIR /app
 
+RUN /image-dependencies.sh
+
 COPY {{ @('app.module_path') }}/go.mod .
 COPY {{ @('app.module_path') }}/go.sum .
 RUN go mod download
 
 COPY . .
+
+RUN go generate
+
 {% if @('app.build') == 'production' %}
 RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
 {% else %}
