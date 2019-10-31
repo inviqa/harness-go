@@ -28,6 +28,13 @@ command('rebuild'):
   $ws->run('destroy');
   $ws->run('install');
 
+command('go generate'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T app go generate
+
 command('go test'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
