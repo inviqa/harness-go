@@ -17,6 +17,11 @@ pipeline {
                 stage('go vet') { steps { sh 'ws go vet' } }
             }
         }
+        stage('Build for production') {
+            steps {
+                sh 'ws build-prod'
+            }
+        }
 {% if @('pipeline.publish.enabled') == 'yes' %}
         stage('Publish') {
             when { not { triggeredBy 'TimerTrigger' } }
