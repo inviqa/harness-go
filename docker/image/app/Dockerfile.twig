@@ -9,6 +9,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 COPY .my127ws/docker/image/app/root /
+COPY .my127ws/docker/image/app/bin /usr/local/bin
 {% if @('github.oauth_token') %}
 ARG GITHUB_TOKEN=
 RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
