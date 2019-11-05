@@ -1,8 +1,8 @@
-requests:
-  memory:
-    mysql: {{ @('resources.requests.memory.mysql') }}
-    postgres: {{ @('resources.requests.memory.postgres') }}
-limits:
-  memory:
-    mysql: {{ @('resources.limits.memory.mysql') }}
-    postgres: {{ @('resources.limits.memory.postgres') }}
+  requests:
+    memory:
+      mysql: {{ @('resources.requests.memory.mysql') }}
+      postgres: {{ @('resources.requests.memory.postgres') }}
+  limits:
+    memory:
+      mysql: {{ @('resources.limits.memory.mysql') }}
+      postgres: {{ @('resources.limits.memory.postgres') }}
