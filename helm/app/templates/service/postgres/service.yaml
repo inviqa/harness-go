@@ -1,4 +1,4 @@
-{{ if .Values.service.postgres.enabled }}
+{{ if .Values.service.postgres }}
 apiVersion: v1
 kind: Service
 metadata:

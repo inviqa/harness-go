@@ -43,11 +43,9 @@ attributes.default:
   # app.services
   persistence:
     mysql:
-      enabled: false
       accessMode: ReadWriteOnce
       size: 4Gi
     postgres:
-      enabled: false
       accessMode: ReadWriteOnce
       size: 4Gi
 

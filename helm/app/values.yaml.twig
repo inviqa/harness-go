@@ -7,7 +7,7 @@ docker:
   image:
     app: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
 
-service:
+persistence:
   mysql:
 {{ to_yaml(@('persistence.mysql'), 2, 4) | raw }}
   postgres:

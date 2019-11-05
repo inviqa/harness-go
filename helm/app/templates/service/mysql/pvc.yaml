@@ -1,6 +1,6 @@
-{{ if .Values.service.mysql.enabled -}}
+{{ if .Values.service.mysql -}}
 
-{{- with .Values.service.mysql -}}
+{{- with .Values.persistence.mysql -}}
 
 kind: PersistentVolumeClaim
 apiVersion: v1

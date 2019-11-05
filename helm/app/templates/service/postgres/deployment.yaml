@@ -1,4 +1,4 @@
-{{ if .Values.service.postgres.enabled }}
+{{ if .Values.service.postgres }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -42,11 +42,7 @@ spec:
       restartPolicy: Always
       volumes:
       - name: {{ .Values.resourcePrefix }}postgres-persistent-storage
-{{- if .Values.service.postgres.enabled }}
         persistentVolumeClaim:
           claimName: {{ .Values.resourcePrefix }}postgres-pv-claim
-{{- else }}
-        emptyDir: {}
-{{- end }}
 status: {}
 {{ end }}
