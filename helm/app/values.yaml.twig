@@ -7,7 +7,9 @@ docker:
 
 service:
   mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
-  postgres: {{ ("postgres" in @('app.services')) ? 'true' : 'false' }}
+  {{ to_yaml(@('persistence.mysql'), 2, 2) | raw }}
+  postgres:
+  {{ to_yaml(@('persistence.postgres'), 2, 2) | raw }}
 
 port: {{ @('app.port') }}
 health_port: {{ @('app.health_port') }}

@@ -1,6 +1,6 @@
-{{ if and .Values.service.postgres .Values.persistence.postgres.enabled -}}
+{{ if .Values.service.postgres.enabled -}}
 
-{{- with .Values.persistence.postgres -}}
+{{- with .Values.service.postgres -}}
 
 kind: PersistentVolumeClaim
 apiVersion: v1

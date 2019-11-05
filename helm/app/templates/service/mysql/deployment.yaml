@@ -1,4 +1,4 @@
-{{ if .Values.service.mysql }}
+{{ if .Values.service.mysql.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -45,7 +45,7 @@ spec:
       restartPolicy: Always
       volumes:
       - {{ .Values.resourcePrefix }}name: mysql-persistent-storage
-{{- if .Values.persistence.mysql.enabled }}
+{{- if .Values.service.mysql.enabled }}
         persistentVolumeClaim:
           claimName: {{ .Values.resourcePrefix }}mysql-pv-claim
 {{- else }}
