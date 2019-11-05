@@ -1,3 +1,5 @@
+{% set blocks  = 'helm/app/_twig/values.yaml/' %}
+
 docker:
   config: {{ @('docker.config') }}
   services:
@@ -8,6 +10,15 @@ docker:
 service:
   mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
   postgres: {{ ("postgres" in @('app.services')) ? 'true' : 'false' }}
+
+persistence:
+  mysql:
+{{ to_yaml(@('persistence.mysql'), 2, 4) | raw }}
+  postgres:
+{{ to_yaml(@('persistence.postgres'), 2, 4) | raw }}
+
+resources:
+{% include blocks ~ 'resources.yml.twig' %}
 
 port: {{ @('app.port') }}
 health_port: {{ @('app.health_port') }}

@@ -66,3 +66,13 @@ attributes.default:
       namespace: = @('workspace.name') 
       hostname: = @('pipeline.qa.namespace') ~ '.' ~ @('domain')
       resourcePrefix: ~
+
+  resources:
+    requests:
+      memory:
+        mysql: "512Mi"
+        postgres: "512Mi"
+    limits:
+      memory:
+        mysql: "512Mi"
+        postgres: "512Mi"
