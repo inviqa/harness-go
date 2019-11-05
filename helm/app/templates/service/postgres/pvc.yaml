@@ -1,4 +1,4 @@
-{{ if .Values.service.postgres -}}
+{{ if and .Values.service.postgres .Values.persistence.postgres.enabled -}}
 
 {{- with .Values.persistence.postgres -}}
 

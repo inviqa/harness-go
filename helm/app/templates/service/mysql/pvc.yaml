@@ -1,4 +1,4 @@
-{{ if .Values.service.mysql -}}
+{{ if and .Values.service.mysql .Values.persistence.mysql.enabled -}}
 
 {{- with .Values.persistence.mysql -}}
 
