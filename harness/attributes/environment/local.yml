@@ -2,3 +2,4 @@ attributes:
   app:
     version: develop
     build: develop
+    log_level: 'debug'
