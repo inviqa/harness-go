@@ -2,7 +2,7 @@ attributes:
   services:
     app:
       environment:
-        LOG_LEVEL: @('app.log_level')
+        LOG_LEVEL: = @('app.log_level')
         APP_HOST: = @('hostname')
     mysql:
       environment:
