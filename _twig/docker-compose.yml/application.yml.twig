@@ -19,13 +19,7 @@
       - traefik.protocol={{ @('app.ingress.protocol') }}
 {% endif %}
 {% endif %}
-    networks:
-      private:
-        aliases:
-          - {{ @('hostname') }}
-{% if @('app.ingress.type') is not null %}
-      shared: {}
-{% endif %}
+{% include blocks ~ 'app-networks.yml.twig' %}
     expose:
       - {{ @('app.port') }}
     environment:

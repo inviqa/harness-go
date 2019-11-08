@@ -1,0 +1,7 @@
+    networks:
+      private:
+        aliases:
+          - {{ @('hostname') }}
+{% if @('app.ingress.type') is not null %}
+      shared: {}
+{% endif %}

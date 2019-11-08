@@ -9,12 +9,7 @@ services:
 {% for service in @('app.services') %}
 {% include blocks ~ 'service/' ~ service ~ '.yml.twig' %}
 {% endfor %}
-networks:
-  private:
-    external: false
-  shared:
-    external:
-      name: my127ws
+{% include blocks ~ 'networks.yml.twig' %}
 {% if dockersync %}
 volumes:
   {{ @('workspace.name') }}-sync:
