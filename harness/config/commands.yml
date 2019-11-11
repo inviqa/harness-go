@@ -23,7 +23,7 @@ command('build'): |
   #!bash(workspace:/)|@
   passthru docker-compose build app
 
-command('rebuild'):
+command('rebuild'): |
   #!php
   $ws->run('destroy');
   $ws->run('install');
