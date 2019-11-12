@@ -2,7 +2,7 @@ attributes:
   services:
     app:
       environment:
-        LOG_LEVEL: = @('app.log_level')
+        LOG_LEVEL: debug
         APP_HOST: = @('hostname')
     mysql:
       environment:
@@ -31,6 +31,7 @@ attributes:
         app:
           environment:
             APP_HOST: = @('pipeline.base.hostname')
+            LOG_LEVEL: info
     qa:
       enabled: no
       namespace: = @('workspace.name') 
