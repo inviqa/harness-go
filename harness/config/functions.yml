@@ -45,3 +45,21 @@ function('slugify', [text]): |
   $text = preg_replace('~-+~', '-', $text);
   $text = strtolower($text);
   = $text;
+
+function('get_docker_external_networks'): |
+  #!php
+  $configRaw = shell_exec('docker-compose config');
+  $config = \Symfony\Component\Yaml\Yaml::parse($configRaw);
+  $externalNetworks = [];
+  if (isset($config['networks'])) {
+    foreach ($config['networks'] as $network) {
+      if (isset($network['external'])) {
+        if (is_array($network['external'])) {
+          $externalNetworks[] = $network['external']['name'];
+        } else if ($network['external'] === true) {
+          $externalNetworks[] = $network['name'];
+        }
+      }
+    }
+  }
+  = join(" ", $externalNetworks);

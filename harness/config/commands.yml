@@ -19,6 +19,17 @@ command('destroy'):
     #!bash(workspace:/)
     source .my127ws/harness/scripts/destroy.sh
 
+command('networks external'):
+  env:
+    NETWORKS: = get_docker_external_networks()
+  exec: |
+    #!bash(workspace:/)
+    for NETWORK in ${NETWORKS}; do
+      if ! docker network inspect "${NETWORK}" 2>&1 >/dev/null; then
+        passthru docker network create "${NETWORK}"
+      fi
+    done
+
 command('build'): |
   #!bash(workspace:/)|@
   passthru docker-compose build app
