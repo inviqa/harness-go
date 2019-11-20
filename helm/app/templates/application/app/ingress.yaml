@@ -1,4 +1,4 @@
-{{ if eq .Values.ingress "standard" }}
+{{ if eq .Values.ingress.type "standard" }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -16,7 +16,7 @@ spec:
       paths:
       - backend:
           serviceName: {{ .Values.resourcePrefix }}app
-          servicePort: {{ .Values.port }}
+          servicePort: {{ .Values.default_port.port }}
 status:
   loadBalancer: {}
 {{ end }}

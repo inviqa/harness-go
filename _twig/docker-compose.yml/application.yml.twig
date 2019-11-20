@@ -14,7 +14,7 @@
       - traefik.backend={{ @('workspace.name') }}
       - traefik.frontend.rule=Host:{{ @('hostname') }}
       - traefik.docker.network=my127ws
-      - traefik.port={{ @('app.port') }}
+      - traefik.port={{ @('app.default_port.port') }}
 {% if @('app.ingress.protocol') %}
       - traefik.protocol={{ @('app.ingress.protocol') }}
 {% endif %}
@@ -27,6 +27,6 @@
       shared: {}
 {% endif %}
     expose:
-      - {{ @('app.port') }}
+      - {{ @('app.default_port.port') }}
     environment:
 {{ to_yaml(@('services.app.environment'), 2, 6) | raw }}

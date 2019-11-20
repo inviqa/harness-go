@@ -20,7 +20,8 @@ persistence:
 resources:
 {% include blocks ~ 'resources.yml.twig' %}
 
-port: {{ @('app.port') }}
+default_port:
+{{ to_yaml(@('app.default_port'), 2, 2) | raw }}
 health_port: {{ @('app.health_port') }}
 ingress:
 {{ to_yaml(@('app.ingress'), 2, 2) | raw }}
