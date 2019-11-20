@@ -3,6 +3,7 @@ attributes.default:
     binary: app
     src_path: .
     module_path: = @('app.src_path')
+    modules_enabled: = go_mod_exists(@('module_path'))
     health_port: 80
     services: []
     default_port:

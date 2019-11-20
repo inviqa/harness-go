@@ -63,3 +63,7 @@ function('get_docker_external_networks'): |
     }
   }
   = join(" ", $externalNetworks);
+
+function('go_mod_exists', [modulePath]): |
+  #!php
+  = file_exists($modulePath . '/go.mod');

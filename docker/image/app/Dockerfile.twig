@@ -23,9 +23,11 @@ WORKDIR /app
 
 RUN /image-dependencies.sh
 
+{% if @('app.modules_enabled') %}
 COPY {{ @('app.module_path') }}/go.mod .
 COPY {{ @('app.module_path') }}/go.sum .
 RUN go mod download
+{% endif %}
 
 COPY . .
 

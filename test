@@ -26,10 +26,6 @@ function test()
 
     ws install
 
-    ws exec composer test-quality
-    ws exec composer test-unit
-    ws exec composer test-acceptance
-
     ws helm template qa >/dev/null
 
     ws disable
