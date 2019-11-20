@@ -1,0 +1,5 @@
+workspace('ci-go-sample'):
+  description: generated local workspace for ci-go-sample.
+  harness: inviqa/go
+
+attribute('app.build'): production

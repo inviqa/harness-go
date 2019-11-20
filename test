@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -e
+set -x
+
+function main()
+{
+    test "$1" "$2"
+}
+
+function test()
+(
+    local mode="$1"
+
+    local path_harness="."
+    local path_test="./.tmp-test"
+
+    if [ -d "${path_test}" ]; then
+        rm -rf "${path_test}"
+    fi
+
+    cp -ap "${path_harness}/.ci/sample-${mode}" "${path_test}"
+    cd ${path_test}
+    mkdir "./.my127ws/"
+    cp -ap "../${path_harness}/"* "./.my127ws/"
+
+    ws install
+
+    ws helm template qa >/dev/null
+
+    ws disable
+    ws enable
+)
+
+function clean()
+{
+    local path_test="./.tmp-test"
+
+    if [ -d "$path_test" ]; then
+        (cd $path_test && ws destroy)
+        rm -rf $path_test
+    fi
+}
+
+trap 'clean' EXIT
+main "$@"
