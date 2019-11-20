@@ -3,14 +3,15 @@ attributes.default:
     binary: app
     src_path: .
     module_path: = @('app.src_path')
-    port: 80
     health_port: 80
     services: []
+    default_port:
+      port: 80
     ingress:
       # possible ingress types are standard, istio, or ~ for none
       # note istio requires a cluster that has istio configured as the ingress controller
       type: standard
-      protocol: http
+      protocol: = @('app.default_port.protocol')
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')

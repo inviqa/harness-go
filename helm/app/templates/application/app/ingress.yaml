@@ -16,7 +16,7 @@ spec:
       paths:
       - backend:
           serviceName: {{ .Values.resourcePrefix }}app
-          servicePort: {{ .Values.port }}
+          servicePort: {{ .Values.default_port.port }}
 status:
   loadBalancer: {}
 {{ end }}

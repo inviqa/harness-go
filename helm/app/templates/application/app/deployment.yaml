@@ -24,7 +24,7 @@ spec:
         imagePullPolicy: Always
         name: app
         ports:
-        - containerPort: {{ .Values.port }}
+        - containerPort: {{ .Values.default_port.port }}
         resources: {}
         readinessProbe:
           tcpSocket:

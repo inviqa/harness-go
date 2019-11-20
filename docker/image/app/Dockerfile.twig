@@ -38,5 +38,5 @@ RUN GOOS=linux GOARCH=amd64 go build -o /go/bin/{{ @('app.binary') }} {{ @('app.
 {% endif %}
 
 ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
-EXPOSE {{ @('app.port') }}
+EXPOSE {{ @('app.default_port.port') }}
 EXPOSE {{ @('app.health_port') }}

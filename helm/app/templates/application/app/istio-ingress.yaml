@@ -16,5 +16,5 @@ spec:
    - destination:
        host: {{ .Values.resourcePrefix }}app
        port:
-         number: {{ .Values.port }}
+         number: {{ .Values.default_port.port }}
 {{ end }}

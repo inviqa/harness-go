@@ -4,5 +4,5 @@ FROM scratch
 
 COPY --chown=0:0 --from=source /go/bin/{{ @('app.binary') }} /
 ENTRYPOINT ["/{{ @('app.binary') }}"]
-EXPOSE {{ @('app.port') }}
+EXPOSE {{ @('app.default_port.port') }}
 EXPOSE {{ @('app.health_port') }}

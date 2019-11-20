@@ -6,9 +6,12 @@ metadata:
   name: {{ .Values.resourcePrefix }}app
 spec:
   ports:
-  - name: "{{ .Values.port }}"
-    port: {{ .Values.port }}
-    targetPort: {{ .Values.port }}
+  - name: "{{ .Values.default_port.name | default .Values.default_port.port }}"
+    port: {{ .Values.default_port.port }}
+    targetPort: {{ .Values.default_port.port }}
+{{- if .Values.default_port.protocol }}
+    protocol: {{ .Values.default_port.protocol | quote }}
+{{- end }}
   selector:
     app.service: {{ .Values.resourcePrefix }}app
 status:
