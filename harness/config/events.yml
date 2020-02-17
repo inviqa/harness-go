@@ -4,9 +4,7 @@ before('harness.install'): |
 
 after('harness.install'): |
   #!bash
-  # run the go mod download on the host too, to make sure that it's generated in a new project
-  # and kept up-to-date after every build
-  go mod download
+  docker cp $(docker-compose ps -q app):/app/go.sum ./go.sum
   ws enable
 
 after('harness.refresh'): |

@@ -2,6 +2,7 @@ confd('harness:/'):
   - { src: application/overlay/Jenkinsfile }
   - { src: application/skeleton/go.mod, dst: workspace:/go.mod }
   - { src: application/skeleton/README.md, dst: workspace:/README.md }
+  - { src: application/skeleton/.gitignore, dst: workspace:/.gitignore }
   - { src: docker/image/app/Dockerfile }
   - { src: docker/image/app/Dockerfile.prod }
   - { src: docker/image/app/root/ssh-keys.sh }
