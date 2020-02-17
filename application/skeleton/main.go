@@ -10,14 +10,14 @@ import (
 func main() {
   fmt.Println("Service running")
 
-  startPrometheusHttpServer()
-}
-
-func startPrometheusHttpServer() {
   http.Handle("/metrics", promhttp.Handler())
+  http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+    w.WriteHeader(200)
+    w.Write([]byte(`{"status": "OK"}`))
+  })
 
-  err := http.ListenAndServe(":2112", nil)
+  err := http.ListenAndServe(":80", nil)
   if err != nil {
-    log.Logger.Fatalf("failed to start prometheus HTTP server: %s", err)
+    log.Fatalf("failed to start HTTP server: %s", err)
   }
 }

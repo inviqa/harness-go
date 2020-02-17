@@ -1,6 +1,12 @@
+before('harness.install'): |
+  #!bash(workspace:/)
+  rsync --exclude='*.twig' --exclude='_twig' -a .my127ws/application/skeleton/ .
 
 after('harness.install'): |
   #!bash
+  # run the go mod download on the host too, to make sure that it's generated in a new project
+  # and kept up-to-date after every build
+  go mod download
   ws enable
 
 after('harness.refresh'): |
