@@ -5,6 +5,9 @@ harness('inviqa/go'):
       - proxy
     confd:
       - harness:/
+    attributes:
+      standard:
+        - module_name
 ---
 import:
   - harness/config/*.yml
