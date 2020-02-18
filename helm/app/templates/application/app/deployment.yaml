@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         app.service: {{ .Values.resourcePrefix }}app
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: {{ .Values.default_port.port }}
     spec:
       containers:
       - env:
