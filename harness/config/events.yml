@@ -4,8 +4,8 @@ before('harness.install'): |
 
 after('harness.install'): |
   #!bash
-  docker cp $(docker-compose ps -q app):/app/go.sum ./go.sum
   ws enable
+  docker cp $(docker-compose ps -q app):/app/go.sum ./go.sum
 
 after('harness.refresh'): |
   #!bash(harness:/)|@
