@@ -1,7 +1,14 @@
+before('harness.install'): |
+  #!bash(workspace:/)
+  rsync --exclude='*.twig' --exclude='_twig' -a .my127ws/application/skeleton/ .
 
-after('harness.install'): |
-  #!bash
-  ws enable
+after('harness.install'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)
+    ws enable
+    docker cp $(docker-compose -p ${COMPOSE_PROJECT_NAME} ps -q app):/app/go.sum ./go.sum
 
 after('harness.refresh'): |
   #!bash(harness:/)|@
