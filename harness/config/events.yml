@@ -3,6 +3,7 @@ after('harness.install'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
+    source .my127ws/harness/scripts/apply.sh
     ws enable
     docker cp $(docker-compose -p ${COMPOSE_PROJECT_NAME} ps -q app):/app/go.sum ./go.sum
 

@@ -2,10 +2,6 @@
 
 main()
 {
-    if [ ! -f "go.mod" ]; then
-        rsync --exclude='*.twig' --exclude='_twig' -a ".my127ws/application/skeleton/" .
-    fi
-
     passthru ws networks external
     if [ ! -f .my127ws/.flag-built ]; then
         passthru docker-compose down
