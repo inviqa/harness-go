@@ -1,7 +1,3 @@
-before('harness.install'): |
-  #!bash(workspace:/)
-  source .my127ws/harness/scripts/sync-files.sh ./.my127ws/application/skeleton/ .
-
 after('harness.install'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')

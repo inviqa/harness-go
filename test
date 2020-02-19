@@ -24,7 +24,6 @@ function test()
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
 
-    ws harness prepare
     ws install
 
     ws helm template qa >/dev/null
