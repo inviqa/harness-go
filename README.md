@@ -13,7 +13,7 @@ To use this Go harness:
 
 When creating a new project, you will be asked to provide the following attributes
 
-* `module_name` - this will be the name of the Go module for your created application, e.g. github.com/inviqa/repo-name, it is stored in the generated `go.mod` file.
+* `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`, it is stored in the generated `go.mod` file.
 
 ## HTTP server
 
