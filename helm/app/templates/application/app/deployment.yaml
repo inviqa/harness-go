@@ -15,7 +15,7 @@ spec:
         app.service: {{ .Values.resourcePrefix }}app
       annotations:
         prometheus.io/scrape: 'true'
-        prometheus.io/port: {{ .Values.default_port.port }}
+        prometheus.io/port: {{ quote .Values.default_port.port }}
     spec:
       containers:
       - env:
