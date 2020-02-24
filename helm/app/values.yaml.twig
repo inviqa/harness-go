@@ -26,3 +26,5 @@ health_port: {{ @('app.health_port') }}
 ingress:
 {{ to_yaml(@('app.ingress'), 2, 2) | raw }}
 resourcePrefix: {{ @('pipeline.base.resourcePrefix') | json_encode | raw }}
+
+{% include blocks ~ 'additional.yml.twig' %}

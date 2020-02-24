@@ -27,13 +27,9 @@ spec:
         imagePullPolicy: Always
         name: app
         ports:
-        - containerPort: {{ .Values.default_port.port }}
+        {{- include "container.ports" . | indent 8 }}
         resources: {}
-        readinessProbe:
-          tcpSocket:
-            port: {{ .Values.health_port }}
-          initialDelaySeconds: 5
-          periodSeconds: 10
+        {{- include "probes" . | indent 8 }}
       imagePullSecrets:
       - name: {{ .Values.resourcePrefix }}docker-config
       restartPolicy: Always
