@@ -26,7 +26,7 @@ function test()
 
     ws install
 
-    ws helm template qa >/dev/null
+    ws helm lint qa
 
     ws disable
     ws enable

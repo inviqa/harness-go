@@ -15,6 +15,7 @@ pipeline {
                 stage('go fmt') { steps { sh 'ws go fmt check' } }
                 stage('go test') { steps { sh 'ws go test' } }
                 stage('go vet') { steps { sh 'ws go vet' } }
+                stage('helm lint') { steps { sh 'ws helm lint qa' } }
             }
         }
         stage('Build for production') {
