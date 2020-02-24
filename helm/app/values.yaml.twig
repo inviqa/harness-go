@@ -27,6 +27,4 @@ ingress:
 {{ to_yaml(@('app.ingress'), 2, 2) | raw }}
 resourcePrefix: {{ @('pipeline.base.resourcePrefix') | json_encode | raw }}
 
-{% include blocks ~ 'container-ports.yml.twig' %}
-{% include blocks ~ 'probes.yml.twig' %}
 {% include blocks ~ 'additional.yml.twig' %}
