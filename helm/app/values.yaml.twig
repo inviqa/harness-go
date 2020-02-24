@@ -27,8 +27,6 @@ ingress:
 {{ to_yaml(@('app.ingress'), 2, 2) | raw }}
 resourcePrefix: {{ @('pipeline.base.resourcePrefix') | json_encode | raw }}
 
-readinessProbe:
-{{ to_yaml(@('pipeline.base.deployment.readinessProbe'), 2, 2) | raw }}
-
-livenessProbe:
-{{ to_yaml(@('pipeline.base.deployment.livenessProbe'), 2, 2) | raw }}
+{% include blocks ~ 'container-ports.yml.twig' %}
+{% include blocks ~ 'probes.yml.twig' %}
+{% include blocks ~ 'additional.yml.twig' %}
