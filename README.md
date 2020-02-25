@@ -3,7 +3,7 @@
 To use this Go harness:
 
 1. Install [Workspace]
-1. Run `ws create <projectName> inviqa/go:v0.2.0`
+1. Run `ws create <projectName> inviqa/go:vX.Y.Z` (substitute `X.Y.Z` with a corresponding version from the [releases list](https://github.com/inviqa/harness-go/releases))
 1. You will be prompted for any required attributes for the application
 1. `cd <projectName>`
 1. Create an initial commit, ensuring that `workspace.override.yml` is not added to git.
