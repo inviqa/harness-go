@@ -17,6 +17,9 @@ persistence:
   postgres:
 {{ to_yaml(@('persistence.postgres'), 2, 4) | raw }}
 
+prometheus:
+{{ to_yaml(@('pipeline.base.prometheus'), 2, 2) | raw }}
+
 resources:
 {% include blocks ~ 'resources.yml.twig' %}
 

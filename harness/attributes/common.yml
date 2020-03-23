@@ -6,6 +6,7 @@ attributes.default:
     health_port: 80
     services: []
     default_port:
+      name: http
       port: 80
     ingress:
       # possible ingress types are standard, istio, or ~ for none
