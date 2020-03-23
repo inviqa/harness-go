@@ -2,13 +2,13 @@
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
-  name: {{ .Values.resourcePrefix }}webapp
+  name: {{ .Values.resourcePrefix }}app
   labels:
-    app.service: {{ .Values.resourcePrefix }}webapp
+    app.service: {{ .Values.resourcePrefix }}app
 spec:
   selector:
     matchLabels:
-      app.service: {{ .Values.resourcePrefix }}webapp
+      app.service: {{ .Values.resourcePrefix }}app
   podMetricsEndpoints:
 {{- if .Values.docker.services.app.metricsEnabled -}}
 {{ .Values.docker.services.app.metricsEndpoints | toYaml | nindent 6 -}}
