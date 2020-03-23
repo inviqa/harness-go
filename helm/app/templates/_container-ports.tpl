@@ -1,3 +1,4 @@
 {{- define "container.ports" }}
-  - containerPort: {{ .Values.default_port.port }}
+  - name: {{ .Values.default_port.name | quote }}
+    containerPort: {{ .Values.default_port.port }}
 {{- end }}
