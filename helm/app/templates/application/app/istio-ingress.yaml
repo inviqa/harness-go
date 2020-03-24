@@ -10,9 +10,7 @@ spec:
  hosts:
  - {{ .Values.docker.services.app.environment.APP_HOST }}
  gateways:
-{{- range $key, $value := .Values.istio.gateways }}
- - {{ tpl $value $ | quote }}
-{{- end }}
+ - istio-system/{{ .Release.Namespace }}-gateway
  http:
  - route:
    - destination:

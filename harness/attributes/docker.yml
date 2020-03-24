@@ -27,9 +27,6 @@ attributes:
     base:
       resourcePrefix: ~
       hostname: = @('pipeline.base.namespace') ~ '.example.com'
-      istio:
-        gateways:
-          - "istio-system/{{ .Release.Namespace }}-gateway"
       prometheus:
         podMonitoring: false
       services:
