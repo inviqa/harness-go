@@ -8,7 +8,7 @@
         GITHUB_TOKEN: {{ @('github.oauth_token') }}
 {% endif %}
     labels:
-{% if @('app.ingress.type') is null %}
+{% if @('app.ingress.type') == "none" %}
       - traefik.enable=false
 {% else %}
       - traefik.backend={{ @('workspace.name') }}
@@ -23,7 +23,7 @@
       private:
         aliases:
           - {{ @('hostname') }}
-{% if @('app.ingress.type') is not null %}
+{% if @('app.ingress.type') != "none" %}
       shared: {}
 {% endif %}
     expose:

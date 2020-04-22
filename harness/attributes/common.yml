@@ -9,7 +9,7 @@ attributes.default:
       name: http
       port: 80
     ingress:
-      # possible ingress types are standard, istio, or ~ for none
+      # possible ingress types are standard, istio, or none
       # note istio requires a cluster that has istio configured as the ingress controller
       type: standard
       protocol: = @('app.default_port.protocol')
