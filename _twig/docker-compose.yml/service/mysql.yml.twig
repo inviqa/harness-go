@@ -1,5 +1,5 @@
   mysql:
-    image: mysql:5.7
+    image: mysql:{{ @('services.mysql.version') }}
     labels:
       - traefik.enable=false
     environment:

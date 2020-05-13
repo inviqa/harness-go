@@ -1,5 +1,5 @@
   postgres:
-    image: postgres:9.6
+    image: postgres:{{ @('services.postgres.version') }}
     labels:
       - traefik.enable=false
     environment:
