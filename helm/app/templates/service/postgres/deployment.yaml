@@ -16,14 +16,15 @@ spec:
         app.service: {{ .Values.resourcePrefix }}postgres
     spec:
       containers:
-      - env:
+      - name: postgres
+        enableServiceLinks: false
+        env:
         {{- range $key, $value := .Values.docker.services.postgres.environment }}
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
         image: postgres:9.6
         imagePullPolicy: Always
-        name: postgres
         ports:
         - containerPort: 5432
         resources:

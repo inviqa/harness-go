@@ -16,14 +16,15 @@ spec:
         app.service: {{ .Values.resourcePrefix }}mysql
     spec:
       containers:
-      - env:
+      - name: mysql
+        enableServiceLinks: false
+        env:
         {{- range $key, $value := .Values.docker.services.mysql.environment }}
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
         image: mysql:5.7
         imagePullPolicy: Always
-        name: mysql
         args:
         - --ignore-db-dir
         - lost+found
