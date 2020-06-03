@@ -15,14 +15,15 @@ spec:
         app.service: {{ .Values.resourcePrefix }}app
     spec:
       containers:
-      - env:
+      - name: app
+        enableServiceLinks: false
+        env:
         {{- range $key, $value := .Values.docker.services.app.environment }}
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
         image: {{ .Values.docker.image.app }}
         imagePullPolicy: Always
-        name: app
         ports:
         {{- include "container.ports" . | indent 8 }}
         resources: {}
