@@ -4,9 +4,9 @@ command('build-prod'): |
 
 command('app publish'): |
   #!bash(workspace:/)|@
-  run docker login -u="@('docker.username')" -p="@('docker.password')" @('docker.repository')
+  run docker login -u="@('docker.username')" -p="@('docker.password')" @('docker.registry_url')
   run docker push @('docker.repository'):@('docker.tagPrefix')@('app.version')
-  run docker logout @('docker.repository')
+  run docker logout @('docker.registry_url')
 
 command('app deploy <environment>'):
   env:
