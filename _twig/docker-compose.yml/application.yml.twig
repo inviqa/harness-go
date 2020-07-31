@@ -28,5 +28,7 @@
 {% endif %}
     expose:
       - {{ @('app.default_port.port') }}
-    environment:
-{{ to_yaml(@('services.app.environment'), 2, 6) | raw }}
+    environment: {{ to_yaml(deep_merge([
+        @('services.app.environment'),
+        @('services.app.environment_secrets'),
+     ]), 2, 6) | raw }}

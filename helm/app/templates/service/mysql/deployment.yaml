@@ -23,6 +23,11 @@ spec:
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
+        {{- if .Values.docker.services.mysql.environment_secrets }}
+        envFrom:
+          - secretRef:
+              name: {{ .Values.resourcePrefix }}mysql
+        {{- end }}
         image: mysql:5.7
         imagePullPolicy: Always
         args:
