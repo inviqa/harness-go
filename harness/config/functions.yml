@@ -2,6 +2,18 @@ function('to_yaml', [text, indentation, nesting]): |
   #!php
   = preg_replace('/^/m', str_repeat(' ', $nesting ?: 2), \Symfony\Component\Yaml\Yaml::dump($text, 100, $indentation ?: 2));
 
+function('docker_config', [attrConfig]): |
+  #!php
+  $config = [
+    'auths' => [
+      $attrConfig['registry_url'] => [
+        'auth' => base64_encode($attrConfig['username'].':'.$attrConfig['password'])
+      ]
+    ]
+  ];
+  
+  = json_encode($config);
+
 function('branch'): |
   #!bash(workspace:/)
   =$(git branch | grep \* | cut -d ' ' -f2)

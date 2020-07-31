@@ -1,11 +1,15 @@
 {% set blocks  = 'helm/app/_twig/values.yaml/' %}
 
+feature:
+{{ to_yaml(@('helm.feature'), 2, 2) | raw }}
+
 docker:
-  config: {{ @('docker.config') }}
+  image_pull_config: {{ @('docker.image_pull_config') | raw }}
   services:
 {{ deep_merge_to_yaml([@('services'), @('pipeline.base.services')], 2, 4) | raw }}
   image:
     app: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
+
 
 service:
   mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
