@@ -27,6 +27,7 @@ attributes.default:
     root_pass: DV6RdNY3QcFsBk7V
 
   docker:
+    registry_url: = get_docker_registry(@('docker.repository'))
     repository: = @("workspace.name")
     tagPrefix: = ''
     config: null
