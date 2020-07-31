@@ -16,9 +16,12 @@ command('app deploy <environment>'):
     TIMEOUT:     = @('helm.timeout')
   exec: |
     #!bash(harness:/helm)|=
+    set -o pipefail
     cd "${ENVIRONMENT}"
     doctl -t $DO_ACCESS_TOKEN kubernetes cluster kubeconfig show $CLUSTER > kubectl.config.yaml
-    passthru helm init --client-only
+    if helm version --short --client | grep '^Client: v2' >/dev/null 2>&1; then
+      passthru helm init --client-only
+    fi
     passthru helm dependency build
     passthru helm --kubeconfig=$PWD/kubectl.config.yaml upgrade --wait --install --timeout "${TIMEOUT}" --namespace "${NAMESPACE}" "${NAMESPACE}" ./
 
@@ -28,8 +31,11 @@ command('helm template <chart-path>'):
     NAMESPACE:   = @('pipeline.' ~ input.argument('environment') ~ '.namespace')
   exec: |
     #!bash(harness:/helm)|=
+    set -o pipefail
     cd "${CHART_PATH}"
-    passthru helm init --client-only
+    if helm version --short --client | grep '^Client: v2' >/dev/null 2>&1; then
+      passthru helm init --client-only
+    fi
     passthru helm dependency build
     passthru helm template .
 
@@ -39,8 +45,11 @@ command('helm kubeval <chart-path>'):
     NAMESPACE: = @('pipeline.' ~ input.argument('environment') ~ '.namespace')
   exec: |
     #!bash(harness:/helm)|=
+    set -o pipefail
     cd "${CHART_PATH}"
-    passthru helm init --client-only
+    if helm version --short --client | grep '^Client: v2' >/dev/null 2>&1; then
+      passthru helm init --client-only
+    fi
     passthru helm dependency build
     passthru helm plugin install https://github.com/instrumenta/helm-kubeval || true
     passthru helm kubeval .
