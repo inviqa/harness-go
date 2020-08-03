@@ -1,5 +1,16 @@
 function('to_yaml', [data, indentation, nesting]): |
   #!php
+  if ($indentation || $nesting) {
+    trigger_error('to_yaml indentation and nesting is deprecated, use to_nice_yaml instead. to_yaml will in the future render to a single line', E_USER_DEPRECATED);
+  }
+  $yaml = \Symfony\Component\Yaml\Yaml::dump($data, 100, 2);
+  if (is_array($data) && count($data) > 0) {
+    $yaml = "\n" . rtrim(preg_replace('/^/m', str_repeat(' ', $nesting ?: 2), $yaml), "\n");
+  }
+  = $yaml;
+
+function('to_nice_yaml', [data, indentation, nesting]): |
+  #!php
   $yaml = \Symfony\Component\Yaml\Yaml::dump($data, 100, 2);
   if (is_array($data) && count($data) > 0) {
     $yaml = "\n" . rtrim(preg_replace('/^/m', str_repeat(' ', $nesting ?: 2), $yaml), "\n");
