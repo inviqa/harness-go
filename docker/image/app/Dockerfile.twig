@@ -1,7 +1,8 @@
 FROM golang:{{ @('go.version')}} AS golang
 
-ENV CGO_ENABLED=0
-ENV GOPRIVATE=github.com/inviqa/*
+{% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}
+ENV {{ envName }}={{ envValue }}
+{% endfor %}
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
