@@ -11,7 +11,7 @@ RUN apt-get update \
 COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin
 
-{% for config in @('git.config_global')|filter(v => v is not empty and (v.when is not defined or v.when)) %}
+{% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
 {% for argName, argValue in config.buildArgs|default({}) %}
 ARG {{ argName }}=
 {% endfor %}

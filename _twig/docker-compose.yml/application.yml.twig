@@ -5,7 +5,7 @@
       dockerfile: .my127ws/docker/image/app/Dockerfile
       args: {{ to_nice_yaml(@('git.config_global') | reduce(
           (carry, config) => carry | merge(
-              (config.when is not defined or config.when) ? config.buildArgs : []
+              ((config.when is not defined) or config.when) ? config.buildArgs : []
             ),
           {}
         ), 2, 8) }}
