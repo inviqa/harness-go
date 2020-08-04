@@ -1,12 +1,13 @@
 {% set blocks  = 'helm/app/_twig/values.yaml/' %}
 
-feature:
-{{ to_yaml(@('helm.feature'), 2, 2) | raw }}
+feature: {{ to_nice_yaml(@('helm.feature'), 2, 2) | raw }}
 
 docker:
   image_pull_config: {{ @('docker.image_pull_config') | raw }}
-  services:
-{{ deep_merge_to_yaml([@('services'), @('pipeline.base.services')], 2, 4) | raw }}
+  services: {{ to_nice_yaml(deep_merge([
+      filter_local_services(@('services')),
+      @('pipeline.base.services')
+    ]), 2, 4) | raw }}
   image:
     app: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
 
@@ -15,25 +16,17 @@ service:
   mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
   postgres: {{ ("postgres" in @('app.services')) ? 'true' : 'false' }}
 
-persistence:
-  mysql:
-{{ to_yaml(@('persistence.mysql'), 2, 4) | raw }}
-  postgres:
-{{ to_yaml(@('persistence.postgres'), 2, 4) | raw }}
+persistence: {{ to_nice_yaml(@('persistence'), 2, 2) | raw }}
 
-prometheus:
-{{ to_yaml(@('pipeline.base.prometheus'), 2, 2) | raw }}
+prometheus: {{ to_nice_yaml(@('pipeline.base.prometheus'), 2, 2) | raw }}
 
 resources:
 {% include blocks ~ 'resources.yml.twig' %}
 
-default_port:
-{{ to_yaml(@('app.default_port'), 2, 2) | raw }}
+default_port: {{ to_nice_yaml(@('app.default_port'), 2, 2) | raw }}
 health_port: {{ @('app.health_port') }}
-ingress:
-{{ to_yaml(@('app.ingress'), 2, 2) | raw }}
-istio:
-{{ to_yaml(@('pipeline.base.istio'), 2, 2) | raw }}
+ingress: {{ to_nice_yaml(@('app.ingress'), 2, 2) | raw }}
+istio: {{ to_nice_yaml(@('pipeline.base.istio'), 2, 2) | raw }}
 resourcePrefix: {{ @('pipeline.base.resourcePrefix') | json_encode | raw }}
 
 {% include blocks ~ 'additional.yml.twig' %}

@@ -22,6 +22,11 @@ spec:
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
+        {{- if .Values.docker.services.app.environment_secrets }}
+        envFrom:
+          - secretRef:
+              name: {{ .Values.resourcePrefix }}app
+        {{- end }}
         image: {{ .Values.docker.image.app }}
         imagePullPolicy: Always
         ports:
