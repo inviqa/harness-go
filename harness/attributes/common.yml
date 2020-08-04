@@ -34,6 +34,19 @@ attributes.default:
     registry_url: = get_docker_registry(@('docker.repository'))
     repository: = @("workspace.name")
     tagPrefix: = ''
+  
+  git:
+    config_global:
+      - key: 'url.${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'
+        value: https://github.com/
+        when: = @('github.token') != null
+        buildArgs: 
+          GITHUB_TOKEN: = @('github.token')
+      - key: 'url.ssh://git@github.com/.insteadOf'
+        value: https://github.com/
+        when: = @('github.ssh_deploy_key') != null
+        buildArgs:
+          SSH_PRIVATE_KEY: = @('github.ssh_deploy_key')
 
   go:
     version: 1.13
