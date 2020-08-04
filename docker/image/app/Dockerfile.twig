@@ -10,14 +10,15 @@ RUN apt-get update \
 
 COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin
-{% if @('github.oauth_token') %}
-ARG GITHUB_TOKEN=
-RUN git config --global url."https://${GITHUB_TOKEN}:x-oauth-basic@github.com/".insteadOf "https://github.com/"
-{% elseif @('github.ssh_deploy_key') %}
-RUN chmod a+x /ssh-keys.sh
-RUN /ssh-keys.sh
-RUN git config --system url."ssh://git@github.com/inviqa".insteadOf "https://github.com/inviqa"
-{% endif %}
+
+{% for config in @('git.config_global')|filter(v => v is not empty and (v.when is not defined or v.when)) %}
+{% for argName, argValue in config.buildArgs|default({}) %}
+ARG {{ argName }}=
+{% endfor %}
+RUN git config --global "{{ config.key }}" "{{ config.value }}"
+{% endfor %}
+
+RUN [ -z "${SSH_DEPLOY_KEY:-}" ] || bash /ssh-keys.sh
 
 WORKDIR /app
 

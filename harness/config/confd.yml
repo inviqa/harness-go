@@ -5,7 +5,6 @@ confd('harness:/'):
   - { src: application/skeleton/.gitignore }
   - { src: docker/image/app/Dockerfile }
   - { src: docker/image/app/Dockerfile.prod }
-  - { src: docker/image/app/root/ssh-keys.sh }
   - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }
   - { src: helm/app/Chart.yaml }
   - { src: helm/app/values.yaml }
