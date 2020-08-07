@@ -31,10 +31,13 @@ attributes.default:
     # If using gitops helm chart repositories, it's recommended to put this configuration
     # in the values.yml in there now instead of project application repositories
     image_pull_config: = @('docker.config')
-    registry_url: = get_docker_registry(@('docker.repository'))
+    registry:
+      url: = get_docker_registry(@('docker.repository'))
+      username: = @('docker.username') # for backwards compatibility
+      password: = @('docker.password') # for backwards compatibility
     repository: = @("workspace.name")
     tagPrefix: = ''
-  
+
   git:
     config_global:
       - key: 'url.${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'

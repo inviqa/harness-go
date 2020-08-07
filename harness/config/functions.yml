@@ -50,7 +50,7 @@ function('docker_config', [attrConfig]): |
   #!php
   $config = [
     'auths' => [
-      $attrConfig['registry_url'] => [
+      $attrConfig['url'] => [
         'auth' => base64_encode($attrConfig['username'].':'.$attrConfig['password'])
       ]
     ]
