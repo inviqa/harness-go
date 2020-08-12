@@ -32,6 +32,7 @@ command('networks external'):
 
 command('build'): |
   #!bash(workspace:/)|@
+  ws external-images pull
   passthru docker-compose build app
 
 command('rebuild'): |

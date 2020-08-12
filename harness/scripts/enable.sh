@@ -6,6 +6,7 @@ main()
     if [ ! -f .my127ws/.flag-built ]; then
         passthru docker-compose down
 
+        ws external-images pull
         passthru ws build
         passthru docker-compose up -d
 
