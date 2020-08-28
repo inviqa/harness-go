@@ -1,7 +1,8 @@
 module {{ @('module_name') }}
 
-go 1.13
+go {{ @('go.version') }}
 
 require (
+	github.com/sirupsen/logrus v1
 	github.com/prometheus/client_golang v1
 )

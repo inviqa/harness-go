@@ -49,7 +49,7 @@ attributes.default:
           SSH_PRIVATE_KEY: = @('github.ssh_deploy_key')
 
   go:
-    version: 1.14
+    version: 1.15
     environment:
       CGO_ENABLED: '0'
       GOPRIVATE: github.com/inviqa/*
