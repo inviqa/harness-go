@@ -2,6 +2,10 @@ FROM {{ @('docker.repository')}}:{{ @('docker.tagPrefix') }}{{ @('app.version') 
 
 FROM scratch
 
+{% if @('app.bundle_certs') == 'yes' %}
+COPY --from=source /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+{% endif %}
+
 COPY --chown=0:0 --from=source /go/bin/{{ @('app.binary') }} /
 ENTRYPOINT ["/{{ @('app.binary') }}"]
 EXPOSE {{ @('app.default_port.port') }}
