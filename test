@@ -40,6 +40,8 @@ function clean()
         (cd $path_test && ws destroy)
         rm -rf $path_test
     fi
+
+    rm -f ./chart
 }
 
 trap 'clean' EXIT
