@@ -10,6 +10,8 @@
 
 **Merged pull requests:**
 
+- Fix trailing newlines being added into secrets before encryption [\#47](https://github.com/inviqa/harness-go/pull/47) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Pull external images in parallel before building service images [\#46](https://github.com/inviqa/harness-go/pull/46) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Bump default Go version to 1.14 [\#43](https://github.com/inviqa/harness-go/pull/43) ([jameshalsall](https://github.com/jameshalsall))
 - Extract go env vars to be configurable [\#42](https://github.com/inviqa/harness-go/pull/42) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Abstract out git config for adding auth from twig [\#41](https://github.com/inviqa/harness-go/pull/41) ([andytson-inviqa](https://github.com/andytson-inviqa))
@@ -26,8 +28,7 @@
 
 **Merged pull requests:**
 
-- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
-- Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
+- MISC Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
 - Allow overriding of istio virtualservice gateway with template support [\#24](https://github.com/inviqa/harness-go/pull/24) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.3.0](https://github.com/inviqa/harness-go/tree/0.3.0) (2020-02-24)
@@ -36,6 +37,7 @@
 
 **Merged pull requests:**
 
+- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Rename helm lint to helm kubeval [\#27](https://github.com/inviqa/harness-go/pull/27) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Make liveness/readiness probes configurable [\#26](https://github.com/inviqa/harness-go/pull/26) ([jameshalsall](https://github.com/jameshalsall))
 - Add kubeval for linting the rendered helm templates against schema [\#25](https://github.com/inviqa/harness-go/pull/25) ([andytson-inviqa](https://github.com/andytson-inviqa))
@@ -80,7 +82,7 @@
 - Reverse the log level configuration change as it's already configurable [\#11](https://github.com/inviqa/harness-go/pull/11) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Add missing pipe to rebuild command definition [\#10](https://github.com/inviqa/harness-go/pull/10) ([richardmiller](https://github.com/richardmiller))
 - Make LOG\_LEVEL configurable, and vary by local/pipeline [\#8](https://github.com/inviqa/harness-go/pull/8) ([jameshalsall](https://github.com/jameshalsall))
-- Fix helm persistence values [\#7](https://github.com/inviqa/harness-go/pull/7) ([jameshalsall](https://github.com/jameshalsall))
+- BUG Fix helm persistence values [\#7](https://github.com/inviqa/harness-go/pull/7) ([jameshalsall](https://github.com/jameshalsall))
 - Add build-prod step for building production image [\#6](https://github.com/inviqa/harness-go/pull/6) ([jameshalsall](https://github.com/jameshalsall))
 - Run check on go mod tidy to make sure deps are up-to-date [\#5](https://github.com/inviqa/harness-go/pull/5) ([jameshalsall](https://github.com/jameshalsall))
 - Add a script that can add build dependencies to image [\#4](https://github.com/inviqa/harness-go/pull/4) ([jameshalsall](https://github.com/jameshalsall))
