@@ -7,6 +7,9 @@ ENV {{ envName }}={{ envValue }}
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
     unzip \
+{% if @('app.bundle_certs') == 'yes' %}
+    ca-certificates \
+{% endif %}
  && rm -rf /var/lib/apt/lists/*
 
 COPY .my127ws/docker/image/app/root /

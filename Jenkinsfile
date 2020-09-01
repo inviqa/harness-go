@@ -11,6 +11,10 @@ pipeline {
                     agent { label "my127ws" } 
                     steps { sh './test production' }
                 }
+                stage('(mode=production with bundled certs)') {
+                    agent { label "my127ws" }
+                    steps { sh './test production-with-certs' }
+                }
                 stage('(mode=develop)') {
                     agent { label "my127ws" } 
                     steps { sh './test develop' }

@@ -13,6 +13,7 @@ attributes.default:
       # note istio requires a cluster that has istio configured as the ingress controller
       type: standard
       protocol: = @('app.default_port.protocol')
+    bundle_certs: no
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')
