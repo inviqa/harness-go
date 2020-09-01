@@ -30,6 +30,13 @@ function test()
 
     ws disable
     ws enable
+
+    sleep 5
+
+    if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ]; then
+      echo "The app container has stopped running unexpectedly."
+      exit 1
+    fi
 )
 
 function clean()
