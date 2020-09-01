@@ -1,15 +1,18 @@
 # Changelog
 
-## [Unreleased](https://github.com/inviqa/harness-go/tree/HEAD)
+## [0.5.0](https://github.com/inviqa/harness-go/tree/0.5.0) (2020-09-01)
 
-[Full Changelog](https://github.com/inviqa/harness-go/compare/0.4.0...HEAD)
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.4.0...0.5.0)
 
 **Closed issues:**
 
+- Update and bundle certificates if enabled [\#34](https://github.com/inviqa/harness-go/issues/34)
 - Make DB service tags configurable, with a default of "latest" [\#32](https://github.com/inviqa/harness-go/issues/32)
 
 **Merged pull requests:**
 
+- Add an option to bundle certs on the production image [\#51](https://github.com/inviqa/harness-go/pull/51) ([jameshalsall](https://github.com/jameshalsall))
+- Add a changelog, and some basic release process notes [\#49](https://github.com/inviqa/harness-go/pull/49) ([jameshalsall](https://github.com/jameshalsall))
 - Gracefully shut down the HTTP server on SIGINT, SIGTERM [\#48](https://github.com/inviqa/harness-go/pull/48) ([jameshalsall](https://github.com/jameshalsall))
 - Fix trailing newlines being added into secrets before encryption [\#47](https://github.com/inviqa/harness-go/pull/47) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Pull external images in parallel before building service images [\#46](https://github.com/inviqa/harness-go/pull/46) ([andytson-inviqa](https://github.com/andytson-inviqa))
@@ -23,6 +26,7 @@
 - Deduce the docker registry\_url from repository [\#37](https://github.com/inviqa/harness-go/pull/37) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Disable k8s service links to reduce unused environment variables [\#36](https://github.com/inviqa/harness-go/pull/36) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Make versions for DB image attributes that can be easily overrided [\#33](https://github.com/inviqa/harness-go/pull/33) ([jameshalsall](https://github.com/jameshalsall))
+- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.4.0](https://github.com/inviqa/harness-go/tree/0.4.0) (2020-04-22)
 
@@ -30,7 +34,6 @@
 
 **Merged pull requests:**
 
-- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - MISC Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
 - Allow overriding of istio virtualservice gateway with template support [\#24](https://github.com/inviqa/harness-go/pull/24) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
