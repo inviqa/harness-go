@@ -29,7 +29,8 @@ func main() {
 		signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
 		<-stop
 		log.Info("shutting down HTTP server")
-		ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
 		if err := srv.Shutdown(ctx); err != nil {
 			log.Errorf("HTTP server did not shutdown correctly: %s", err)
 		}
