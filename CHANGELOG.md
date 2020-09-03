@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.5.1](https://github.com/inviqa/harness-go/tree/0.5.1) (2020-09-02)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.5.0...0.5.1)
+
+**Merged pull requests:**
+
+- Defer cancellation of HTTP shutdown context [\#57](https://github.com/inviqa/harness-go/pull/57) ([jameshalsall](https://github.com/jameshalsall))
+- Set content-type in example HTTP handler [\#56](https://github.com/inviqa/harness-go/pull/56) ([jameshalsall](https://github.com/jameshalsall))
+- Switch main.go to use tabs [\#55](https://github.com/inviqa/harness-go/pull/55) ([jameshalsall](https://github.com/jameshalsall))
+- Set indent\_style to tab for Go files [\#54](https://github.com/inviqa/harness-go/pull/54) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.5.0](https://github.com/inviqa/harness-go/tree/0.5.0) (2020-09-01)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.4.0...0.5.0)
