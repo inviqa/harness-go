@@ -23,6 +23,9 @@ prometheus: {{ to_nice_yaml(@('pipeline.base.prometheus'), 2, 2) | raw }}
 resources:
 {% include blocks ~ 'resources.yml.twig' %}
 
+sealed_secrets:
+  scope: {{ @('helm.sealed_secrets.scope') | json_encode | raw }}
+
 default_port: {{ to_nice_yaml(@('app.default_port'), 2, 2) | raw }}
 health_port: {{ @('app.health_port') }}
 ingress: {{ to_nice_yaml(@('app.ingress'), 2, 2) | raw }}
