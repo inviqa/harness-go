@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.6.0](https://github.com/inviqa/harness-go/tree/0.6.0) (2021-02-01)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.5.1...0.6.0)
+
+**Implemented enhancements:**
+
+- Update external-images CI pull to skip pulling images locally existing [\#67](https://github.com/inviqa/harness-go/pull/67) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Use different namespaces for pipeline for parallel builds [\#64](https://github.com/inviqa/harness-go/pull/64) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Allow specifying cert, namespace and scope for sealed-secrets [\#63](https://github.com/inviqa/harness-go/pull/63) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Add alternative local/http sealed-secret seal certificate [\#59](https://github.com/inviqa/harness-go/pull/59) ([andytson-inviqa](https://github.com/andytson-inviqa))
+
+**Fixed bugs:**
+
+- Fix bug in processing non-interactive sealed-secret input [\#61](https://github.com/inviqa/harness-go/pull/61) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Fix probe spec [\#60](https://github.com/inviqa/harness-go/pull/60) ([andytson-inviqa](https://github.com/andytson-inviqa))
+
 ## [0.5.1](https://github.com/inviqa/harness-go/tree/0.5.1) (2020-09-02)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.5.0...0.5.1)
