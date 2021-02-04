@@ -57,6 +57,9 @@ attributes.default:
     environment:
       CGO_ENABLED: '0'
       GOPRIVATE: github.com/inviqa/*
+    modules:
+      after:
+        steps: []
   
   helm:
     additional_schema_locations: https://inviqa.github.io/kubernetes-json-schema/schema

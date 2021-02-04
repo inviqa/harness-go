@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+main()
+{
+    task "$@"
+}
+
+bootstrap()
+{
+    . /lib/sidekick.sh
+}
+
+bootstrap
+main "$@"
