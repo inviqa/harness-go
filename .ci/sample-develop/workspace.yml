@@ -4,10 +4,3 @@ workspace('ci-go-sample'):
 
 attribute('app.build'): develop
 attribute('module_name'): ci-go-sample
-
-attributes:
-  go:
-    modules:
-      after:
-        steps:
-          - echo "After go mod download!"
