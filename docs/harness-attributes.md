@@ -8,7 +8,7 @@ The Go harness has several attributes that you can use in your own project to co
 
 Some attribute values are required in order to create a working application. You will be asked to provide these whenever you create a project (`ws create-project ...`):
 
-* `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`, it is stored in the generated `go.mod` file.
+* `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`. This is stored in the generated `go.mod` file.
 
 ## Overriding attributes
 
