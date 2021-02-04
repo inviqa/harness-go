@@ -9,6 +9,10 @@ To use this Go harness:
 1. Create an initial commit, ensuring that `workspace.override.yml` is not added to git.
 1. Store the `workspace.override.yml` contents in a suitable location (such as LastPass).
 
+## Documentation
+
+To read more about how to use this harness check out the [docs](docs).
+
 ## HTTP server
 
 By default, new projects created with this harness will have a basic HTTP server listening on port 80. The following endpoints are available:
