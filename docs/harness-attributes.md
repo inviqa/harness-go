@@ -8,7 +8,7 @@ The Go harness has several attributes that you can use in your own project to co
 
 Some attribute values are required in order to create a working application. You will be asked to provide these whenever you create a project (`ws create-project ...`):
 
-* `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`, it is stored in the generated `go.mod` file.
+* `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`. This is stored in the generated `go.mod` file.
 
 ## Overriding attributes
 
@@ -41,7 +41,7 @@ These attributes control how Go behaves in the built docker image. A full pictur
 
 #### `version`
 
-This controls the Go version to use, in the format of `major.minor`. When you create a project the harness will use the latest Go version available (defined [here](/harness/attributes/common.yml#L56)). If you have to change this be sure to also change the Go version in your `go.mod` file to match.
+This controls the Go version to use, in the format of `major.minor`. See [here](supported-go-versions.md) for the versions we support.
 
 #### `environment`
 
