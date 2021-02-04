@@ -10,6 +10,9 @@ RUN apt-get update \
 {% if @('app.bundle_certs') == 'yes' %}
     ca-certificates \
 {% endif %}
+{% for package in @('app.packages') %}
+    {{ package|raw }} \
+{% endfor %}
  && rm -rf /var/lib/apt/lists/*
 
 COPY .my127ws/docker/image/app/root /
