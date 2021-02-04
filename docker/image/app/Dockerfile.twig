@@ -27,7 +27,7 @@ RUN [ -z "${SSH_DEPLOY_KEY:-}" ] || bash /ssh-keys.sh
 
 WORKDIR /app
 
-RUN /image-dependencies.sh
+RUN helper modules:before
 
 COPY {{ @('app.module_path') }}/go.mod .
 COPY {{ @('app.module_path') }}/go.sum .

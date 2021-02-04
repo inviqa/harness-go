@@ -32,6 +32,9 @@ By default, new projects created with this harness will have a basic HTTP server
 * `/` - returns a simple JSON response confirming the service is working
 * `/metrics` - returns prometheus instrumentation data
 
+## Upgrades
+
+If you are upgrading your application's Go harness version, then you should consider any breaking changes mentioned in the [upgrade doc].   
 
 ## Releasing
 
@@ -63,3 +66,4 @@ Once the `CHANGELOG.md` is in the branch you wish to release:
 [GitHub Changelog Generator]: https://github.com/github-changelog-generator/github-changelog-generator
 [my127/my127.io]: https://github.com/my127/my127.io
 [Workspace]:https://github.com/my127/workspace
+[upgrade doc]: UPGRADE.md
