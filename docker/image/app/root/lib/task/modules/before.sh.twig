@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function task_modules_before()
+{
+    {% if @('go.modules.before.steps') is empty %}
+        :
+    {% else %}
+        {% for step in @('go.modules.before.steps') -%}
+            {{ step|raw }}
+        {% endfor %}
+    {% endif %}
+}
