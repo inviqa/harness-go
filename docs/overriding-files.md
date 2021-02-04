@@ -1,6 +1,6 @@
 # Overriding harness templates
 
-Sometimes you may need to completely replace a file in the harness with a version of your own. This should be avoided if possible, because they make harness updates on your application a bit more cumbersome, and bloat your repository. Before considering a template override, make sure you have looked at the [attributes](harness-attributes.md) available to see if you can use these to make the change you require.
+Sometimes you may need to completely replace a file in the harness with a version of your own. This should be avoided if possible, because they make harness updates on your application a bit more cumbersome and also bloat your repository. Before considering a template override, make sure you have looked at the [attributes](harness-attributes.md) available to see if you can use these to make the change you require.
 
 If you are absolutely sure a template override is required, then you can follow these steps
 
@@ -18,3 +18,5 @@ If you are absolutely sure a template override is required, then you can follow 
 1. Verify that it's in the correct place by running `ws harness prepare`. This should run templating and overwrite the harness version of that file with your new version.
 1. Run a full `ws install` and make sure you are happy with the changes
 1. Commit the new file override that you added in the `tools/workspace` directory, along with the `workspace.yml` change to add the overlay directory.
+
+> _After you have implemented your template override in your application please consider creating an issue in this harness repository so that we can avoid that override in future._

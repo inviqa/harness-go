@@ -1,16 +1,18 @@
 # Using harness attributes
 
-The Go harness has several attributes that you can use in your own project to control how it behaves. This document outlines some of the most common attributes that you will need to use when developing an application using this harness.
+The Go harness has several attributes that you can use in your own project to control how it behaves. This document outlines some of the most common attributes that you will need to use when developing an application with it.
+
+> _NOTE: This document is a work-in-progress, and only a subset of all attributes have been documented. Please consider contributing._
 
 ## Required attributes
 
-Some attributes are required in order to create a project from this harness (`ws create-project ...`). You will be asked to provide the following attributes during this process:
+Some attribute values are required in order to create a working application. You will be asked to provide these whenever you create a project (`ws create-project ...`):
 
 * `module_name` - this will be the name of the Go module for your created application, e.g. `github.com/inviqa/repo-name`, it is stored in the generated `go.mod` file.
 
 ## Overriding attributes
 
-The harness has sensible defaults for all attributes, but you will often need to override attributes in order to get the
+The harness has sensible defaults for all other attributes, but you will often need to override some of these in order to get the
 Go harness to work for your particular application. To override an attribute, define an `attributes` property in your `workspace.yml` after your project has been created. It may look something like this:
 
     workspace('my-go-app'):
