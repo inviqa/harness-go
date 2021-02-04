@@ -14,6 +14,7 @@ attributes.default:
       type: standard
       protocol: = @('app.default_port.protocol')
     bundle_certs: no
+    packages: []
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')
