@@ -2,7 +2,11 @@
 
 function task_modules_after()
 {
-    {% for step in @('go.modules.after.steps') -%}
-    {{ step|raw }}
-    {% endfor %}
+    {% if @('go.modules.after.steps') is empty %}
+        :
+    {% else %}
+        {% for step in @('go.modules.after.steps') -%}
+            {{ step|raw }}
+        {% endfor %}
+    {% endif %}
 }
