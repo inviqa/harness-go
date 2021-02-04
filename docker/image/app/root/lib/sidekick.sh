@@ -28,7 +28,7 @@ prompt()
 {
     if [ "${RUN_CWD}" != "$(pwd)" ]; then
         RUN_CWD="$(pwd)"
-        echo -e "\\033[1m[\\033[0mdocker(console):$(pwd)\\033[1m]:\\033[0m" >&2
+        echo -e "\\033[1m[\\033[0mdocker(app):$(pwd)\\033[1m]:\\033[0m" >&2
     fi
 }
 
