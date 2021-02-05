@@ -17,7 +17,7 @@ RUN apt-get update \
 
 COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin
-RUN chmod +x /usr/local/bin/helper
+RUN chmod +x /usr/local/bin/helper /lib/scripts/*
 
 {% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
 {% for argName, argValue in config.buildArgs|default({}) %}
