@@ -53,8 +53,9 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
 
 1. Configure an overlay directory as described in step 1 of [overriding harness templates]
 1. Inside your overlay directory (e.g. `tools/workspace`), add your shell script as `docker/image/app/root/lib/my-script.sh`, the full path will be `tools/workspace/docker/image/app/root/lib/my-script.sh`.
+1. Give your script executable permission with `chmod +x tools/workspace/docker/image/app/root/lib/my-script.sh`
 1. Populate your new shell script with whatever it is you want to execute
-1. Run `ws harness prepare`, and verify that your file has been copied to `.my127ws/docker/image/app/root/lib/` (this directory and its contents are automatically copied onto the Docker image)
+1. Run `ws harness prepare`, and verify that your file has been copied to `.my127ws/docker/image/app/root/lib` (this directory and its contents are automatically copied onto the Docker image)
 1. In the desired step attribute, e.g. `modules.after.steps`, add a call to your new shell script:
 
        attributes:
@@ -62,7 +63,7 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
            modules:
              after:
                steps:
-                 - ./lib/my-script.sh
+                 - /lib/my-script.sh
 
 1. Run a full `ws install` and make sure you are happy with the result
 1. Commit your new shell script file, along with the `workspace.yml` change to define an overlay directory
@@ -111,8 +112,8 @@ This attribute is for adding additional services to your application stack. For 
 1. Define a `tools/workspace` overlay directory as described in step 1 of [overriding harness templates]
 1. Update this attribute to define these two new services:
 
-    app:
-      services: [kafka, zookeeper]
+       app:
+         services: [kafka, zookeeper]
 
 1. Add `docker-compose` configuration for these under `tools/workspace/_twig/docker-compose.yml/services/kafka.yml.twig` (and `zookeeper.yml.twig`)
 1. Run `ws harness prepare` to run the templating, and then check your `docker-compose.yml` to see if those services are now present.
