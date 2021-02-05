@@ -52,10 +52,10 @@ This allows you to define various environment variables that are set in the dock
 Here you can set a bunch of arbitrary steps to execute before/after go modules have been downloaded. These are executed as you define them, from a shell context, so you can execute other shell scripts from here too. If you want to add a shell script and execute it from these before/after step attributes you can follow these steps:
 
 1. Configure an overlay directory as described in step 1 of [overriding harness templates]
-1. Inside your overlay directory (e.g. `tools/workspace`), add your shell script as `docker/image/app/root/lib/scripts/my-script.sh`, the full path will be `tools/workspace/docker/image/app/root/lib/scripts/my-script.sh`.
-   >_NOTE: The contents of the `scripts` directory will be granted executable permission when the image is being built_
+1. Inside your overlay directory (e.g. `tools/workspace`), add your shell script as `docker/image/app/root/lib/my-script.sh`, the full path will be `tools/workspace/docker/image/app/root/lib/my-script.sh`.
+1. Give your script executable permission with `chmod +x tools/workspace/docker/image/app/root/lib/my-script.sh`
 1. Populate your new shell script with whatever it is you want to execute
-1. Run `ws harness prepare`, and verify that your file has been copied to `.my127ws/docker/image/app/root/lib/scripts` (this directory and its contents are automatically copied onto the Docker image)
+1. Run `ws harness prepare`, and verify that your file has been copied to `.my127ws/docker/image/app/root/lib` (this directory and its contents are automatically copied onto the Docker image)
 1. In the desired step attribute, e.g. `modules.after.steps`, add a call to your new shell script:
 
        attributes:
@@ -63,7 +63,7 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
            modules:
              after:
                steps:
-                 - /lib/scripts/my-script.sh
+                 - /lib/my-script.sh
 
 1. Run a full `ws install` and make sure you are happy with the result
 1. Commit your new shell script file, along with the `workspace.yml` change to define an overlay directory
