@@ -63,6 +63,7 @@ attributes.default:
         steps: []
       before:
         steps: []
+    formatter: gofmt
   
   helm:
     additional_schema_locations: https://inviqa.github.io/kubernetes-json-schema/schema

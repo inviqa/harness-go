@@ -38,6 +38,7 @@ These attributes control how Go behaves in the built docker image. A full pictur
           steps: []
         before:
           steps: []
+      formatter: gofmt
 
 #### `version`
 
@@ -67,6 +68,10 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
 
 1. Run a full `ws install` and make sure you are happy with the result
 1. Commit your new shell script file, along with the `workspace.yml` change to define an overlay directory
+
+#### `formatter`
+
+This allows you to set your preferred formatter, which will be used in the Jenkins pipelines for your project. If a Jenkins pipeline detects that any of your files do not conform with the configured formatter's standard, then the whole pipeline will fail. Available options are [`gofmt`] or [`goimports`]. Defaults to `gofmt`.
 
 ### `app` attributes
 
@@ -119,8 +124,6 @@ This attribute is for adding additional services to your application stack. For 
 1. Run `ws harness prepare` to run the templating, and then check your `docker-compose.yml` to see if those services are now present.
 1. Run a `ws rebuild` to bring those services up
 
-[overriding harness templates]: overriding-files.md
-
 #### `default_port`
 
 This is used to control the containerPort definition in the Helm chart, used in Kubernetes deployments. Generally, you should never have to change this, but if you do please liaise with the DevOps team.
@@ -136,3 +139,7 @@ This allows us to enable the bundling of certificates when the production image 
 #### `packages`
 
 This array attribute allows you to define an arbitrary number of `apt` packages to be installed when the Docker image is being built. Please note that these packages are only installed on the development image, and not the production image.
+
+[overriding harness templates]: overriding-files.md
+[`gofmt`]: https://pkg.go.dev/cmd/gofmt
+[`goimports`]: https://pkg.go.dev/golang.org/x/tools/cmd/goimports
