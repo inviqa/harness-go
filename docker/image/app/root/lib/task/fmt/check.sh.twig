@@ -2,5 +2,5 @@
 
 function task_fmt_check()
 {
-    {{ @('go.formatter') }} -l -w /app/{{ @('app.src_path') }}
+    {{ @('go.formatter') }} -l -w {{ @('app.src_path') }}
 }
