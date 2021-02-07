@@ -5,6 +5,7 @@ confd('harness:/'):
   - { src: application/skeleton/.gitignore }
   - { src: docker/image/app/Dockerfile }
   - { src: docker/image/app/Dockerfile.prod }
+  - { src: docker/image/app/root/lib/task/gocyclo.sh }
   - { src: docker/image/app/root/lib/task/modules/after.sh }
   - { src: docker/image/app/root/lib/task/modules/before.sh }
   - { src: docker/image/app/root/lib/task/modules/check.sh }

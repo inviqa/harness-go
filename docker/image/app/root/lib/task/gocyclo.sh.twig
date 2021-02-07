@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function task_gocyclo()
+{
+    dirs="/app"
+    for d in /app/*/; do
+         dirs="${dirs} $d"
+    done
+
+    gocyclo -over {{ @('go.gocyclo.threshold') }} $dirs
+}
