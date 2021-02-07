@@ -38,6 +38,10 @@ RUN go mod download
 
 RUN helper modules:after
 
+{% if @('go.formatter') == 'goimports' %}
+RUN go install golang.org/x/tools/cmd/goimports
+{% endif %}
+
 COPY . .
 
 RUN go generate
