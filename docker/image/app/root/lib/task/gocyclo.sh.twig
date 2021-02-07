@@ -1,11 +1,13 @@
 #!/bin/bash
 
+shopt -s globstar
+
 function task_gocyclo()
 {
-    dirs="/app"
-    for d in /app/*/; do
+    dirs=""
+    for d in /app/**/*.go; do
          dirs="${dirs} $d"
     done
 
-    gocyclo -over {{ @('go.gocyclo.threshold') }} $dirs
+    gocyclo -over {{ @('go.gocyclo.threshold') }} "$dirs"
 }
