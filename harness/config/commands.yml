@@ -74,3 +74,10 @@ command('go mod check'):
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper modules:check
+
+command('recompile'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru ws harness prepare && docker-compose up -d --build app
