@@ -73,7 +73,7 @@ command('go fmt check'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru test -z $(docker-compose exec -T app gofmt -l .)
+    passthru test -z $(docker-compose exec -T app helper fmt:check)
 
 command('go mod check'):
   env:

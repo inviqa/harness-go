@@ -63,6 +63,7 @@ attributes.default:
         steps: []
       before:
         steps: []
+    formatter: gofmt
     gocyclo:
       threshold: 10
 
