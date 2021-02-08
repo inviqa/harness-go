@@ -38,6 +38,8 @@ These attributes control how Go behaves in the built docker image. A full pictur
           steps: []
         before:
           steps: []
+      gocyclo:
+         threshold: 10
 
 #### `version`
 
@@ -67,6 +69,10 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
 
 1. Run a full `ws install` and make sure you are happy with the result
 1. Commit your new shell script file, along with the `workspace.yml` change to define an overlay directory
+
+#### `gocyclo.threshold`
+
+This controls the cyclomatic complexity threshold for `gocyclo` checks in the Jenkins pipelines. If any function in your application exceeds this complexity threshold then the pipeline will fail. A lower setting is more strict, and a higher one is less so. See [`gocyclo`] for more information. Defaults to `10`.
 
 ### `app` attributes
 
@@ -136,3 +142,5 @@ This allows us to enable the bundling of certificates when the production image 
 #### `packages`
 
 This array attribute allows you to define an arbitrary number of `apt` packages to be installed when the Docker image is being built. Please note that these packages are only installed on the development image, and not the production image.
+
+[`gocyclo`]: https://github.com/fzipp/gocyclo
