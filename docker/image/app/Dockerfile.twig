@@ -42,6 +42,8 @@ RUN helper modules:after
 RUN go install golang.org/x/tools/cmd/goimports
 {% endif %}
 
+RUN go install github.com/fzipp/gocyclo/cmd/gocyclo
+
 COPY . .
 
 RUN go generate

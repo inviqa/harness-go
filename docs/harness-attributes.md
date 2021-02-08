@@ -39,6 +39,8 @@ These attributes control how Go behaves in the built docker image. A full pictur
         before:
           steps: []
       formatter: gofmt
+      gocyclo:
+         threshold: 10
 
 #### `version`
 
@@ -72,6 +74,10 @@ Here you can set a bunch of arbitrary steps to execute before/after go modules h
 #### `formatter`
 
 This allows you to set your preferred formatter, which will be used in the Jenkins pipelines for your project. If a Jenkins pipeline detects that any of your files do not conform with the configured formatter's standard, then the whole pipeline will fail. Available options are [`gofmt`] or [`goimports`]. Defaults to `gofmt`.
+
+#### `gocyclo.threshold`
+
+This controls the cyclomatic complexity threshold for `gocyclo` checks in the Jenkins pipelines. If any function in your application exceeds this complexity threshold then the pipeline will fail. A lower setting is more strict, and a higher one is less so. See [`gocyclo`] for more information. Defaults to `10`.
 
 ### `app` attributes
 
@@ -143,3 +149,4 @@ This array attribute allows you to define an arbitrary number of `apt` packages 
 [overriding harness templates]: overriding-files.md
 [`gofmt`]: https://pkg.go.dev/cmd/gofmt
 [`goimports`]: https://pkg.go.dev/golang.org/x/tools/cmd/goimports
+[`gocyclo`]: https://github.com/fzipp/gocyclo
