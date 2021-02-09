@@ -16,6 +16,7 @@ pipeline {
                 stage('go test') { steps { sh 'ws go test' } }
                 stage('go vet') { steps { sh 'ws go vet' } }
                 stage('go gocyclo') { steps { sh 'ws go gocyclo' } }
+                stage('go ineffassign') { steps { sh 'ws go ineffassign' } }
                 stage('helm kubeval qa') { steps { sh 'ws helm kubeval qa' } }
             }
         }
