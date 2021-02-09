@@ -2,5 +2,5 @@
 
 function task_fmt_check()
 {
-    {{ @('go.formatter') }} -l -w {{ @('app.src_path') }}
+    {{ @('go.formatter') }} -l -w "$(find . -type f -name '*.go' -not -path ".my127ws/*")"
 }
