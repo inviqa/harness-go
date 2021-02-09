@@ -2,5 +2,8 @@
 
 function task_fmt_check()
 {
-    {{ @('go.formatter') }} -l -w "$(find . -type f -name '*.go' -not -path ".my127ws/*")"
+    find . -type f -name '*.go' -not -path "./.my127ws/*" | while IFS='' read -r line
+    do
+      {{ @('go.formatter') }} -l -w "$line"
+    done
 }
