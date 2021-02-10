@@ -38,12 +38,6 @@ RUN go mod download
 
 RUN helper modules:after
 
-{% if @('go.formatter') == 'goimports' %}
-RUN go install golang.org/x/tools/cmd/goimports
-{% endif %}
-
-RUN go install github.com/fzipp/gocyclo/cmd/gocyclo
-
 COPY . .
 
 RUN go generate

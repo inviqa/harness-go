@@ -2,11 +2,14 @@
 
 function task_modules_after()
 {
-    {% if @('go.modules.after.steps') is empty %}
-        :
-    {% else %}
-        {% for step in @('go.modules.after.steps') -%}
-            {{ step|raw }}
-        {% endfor %}
+    {% for step in @('go.modules.after.steps') -%}
+        {{ step|raw }}
+    {% endfor %}
+
+    {% if @('go.formatter') == 'goimports' %}
+    go install golang.org/x/tools/cmd/goimports
     {% endif %}
+
+    go install github.com/fzipp/gocyclo/cmd/gocyclo
+    go install github.com/gordonklaus/ineffassign
 }
