@@ -2,7 +2,7 @@
 
 ## Development
 
-When working locally, doing a `ws create-project ...` or `ws install`, a development image will be produced based on the upstream [`go` image]. This is based on [DebianBuster], which has a shell and system utilities available for use. We can install more packags when running this container using `apt` (see the [`app.packages` attribute])
+When working locally, doing a `ws create ...` or `ws install`, a development image will be produced based on the upstream [`go` image]. This is based on [DebianBuster], which has a shell and system utilities available for use. We can install more packags when running this container using `apt` (see the [`app.packages` attribute])
 
 This works really well when we are developing, as we will want to be able to install packages quickly to test various things.
 
