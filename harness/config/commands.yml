@@ -89,6 +89,11 @@ command('go mod check'):
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper modules:check
 
+command('go test coverage'):
+  exec: |
+    #!bash(workspace:/)|@
+    go test -coverprofile=cp.out ./... && go tool cover -html=cp.out
+
 command('recompile'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
