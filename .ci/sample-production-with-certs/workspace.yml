@@ -3,5 +3,5 @@ workspace('ci-go-sample'):
   harness: inviqa/go
 
 attribute('app.build'): production
-attribute('module_name'): ci-go-sample
+attribute('go.module_name'): ci-go-sample
 attribute('app.bundle_certs'): yes

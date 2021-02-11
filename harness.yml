@@ -7,7 +7,7 @@ harness('inviqa/go'):
       - harness:/
     attributes:
       standard:
-        - module_name
+        - go.module_name
 ---
 import:
   - harness/config/*.yml

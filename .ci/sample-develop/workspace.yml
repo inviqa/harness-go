@@ -3,4 +3,4 @@ workspace('ci-go-sample'):
   harness: inviqa/go
 
 attribute('app.build'): develop
-attribute('module_name'): ci-go-sample
+attribute('go.module_name'): ci-go-sample
