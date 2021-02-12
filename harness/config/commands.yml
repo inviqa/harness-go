@@ -40,49 +40,49 @@ command('rebuild'): |
   $ws->run('destroy');
   $ws->run('install');
 
-command('go generate'):
+command('go docker generate'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go generate
 
-command('go test'):
+command('go docker test'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go test ./...
 
-command('go vet'):
+command('go docker vet'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go vet ./...
 
-command('go gocyclo'):
+command('go docker gocyclo'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper gocyclo
 
-command('go ineffassign'):
+command('go docker ineffassign'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper ineffassign
 
-command('go fmt check'):
+command('go docker fmt check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru test -z $(docker-compose exec -T app helper fmt:check)
 
-command('go mod check'):
+command('go docker mod check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
