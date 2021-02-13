@@ -40,6 +40,10 @@ command('rebuild'): |
   $ws->run('destroy');
   $ws->run('install');
 
+command('app'): |
+  #!bash(workspace:/)|@
+  passthru docker-compose exec app bash
+
 command('go docker generate'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
