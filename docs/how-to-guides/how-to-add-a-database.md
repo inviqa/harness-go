@@ -1,0 +1,55 @@
+# How to add a database to your project
+
+It is common for a Go application to require a database, in order to persist data. In a microservices architecture it enables the [database-per-service] pattern.
+
+## Supported databases
+
+This harness supports the following databases by default:
+
+* [MySQL](https://hub.docker.com/_/mysql)
+* [Postgres](https://hub.docker.com/_/postgres)
+
+## Adding a database
+
+In order to add one of the above databases, we just need to update our project's attributes in `workspace.yml`, and then update our application code to use some environment variables that contain our database connection information. The Go harness takes care of the rest for us.
+
+The below guide shows how to add the MySQL database to your application. In your project's `workspace.yml`:
+
+1. Add MySQL to the `app.services` attribute:
+   ```
+   attributes:
+     app:
+       services: [mysql]
+   ```
+1. Set the `database` attribute with your desired database name, username and password
+   ```
+   attributes:
+     # ...
+     database:
+       name: my_database
+       host: mysql
+       user: db-user
+       pass: db-pass
+       port: 3306
+   ```
+1. Configure your app container's environment variables so that it knows how to connect to the database, and define a `mysql.version`:
+   ```
+   attributes:
+     # ...
+     services:
+       app:
+         environment:
+           DB_HOST: = @('database.host')
+           DB_PORT: = @('database.port')
+           DB_USER: = @('database.user')
+           DB_PASS: = @('database.pass')
+           DB_SCHEMA: = @('database.name')
+       mysql:
+         version: 8
+   ```
+
+Now that we have configured the harness correctly, we just need to do a `ws rebuild`. Your local environment should now have a running `mysql` container, alongside your `app` container (check this with `docker-compose ps`).
+
+>_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database._
+
+[database-per-service]: https://microservices.io/patterns/data/database-per-service.html
