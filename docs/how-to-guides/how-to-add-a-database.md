@@ -63,6 +63,51 @@ Now that we have configured the harness correctly, we just need to do a `ws rebu
 
 >_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database. Also, remember to import the correct Go module that supports your database driver, see the [recommended modules](#recommended-modules)._
 
+## Example code
+
+### Connecting to a MySQL database:
+
+```go
+package main
+
+import (
+    "database/sql"
+
+    _ "github.com/go-sql-driver/mysql"
+)
+
+func main() {
+    db, err := sql.Open("mysql", "user:pass@tcp(host:3306)/database-name?parseTime=true")
+    if err != nil {
+        // handle error
+    }
+
+    // ...
+}
+```
+
+### Connecting to a Postgres database:
+
+```go
+package main
+
+import (
+    "database/sql"
+
+    _ "github.com/jackc/pgx/v4/stdlib"
+)
+
+func main() {
+	// note: see https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS for sslmode values
+    db, err := sql.Open("pgx", "postgres://user:pass@host:5432/database-name?sslmode=disable")
+    if err != nil {
+        // handle error
+    }
+
+    // ...
+}
+```
+
 [`database/sql` package docs]: https://pkg.go.dev/database/sql
 [`github.com/go-sql-driver/mysql`]: https://pkg.go.dev/github.com/go-sql-driver/mysql
 [`github.com/jackc/pgx/v4`]: https://pkg.go.dev/github.com/jackc/pgx/v4
