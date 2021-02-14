@@ -71,18 +71,18 @@ Now that we have configured the harness correctly, we just need to do a `ws rebu
 package main
 
 import (
-    "database/sql"
+	"database/sql"
 
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
-    db, err := sql.Open("mysql", "user:pass@tcp(host:3306)/database-name?parseTime=true")
-    if err != nil {
-        // handle error
-    }
+	db, err := sql.Open("mysql", "user:pass@tcp(host:3306)/database-name?parseTime=true")
+	if err != nil {
+		// handle error
+	}
 
-    // ...
+	// ...
 }
 ```
 
@@ -92,19 +92,19 @@ func main() {
 package main
 
 import (
-    "database/sql"
+	"database/sql"
 
-    _ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
 func main() {
 	// note: see https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS for sslmode values
-    db, err := sql.Open("pgx", "postgres://user:pass@host:5432/database-name?sslmode=disable")
-    if err != nil {
-        // handle error
-    }
+	db, err := sql.Open("pgx", "postgres://user:pass@host:5432/database-name?sslmode=disable")
+	if err != nil {
+		// handle error
+	}
 
-    // ...
+	// ...
 }
 ```
 
