@@ -9,6 +9,16 @@ This harness supports the following databases by default:
 * [MySQL](https://hub.docker.com/_/mysql)
 * [Postgres](https://hub.docker.com/_/postgres)
 
+## Recommended modules
+
+Go does not have any built-in support for communicating to a particular database. Instead, it provides the `database/sql` package as an abstraction layer that we interact with, relying on 3rd party Go modules to provide support for particular databases. We need to import one of those Go module for our chosen database to be able to communicate with it in our application. Read more about that in the [`database/sql` package docs].
+
+Here is a list of recommended Go modules for each database:
+* MySQL
+    * [`github.com/go-sql-driver/mysql`]
+* Postgres
+    * [`github.com/jackc/pgx/v4`]
+
 ## Adding a database
 
 In order to add one of the above databases, we just need to update our project's attributes in `workspace.yml`, and then update our application code to use some environment variables that contain our database connection information. The Go harness takes care of the rest for us.
@@ -47,10 +57,13 @@ The below guide shows how to add the MySQL database to your application. In your
        mysql:
          version: 8
    ```
-   >_NOTE: The version number must match the docker image versions linked to in the [#supported-databases](#supported-databases) section above._
+   >_NOTE: The version number must match the docker image versions linked to in the [supported databases](#supported-databases) section above._
 
 Now that we have configured the harness correctly, we just need to do a `ws rebuild`. Your local environment should now have a running `mysql` container, alongside your `app` container (check this with `docker-compose ps`).
 
->_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database._
+>_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database. Also, remember to import the correct Go module that supports your database driver, see the [recommended modules](#recommended-modules)._
 
+[`database/sql` package docs]: https://pkg.go.dev/database/sql
+[`github.com/go-sql-driver/mysql`]: https://pkg.go.dev/github.com/go-sql-driver/mysql
+[`github.com/jackc/pgx/v4`]: https://pkg.go.dev/github.com/jackc/pgx/v4
 [database-per-service]: https://microservices.io/patterns/data/database-per-service.html
