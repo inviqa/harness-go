@@ -44,6 +44,10 @@ command('app'): |
   #!bash(workspace:/)|@
   passthru docker-compose exec app bash
 
+command('console'): |
+  #!php
+  $ws->run('app');
+
 command('go docker generate'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
