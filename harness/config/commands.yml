@@ -44,6 +44,8 @@ command('app'): |
   #!bash(workspace:/)|@
   passthru docker-compose exec app bash
 
+# this is only here to make things easier for people who are familar with the other
+# harnesses, where `ws console` is used to quickly exec onto the main container
 command('console'): |
   #!php
   $ws->run('app');
