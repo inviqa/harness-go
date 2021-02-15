@@ -4,10 +4,7 @@ shopt -s globstar
 
 function task_gocyclo()
 {
-    dirs=""
-    for d in /app/**/*.go; do
-         dirs="${dirs} $d"
+    for f in /app/**/*.go; do
+         gocyclo -over {{ @('go.gocyclo.threshold') }} "$f"
     done
-
-    gocyclo -over {{ @('go.gocyclo.threshold') }} "$dirs"
 }
