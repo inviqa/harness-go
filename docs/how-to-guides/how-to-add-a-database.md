@@ -65,10 +65,56 @@ Now that we have configured the harness correctly, we just need to do a `ws rebu
 
 ## Example code
 
-### Connecting to a MySQL database:
+### Implementing connection retries to your database
+
+It is important to make sure that your Go application is able to handle the case where a database is not available initially on startup. This is common in a local development environment, where your `app` container may start before your database container, but it is also really important in other environments where a connection attempt may fail for all kinds of reasons.
+
+>_NOTE: This code example uses an arbitrary database driver and DSN. You can find examples of how to connect to specific databases in the other code examples further below._
 
 ```go
-package main
+package data
+
+import (
+	"database/sql"
+	"log"
+	"time"
+)
+
+const retryAttempts = 10
+
+func NewDB(driver, dsn string) *sql.DB {
+	db, err := sql.Open(driver, dsn)
+
+	if err != nil {
+		log.Fatalf("cannot connect to database: %s", err)
+	}
+
+	tries := retryAttempts
+	for {
+		err := db.Ping()
+		if err == nil {
+			break
+		}
+
+		time.Sleep(time.Second * 1)
+		tries--
+		log.Printf("database is not available (err: %s), retrying %d more time(s)", err, tries)
+
+		if tries == 0 {
+			log.Fatalf("database did not become available within %d connection attempts", retryAttempts)
+		}
+	}
+
+	return db
+}
+```
+
+### Connecting to a MySQL database:
+
+Building upon the [connection retry example] above, this shows a specific approach for MySQL.
+
+```go
+package data
 
 import (
 	"database/sql"
@@ -76,17 +122,16 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func main() {
+func NewDB() *sql.DB {
 	db, err := sql.Open("mysql", "user:pass@tcp(host:3306)/database-name?parseTime=true")
-	if err != nil {
-		// handle error
-	}
 
 	// ...
 }
 ```
 
 ### Connecting to a Postgres database:
+
+Building upon the [connection retry example] above, this shows a specific approach for Postgres.
 
 ```go
 package main
@@ -97,12 +142,8 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
-func main() {
-	// note: see https://www.postgresql.org/docs/9.1/libpq-ssl.html#LIBPQ-SSL-SSLMODE-STATEMENTS for sslmode values
+func NewDB() *sql.DB {
 	db, err := sql.Open("pgx", "postgres://user:pass@host:5432/database-name?sslmode=disable")
-	if err != nil {
-		// handle error
-	}
 
 	// ...
 }
@@ -112,3 +153,4 @@ func main() {
 [`github.com/go-sql-driver/mysql`]: https://pkg.go.dev/github.com/go-sql-driver/mysql
 [`github.com/jackc/pgx/v4`]: https://pkg.go.dev/github.com/jackc/pgx/v4
 [database-per-service]: https://microservices.io/patterns/data/database-per-service.html
+[connection retry example]: #implementing-connection-retries-to-your-database
