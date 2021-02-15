@@ -1,5 +1,48 @@
 # Changelog
 
+## [0.7.0](https://github.com/inviqa/harness-go/tree/0.7.0) (2021-02-15)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.6.0...0.7.0)
+
+**Implemented enhancements:**
+
+- Add workspace command for consistency with PHP harness' "ws console" [\#82](https://github.com/inviqa/harness-go/issues/82)
+- Make it easier to run `go install \<module\>` in the Docker image [\#69](https://github.com/inviqa/harness-go/issues/69)
+- Add ineffassign to the pipeline checks [\#66](https://github.com/inviqa/harness-go/issues/66)
+- Allow the use of goimports as an alternative to gofmt, if preferred [\#62](https://github.com/inviqa/harness-go/issues/62)
+- Add recompile command [\#31](https://github.com/inviqa/harness-go/issues/31)
+- Add "ws app" command for quick access to app container [\#94](https://github.com/inviqa/harness-go/pull/94) ([jameshalsall](https://github.com/jameshalsall))
+- Add ineffassign to pipeline checks [\#84](https://github.com/inviqa/harness-go/pull/84) ([jameshalsall](https://github.com/jameshalsall))
+- Add gocyclo [\#79](https://github.com/inviqa/harness-go/pull/79) ([jameshalsall](https://github.com/jameshalsall))
+- Add recompile command [\#78](https://github.com/inviqa/harness-go/pull/78) ([jameshalsall](https://github.com/jameshalsall))
+- Remove Apache license in README [\#77](https://github.com/inviqa/harness-go/pull/77) ([jameshalsall](https://github.com/jameshalsall))
+- Add go.formatter option for changing formatter [\#76](https://github.com/inviqa/harness-go/pull/76) ([jameshalsall](https://github.com/jameshalsall))
+
+**Fixed bugs:**
+
+- Move the Jenkinsfile.twig to the overlay directory [\#86](https://github.com/inviqa/harness-go/issues/86)
+- Apply overlay after ws install [\#93](https://github.com/inviqa/harness-go/pull/93) ([jameshalsall](https://github.com/jameshalsall))
+
+**Closed issues:**
+
+- Standardise `ws go` command naming to reflect where they are executed [\#89](https://github.com/inviqa/harness-go/issues/89)
+- Write a "how to" guide on how to add a database to your project using the harness [\#83](https://github.com/inviqa/harness-go/issues/83)
+- Write documentation on how to configure the harness for your project [\#70](https://github.com/inviqa/harness-go/issues/70)
+- Add gocyclo to pipeline checks [\#65](https://github.com/inviqa/harness-go/issues/65)
+- Do not remove the apt lists until after image-dependencies.sh is executed [\#35](https://github.com/inviqa/harness-go/issues/35)
+
+**Merged pull requests:**
+
+- Add how-to guide on adding a database to a project [\#95](https://github.com/inviqa/harness-go/pull/95) ([jameshalsall](https://github.com/jameshalsall))
+- Update go command naming convention [\#90](https://github.com/inviqa/harness-go/pull/90) ([jbarton123](https://github.com/jbarton123))
+- Add command to run unit tests with coverage [\#88](https://github.com/inviqa/harness-go/pull/88) ([jbarton123](https://github.com/jbarton123))
+- Move module\_name attribute -\> go.module\_name [\#87](https://github.com/inviqa/harness-go/pull/87) ([jameshalsall](https://github.com/jameshalsall))
+- Correct the approach to executing project shell scripts in image build [\#75](https://github.com/inviqa/harness-go/pull/75) ([jameshalsall](https://github.com/jameshalsall))
+- Add attribute to allow installing arbitrary apt packages [\#74](https://github.com/inviqa/harness-go/pull/74) ([jameshalsall](https://github.com/jameshalsall))
+- Start writing docs [\#73](https://github.com/inviqa/harness-go/pull/73) ([jameshalsall](https://github.com/jameshalsall))
+- Add attribute to allow running arbitrary steps before go mod download [\#72](https://github.com/inviqa/harness-go/pull/72) ([jameshalsall](https://github.com/jameshalsall))
+- Add option for running steps after go mod download [\#71](https://github.com/inviqa/harness-go/pull/71) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.6.0](https://github.com/inviqa/harness-go/tree/0.6.0) (2021-02-01)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.5.1...0.6.0)
@@ -16,7 +59,7 @@
 - Fix bug in processing non-interactive sealed-secret input [\#61](https://github.com/inviqa/harness-go/pull/61) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Fix probe spec [\#60](https://github.com/inviqa/harness-go/pull/60) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
-## [0.5.1](https://github.com/inviqa/harness-go/tree/0.5.1) (2020-09-02)
+## [0.5.1](https://github.com/inviqa/harness-go/tree/0.5.1) (2020-09-03)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.5.0...0.5.1)
 
