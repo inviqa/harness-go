@@ -3,8 +3,7 @@ after('harness.install'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
-    chmod +x .my127ws/harness/scripts/mod_init.sh
-    run docker run --rm -v "$(pwd):/app" -w /app golang:1.15 ./.my127ws/harness/scripts/mod_init.sh
+    source .my127ws/harness/scripts/init.sh
     source .my127ws/harness/scripts/apply.sh
     run ws enable
 
