@@ -7,17 +7,21 @@ pipeline {
     stages {
         stage('Test Matrix') {
             parallel {
-                stage('(mode=production)') {
+                stage('(go=1.15 mode=production)') {
                     agent { label "my127ws" } 
-                    steps { sh './test production' }
+                    steps { sh './test production 1.15' }
                 }
-                stage('(mode=production with bundled certs)') {
+                stage('(go=1.15 mode=develop)') {
                     agent { label "my127ws" }
-                    steps { sh './test production-with-certs' }
+                    steps { sh './test develop 1.15' }
                 }
-                stage('(mode=develop)') {
-                    agent { label "my127ws" } 
-                    steps { sh './test develop' }
+                stage('(go=1.16 mode=develop)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop 1.16' }
+                }
+                stage('(go=1.16 mode=develop)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop 1.16' }
                 }
             }
         }

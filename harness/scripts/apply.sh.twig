@@ -1,0 +1,13 @@
+function apply() {
+    if [ ! -f "go.mod" ]; then
+        rsync --exclude='*.twig' -a ".my127ws/application/skeleton/" .
+        go mod init {{ @('go.module_name') }}
+        go get github.com/prometheus/client_golang@v1
+        go get github.com/prometheus/client_golang/prometheus@v1
+        go get github.com/sirupsen/logrus@v1
+    fi
+
+    rsync --exclude='*.twig' -a ".my127ws/application/overlay/" .
+}
+
+apply
