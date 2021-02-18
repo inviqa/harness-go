@@ -2,8 +2,7 @@
 
 function init() {
     if [ ! -f "go.mod" ]; then
-      chmod +x .my127ws/harness/scripts/mod_init.sh
-      docker run --rm -v "$(pwd):/app" -w /app golang:{{ @('go.version') }} ./.my127ws/harness/scripts/mod_init.sh
+      docker run --rm -v "$(pwd):/app" -w /app golang:{{ @('go.version') }} bash ./.my127ws/harness/scripts/mod_init.sh
     fi
 }
 
