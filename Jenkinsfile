@@ -15,9 +15,9 @@ pipeline {
                     agent { label "my127ws" }
                     steps { sh './test develop 1.15' }
                 }
-                stage('(go=1.16 mode=develop)') {
+                stage('(go=1.16 mode=production)') {
                     agent { label "my127ws" }
-                    steps { sh './test develop 1.16' }
+                    steps { sh './test production 1.16' }
                 }
                 stage('(go=1.16 mode=develop)') {
                     agent { label "my127ws" }
