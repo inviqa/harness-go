@@ -5,7 +5,7 @@ after('harness.install'):
     #!bash(workspace:/)
     source .my127ws/harness/scripts/init.sh
     source .my127ws/harness/scripts/apply.sh
-    run ws enable
+    ws enable
 
 after('harness.refresh'): |
   #!bash(harness:/)|@
