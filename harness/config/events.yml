@@ -3,8 +3,8 @@ after('harness.install'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
-    source .my127ws/harness/scripts/init.sh
     source .my127ws/harness/scripts/apply.sh
+    source .my127ws/harness/scripts/init.sh
     ws enable
 
 after('harness.refresh'): |
