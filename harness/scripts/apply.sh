@@ -1,5 +1,5 @@
 function apply() {
-    if [ ! -f "go.mod" ]; then
+    if [ ! -f "main.go" ]; then
         rsync --exclude='*.twig' -a ".my127ws/application/skeleton/" .
     fi
 

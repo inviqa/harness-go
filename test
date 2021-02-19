@@ -5,12 +5,13 @@ set -x
 
 function main()
 {
-    test "$1"
+    test "$1" "$2"
 }
 
 function test()
 (
     local mode="$1"
+    local goversion="$2"
 
     local path_harness="."
     local path_test="./.tmp-test"
@@ -19,7 +20,7 @@ function test()
         rm -rf "${path_test}"
     fi
 
-    cp -ap "${path_harness}/.ci/sample-${mode}" "${path_test}"
+    cp -ap "${path_harness}/.ci/${goversion}/sample-${mode}" "${path_test}"
     cd ${path_test}
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
