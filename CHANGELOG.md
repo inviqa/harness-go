@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.7.1](https://github.com/inviqa/harness-go/tree/0.7.1) (2021-02-19)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.7.0...0.7.1)
+
+**Fixed bugs:**
+
+- In Go 1.16 the "go install" command needs a module version [\#96](https://github.com/inviqa/harness-go/issues/96)
+
+**Merged pull requests:**
+
+- Support Go 1.16 go install and module setup [\#98](https://github.com/inviqa/harness-go/pull/98) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.7.0](https://github.com/inviqa/harness-go/tree/0.7.0) (2021-02-15)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.6.0...0.7.0)
