@@ -15,9 +15,14 @@ When we create a production image in our CI pipeline we want to produce a lighte
 
 The second step is quite key, because when looking at the development [`Dockerfile`] it looks strange to see the `go build` step towards the end of it is different based on the build mode. This is hopefully clear from this description, we do that because the production build step is just a copy of the binary compiled during the development image build.
 
+## Testing a production image build locally
+
+You can find out how to do this in the [how to guide].
+
 [`go` image]: https://hub.docker.com/_/golang
 [DebianBuster]: https://wiki.debian.org/DebianBuster
 [`app.packages` attribute]: harness-attributes.md
 [Docker's scratch image]: https://hub.docker.com/_/scratch/
 [`Dockerfile.prod`]: /docker/image/app/Dockerfile.prod.twig
 [`Dockerfile`]: /docker/image/app/Dockerfile.twig
+[how to guide]: /docs/how-to-guides/test-production-image-build-locally.md
