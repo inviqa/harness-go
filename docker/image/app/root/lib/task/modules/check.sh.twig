@@ -6,6 +6,7 @@ function task_modules_check()
 
     if git status --porcelain | grep "go\.mod"
     then
+      git diff go.mod go.sum
       echo "Run go mod tidy to fix your module dependencies."
       exit 1
     else
