@@ -3,13 +3,14 @@
 function task_modules_check()
 {
     go mod tidy -v
+    git diff --exit-code go.mod go.sum
 
-    if git status --porcelain | grep "go\.mod"
+    if [ $? -eq 0 ]
     then
-      echo "Run go mod tidy to fix your module dependencies."
-      exit 1
-    else
       echo "No unused or missing dependencies found in go.mod."
       exit 0
+    else
+      echo "Run go mod tidy to fix your module dependencies."
+      exit $?
     fi
 }
