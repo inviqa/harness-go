@@ -110,3 +110,12 @@ command('recompile'):
   exec: |
     #!bash(workspace:/)|@
     passthru ws harness prepare && docker-compose up -d --build app
+
+command('use prod'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru ws harness prepare
+    passthru ws build-prod
+    passthru && docker-compose up -d app
