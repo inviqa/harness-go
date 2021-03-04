@@ -104,6 +104,11 @@ command('go test coverage'):
     #!bash(workspace:/)|@
     go test -coverprofile=cp.out ./... && go tool cover -html=cp.out
 
+command('go fmt'):
+  exec: |
+    #!bash(workspace:/)|@
+    @('go.formatter') -w -l .
+
 command('recompile'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
