@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.8.0](https://github.com/inviqa/harness-go/tree/0.8.0) (2021-03-05)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.7.1...0.8.0)
+
+**Implemented enhancements:**
+
+- Add host versions of the `ws go docker ...` commands [\#107](https://github.com/inviqa/harness-go/issues/107)
+- Make it easier to do a prod build and use it in your local docker-compose stack [\#97](https://github.com/inviqa/harness-go/issues/97)
+- Add ws go fmt to format code in line with formatter [\#108](https://github.com/inviqa/harness-go/pull/108) ([jameshalsall](https://github.com/jameshalsall))
+- Improve go mod init process [\#105](https://github.com/inviqa/harness-go/pull/105) ([jameshalsall](https://github.com/jameshalsall))
+- Install dev tools in modules:before step [\#104](https://github.com/inviqa/harness-go/pull/104) ([jameshalsall](https://github.com/jameshalsall))
+- Bump default Go version to 1.16 [\#103](https://github.com/inviqa/harness-go/pull/103) ([jameshalsall](https://github.com/jameshalsall))
+- Output diff of go.mod/sum when mod check fails [\#102](https://github.com/inviqa/harness-go/pull/102) ([jameshalsall](https://github.com/jameshalsall))
+- Add 'ws use prod' command to switch to production build [\#101](https://github.com/inviqa/harness-go/pull/101) ([jameshalsall](https://github.com/jameshalsall))
+
+**Fixed bugs:**
+
+- The go fmt check step in the pipeline does not return a non-zero exit code [\#106](https://github.com/inviqa/harness-go/issues/106)
+
+**Closed issues:**
+
+- Make Go 1.16 the default version after it has been assessed [\#100](https://github.com/inviqa/harness-go/issues/100)
+
 ## [0.7.1](https://github.com/inviqa/harness-go/tree/0.7.1) (2021-02-19)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.7.0...0.7.1)
