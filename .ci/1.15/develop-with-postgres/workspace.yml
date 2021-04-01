@@ -17,4 +17,4 @@ attributes:
     host: postgres
     user: db-user
     pass: db-pass
-    port: 3306
+    port: 5432
