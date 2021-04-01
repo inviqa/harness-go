@@ -39,7 +39,7 @@ When ready to tag a release, make a new branch from the `master` branch for the 
   docker run -e CHANGELOG_GITHUB_TOKEN="$CHANGELOG_GITHUB_TOKEN" -it --rm -v "$(pwd)":/usr/local/src/your-app -v "$(pwd)/github-changelog-http-cache":/tmp/github-changelog-http-cache ferrarimarco/github-changelog-generator --user inviqa --project harness-go --exclude-labels "duplicate,question,invalid,wontfix,skip-changelog" --release-branch master --future-release <nextReleaseTag>
   ```
 1. Examine the generated `CHANGELOG.md`, verify the changes make sense.
-1. Commit the resulting `CHANGELOG.md`, push and raise a pull request.
+1. Commit the resulting `CHANGELOG.md`, push and raise a pull request with the label `skip-changelog`.
 1. Once merged, continue with the release process below.
 
 ### Performing a Release
