@@ -1,0 +1,20 @@
+workspace('ci-go-sample'):
+  description: generated local workspace for ci-go-sample.
+  harness: inviqa/go
+
+attributes:
+  app:
+    build: develop
+    services: [postgres]
+  go:
+    module_name: ci-go-sample
+    version: 1.15
+  services:
+    postgres:
+      version: alpine
+  database:
+    name: my_database
+    host: postgres
+    user: db-user
+    pass: db-pass
+    port: 3306

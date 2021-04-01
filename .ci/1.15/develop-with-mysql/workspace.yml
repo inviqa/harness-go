@@ -1,0 +1,20 @@
+workspace('ci-go-sample'):
+  description: generated local workspace for ci-go-sample.
+  harness: inviqa/go
+
+attributes:
+  app:
+    build: develop
+    services: [mysql]
+  go:
+    module_name: ci-go-sample
+    version: 1.15
+  services:
+    mysql:
+      version: 8
+  database:
+    name: my_database
+    host: mysql
+    user: db-user
+    pass: db-pass
+    port: 3306

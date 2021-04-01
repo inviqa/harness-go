@@ -15,12 +15,13 @@ function test()
 
     local path_harness="."
     local path_test="./.tmp-test"
+    local ci_test_path="${path_harness}/.ci/${goversion}/${mode}"
 
     if [ -d "${path_test}" ]; then
         rm -rf "${path_test}"
     fi
 
-    cp -ap "${path_harness}/.ci/${goversion}/sample-${mode}" "${path_test}"
+    cp -ap "${ci_test_path}" "${path_test}"
     cd ${path_test}
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
@@ -34,11 +35,28 @@ function test()
 
     sleep 5
 
-    if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ]; then
+    verify_and_exit "${path_test}" "${ci_test_path}"
+)
+
+function verify_and_exit() {
+  local path_test="$1"
+  local ci_test_path="$2"
+  local expected_containers="../${ci_test_path}/.expected_containers"
+
+  if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ]; then
       echo "The app container has stopped running unexpectedly."
       exit 1
-    fi
-)
+  fi
+
+  if [[ -f "${expected_containers}" ]]; then
+    while read -r container; do
+      if [ ! "$(docker ps -q -f name=ci-go-sample_"$container")" ]; then
+        echo "The ${container} container is not running, but it should be."
+        exit 1
+      fi
+    done < "${expected_containers}"
+  fi
+}
 
 function clean()
 {

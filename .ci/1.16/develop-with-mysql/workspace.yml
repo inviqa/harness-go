@@ -5,6 +5,16 @@ workspace('ci-go-sample'):
 attributes:
   app:
     build: develop
+    services: [mysql]
   go:
     module_name: ci-go-sample
     version: 1.16
+  services:
+    mysql:
+      version: 8
+  database:
+    name: my_database
+    host: mysql
+    user: db-user
+    pass: db-pass
+    port: 3306

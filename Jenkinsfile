@@ -11,17 +11,25 @@ pipeline {
                     agent { label "my127ws" } 
                     steps { sh './test production 1.15' }
                 }
-                stage('(go=1.15 mode=develop)') {
+                stage('(go=1.15 mode=develop-with-mysql)') {
                     agent { label "my127ws" }
-                    steps { sh './test develop 1.15' }
+                    steps { sh './test develop-with-mysql 1.15' }
+                }
+                stage('(go=1.15 mode=develop-with-postgres)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-postgres 1.15' }
                 }
                 stage('(go=1.16 mode=production)') {
                     agent { label "my127ws" }
                     steps { sh './test production 1.16' }
                 }
-                stage('(go=1.16 mode=develop)') {
+                stage('(go=1.16 mode=develop-with-mysql)') {
                     agent { label "my127ws" }
-                    steps { sh './test develop 1.16' }
+                    steps { sh './test develop-with-mysql 1.16' }
+                }
+                stage('(go=1.16 mode=develop-with-postgrea)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-postgres 1.16' }
                 }
             }
         }
