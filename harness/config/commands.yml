@@ -83,7 +83,7 @@ command('go docker gosec'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec -T app helper gocsec
+    passthru docker-compose exec -T app helper gosec
 
 command('go docker ineffassign'):
   env:
