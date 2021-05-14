@@ -1,9 +1,11 @@
 #!/bin/bash
 
+{% import './docker/image/app/root/lib/task/modules/common.twig' as common %}
+
 function task_modules_after()
 {
     {# TODO: when we drop 1.15 support, this can be moved to modules:before #}
-    go {{ operator }} github.com/securego/gosec/v2/cmd/gosec{{ version }}
+    go {{ common.operator }} github.com/securego/gosec/v2/cmd/gosec{{ common.version }}
 
     {% for step in @('go.modules.after.steps') -%}
         {{ step|raw }}

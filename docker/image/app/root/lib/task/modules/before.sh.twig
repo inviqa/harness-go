@@ -1,6 +1,6 @@
 #!/bin/bash
 
-{% include 'common.twig' %}
+{% import './docker/image/app/root/lib/task/modules/common.twig' as common %}
 
 function task_modules_before()
 {
@@ -9,10 +9,9 @@ function task_modules_before()
     {% endfor %}
 
     {% if @('go.formatter') == 'goimports' %}
-    go {{ operator }} golang.org/x/tools/cmd/goimports{{ version }}
+    go {{ common.operator }} golang.org/x/tools/cmd/goimports{{ common.version }}
     {% endif %}
 
-    go {{ operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ version }}
-    go {{ operator }} github.com/gordonklaus/ineffassign{{ version }}
-    go {{ operator }} github.com/securego/gosec/v2/cmd/gosec{{ version }}
+    go {{ common.operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ common.version }}
+    go {{ common.operator }} github.com/gordonklaus/ineffassign{{ common.version }}
 }
