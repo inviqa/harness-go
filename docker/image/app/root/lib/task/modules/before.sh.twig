@@ -1,7 +1,5 @@
 #!/bin/bash
 
-{% import './docker/image/app/root/lib/task/modules/common.twig' as common %}
-
 function task_modules_before()
 {
     {% for step in @('go.modules.before.steps') -%}
@@ -9,9 +7,10 @@ function task_modules_before()
     {% endfor %}
 
     {% if @('go.formatter') == 'goimports' %}
-    go {{ common.operator }} golang.org/x/tools/cmd/goimports{{ common.version|spaceless }}
+    go install golang.org/x/tools/cmd/goimports@latest
     {% endif %}
 
-    go {{ common.operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ common.version|spaceless }}
-    go {{ common.operator }} github.com/gordonklaus/ineffassign{{ common.version|spaceless }}
+    go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
+    go install github.com/gordonklaus/ineffassign@latest
+    go install github.com/securego/gosec/v2/cmd/gosec@latest
 }
