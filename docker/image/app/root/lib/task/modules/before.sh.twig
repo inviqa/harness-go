@@ -9,9 +9,9 @@ function task_modules_before()
     {% endfor %}
 
     {% if @('go.formatter') == 'goimports' %}
-    go {{ common.operator }} golang.org/x/tools/cmd/goimports{{ common.version }}
+    go {{ common.operator }} golang.org/x/tools/cmd/goimports{{ common.version|spaceless }}
     {% endif %}
 
-    go {{ common.operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ common.version }}
-    go {{ common.operator }} github.com/gordonklaus/ineffassign{{ common.version }}
+    go {{ common.operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ common.version|spaceless }}
+    go {{ common.operator }} github.com/gordonklaus/ineffassign{{ common.version|spaceless }}
 }

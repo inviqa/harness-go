@@ -7,7 +7,6 @@ confd('harness:/'):
   - { src: docker/image/app/root/lib/task/gocyclo.sh }
   - { src: docker/image/app/root/lib/task/gosec.sh }
   - { src: docker/image/app/root/lib/task/fmt/check.sh }
-  - { src: docker/image/app/root/lib/task/modules/common }
   - { src: docker/image/app/root/lib/task/modules/after.sh }
   - { src: docker/image/app/root/lib/task/modules/before.sh }
   - { src: docker/image/app/root/lib/task/modules/check.sh }

@@ -5,7 +5,7 @@
 function task_modules_after()
 {
     {# TODO: when we drop 1.15 support, this can be moved to modules:before #}
-    go {{ common.operator }} github.com/securego/gosec/v2/cmd/gosec{{ common.version }}
+    go {{ common.operator }} github.com/securego/gosec/v2/cmd/gosec{{ common.version|spaceless }}
 
     {% for step in @('go.modules.after.steps') -%}
         {{ step|raw }}
