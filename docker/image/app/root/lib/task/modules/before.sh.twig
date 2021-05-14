@@ -20,4 +20,5 @@ function task_modules_before()
 
     go {{ operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ version }}
     go {{ operator }} github.com/gordonklaus/ineffassign{{ version }}
+    go {{ operator }} github.com/securego/gosec/v2/cmd/gosec{{ version }}
 }
