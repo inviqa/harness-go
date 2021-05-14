@@ -2,11 +2,10 @@
 
 function task_modules_after()
 {
-    {% if @('go.modules.after.steps') is empty %}
-        :
-    {% else %}
-        {% for step in @('go.modules.after.steps') -%}
-            {{ step|raw }}
-        {% endfor %}
-    {% endif %}
+    {# TODO: when we drop 1.15 support, this can be moved to modules:before #}
+    go {{ operator }} github.com/securego/gosec/v2/cmd/gosec{{ version }}
+
+    {% for step in @('go.modules.after.steps') -%}
+        {{ step|raw }}
+    {% endfor %}
 }
