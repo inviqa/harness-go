@@ -5,7 +5,7 @@ workspace('ci-go-sample'):
 attributes:
   app:
     build: develop
-    services: [postgres]
+    services: [kafka]
   go:
     module_name: ci-go-sample
     version: 1.16
