@@ -1,5 +1,5 @@
   kafka:
-    image: wurstmeister/kafka:2.12-2.4.1
+    image: wurstmeister/kafka:{{ @('kafka.version') }}
     ports:
     - 9092
     environment:
