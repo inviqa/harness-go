@@ -21,7 +21,10 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Add("Content-type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status": "OK"}`))
+		_, err := w.Write([]byte(`{"status": "OK"}`))
+		if err != nil {
+			log.WithError(err).Error("error writing to response on / route")
+		}
 	})
 
 	go func() {
