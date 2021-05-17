@@ -1,13 +1,5 @@
 #!/bin/bash
 
-{% set operator = 'install' %}
-{% set version = '@latest' %}
-
-{% if @('go.version') < 1.16 %}
-    {% set operator = 'get' %}
-    {% set version = '' %}
-{% endif %}
-
 function task_modules_before()
 {
     {% for step in @('go.modules.before.steps') -%}
@@ -15,9 +7,9 @@ function task_modules_before()
     {% endfor %}
 
     {% if @('go.formatter') == 'goimports' %}
-    go {{ operator }} golang.org/x/tools/cmd/goimports{{ version }}
+    go install golang.org/x/tools/cmd/goimports@latest
     {% endif %}
 
-    go {{ operator }} github.com/fzipp/gocyclo/cmd/gocyclo{{ version }}
-    go {{ operator }} github.com/gordonklaus/ineffassign{{ version }}
+    go install github.com/fzipp/gocyclo/cmd/gocyclo@latest
+    go install github.com/gordonklaus/ineffassign@latest
 }
