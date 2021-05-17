@@ -78,6 +78,13 @@ command('go docker gocyclo'):
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper gocyclo
 
+command('go docker gosec'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T app helper gosec
+
 command('go docker ineffassign'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
