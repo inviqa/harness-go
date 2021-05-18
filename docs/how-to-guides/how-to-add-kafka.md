@@ -26,7 +26,7 @@ Go does not have any built-in support for working with Kafka. We recommend the u
 
 In order to add Kafka and Zookeeper to your application, you just need to update our project's attributes in `workspace.yml`, and then update your application code to use some environment variables that contain Kakfa host information. The Go harness takes care of the rest for us.
 
-The below guide shows how to add the MySQL database to your application. In your project's `workspace.yml`:
+The below guide shows how to add Kafka and Zookeeper to your application. In your project's `workspace.yml`:
 
 1. Add Kafka to the `app.services` attribute:
    ```
