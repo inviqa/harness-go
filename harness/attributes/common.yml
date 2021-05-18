@@ -28,6 +28,9 @@ attributes.default:
     name: app
     root_pass: DV6RdNY3QcFsBk7V
 
+  kafka:
+    version: latest
+
   docker:
     config: null # deprecated
     # If using gitops helm chart repositories, it's recommended to put this configuration

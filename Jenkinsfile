@@ -15,9 +15,13 @@ pipeline {
                     agent { label "my127ws" }
                     steps { sh './test develop-with-mysql 1.16' }
                 }
-                stage('(go=1.16 mode=develop-with-postgrea)') {
+                stage('(go=1.16 mode=develop-with-postgres)') {
                     agent { label "my127ws" }
                     steps { sh './test develop-with-postgres 1.16' }
+                }
+                stage('(go=1.16 mode=develop-with-kafka)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-kafka 1.16' }
                 }
             }
         }
