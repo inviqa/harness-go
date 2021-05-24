@@ -111,6 +111,26 @@ command('go test coverage'):
     #!bash(workspace:/)|@
     go test -coverprofile=cp.out ./... && go tool cover -html=cp.out
 
+command('go bench compare'):
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/bench/compare.sh
+
+command('go bench report'):
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/bench/report.sh
+
+command('go bench current'):
+  exec: |
+    #!bash(workspace:/)|@
+    go test -count=5 -bench=. -benchmem --tags=benchmarks ./...
+
+command('go bench'):
+  exec: |
+    #!bash(workspace:/)|@
+    ws go bench current
+
 command('go fmt'):
   exec: |
     #!bash(workspace:/)|@
