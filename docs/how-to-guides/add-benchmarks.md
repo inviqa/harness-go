@@ -17,10 +17,6 @@ The Go harness provides tools to make running benchmarks easier. In order to mak
 
 Following the Inviqa engineering guidelines' best practice, the commands provided by this harness aim to make it easy to get a delta comparison of the performance of your new code (feature branch) against your stable branch. When executed, it will prompt you for the name of your stable branch.
 
-### Modes
-
-There are two modes available to you when you run the commands. 
-
 ### `ws go bench compare`
 
 This will provide a comparison of your current branch changes against your stable branch changes using [`benchstat`]. The command itself will rebuild your local environment twice, to provide a completely clean and consistent state between each run.
