@@ -1,4 +1,4 @@
-# How to add a database to your project
+# How to add a database to your app
 
 It is common for a Go application to require a database. In a microservices architecture it enables the [database-per-service] pattern.
 
