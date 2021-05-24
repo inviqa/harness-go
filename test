@@ -28,6 +28,13 @@ function test()
 
     ws install
 
+    local lockedversion
+    lockedversion=$(ws get go.version)
+    if [ "$lockedversion" != "$goversion" ]; then
+      echo "Expected a locked go.version value of $goversion, but got $lockedversion."
+      exit 1
+    fi
+
     ws helm kubeval qa
 
     ws disable

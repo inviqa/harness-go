@@ -151,3 +151,32 @@ command('use prod'):
     passthru ws harness prepare
     passthru ws build-prod
     passthru && docker-compose up -d app
+
+# borrowed from https://github.com/inviqa/harness-base-php/blob/1.2.x/src/_base/harness/config/commands.yml#L179
+command('set <attribute> <value>'):
+  env:
+    ATTR_KEY: = input.argument('attribute')
+    ATTR_VAL: = input.argument('value')
+  exec: |
+    #!bash(workspace:/)|=
+    if [ ! -f workspace.yml ]; then
+      touch workspace.yml
+    fi
+    if grep -q "attribute('${ATTR_KEY}'):" workspace.yml; then
+      echo "Removing old '${ATTR_KEY}' setting from workspace.yml"
+      sed "/^attribute('${ATTR_KEY}'): .*$/d" workspace.yml > workspace.yml.tmp && mv workspace.yml.tmp workspace.yml
+    fi
+    if grep -q "attribute('${ATTR_KEY}'):" workspace.yml; then
+      echo 'Could not remove line from workspace.yml, failing'
+      exit 1
+    fi
+    echo "Setting '${ATTR_KEY}' setting to '${ATTR_VAL}' in workspace.yml"
+    echo "" >> workspace.yml
+    echo "attribute('${ATTR_KEY}'): ${ATTR_VAL}" >> workspace.yml
+
+command('get <attribute>'):
+  env:
+    VALUE: = @(input.argument('attribute'))
+  exec: |
+    #!bash(workspace:/)|@
+    echo "$VALUE"
