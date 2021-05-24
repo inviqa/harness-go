@@ -124,7 +124,7 @@ command('go bench report'):
 command('go bench current'):
   exec: |
     #!bash(workspace:/)|@
-    go test -count=5 -bench=. --tags=benchmarks ./...
+    go test -count=5 -bench=. -benchmem --tags=benchmarks ./...
 
 command('go bench'):
   exec: |
