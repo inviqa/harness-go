@@ -9,4 +9,6 @@ This is the documentation for the Go harness.
 * [Harness attributes](harness-attributes.md)
 * [Overriding harness files](overriding-files.md)
 * [How to guides](how-to-guides)
-    * [How to add a database to your project](how-to-guides/how-to-add-a-database.md)
+    * [How to add a database to your app](how-to-guides/add-a-database.md)
+    * [How to add benchmarks to your app](how-to-guides/add-benchmarks.md)
+    * [How to add Kafka (and Zookeeper)](how-to-guides/add-kafka.md)

@@ -1,4 +1,4 @@
-# How to add benchmark to your app
+# How to add benchmarks to your app
 
 When writing applications with Go, you should make use of the [benchmarking](https://pkg.go.dev/testing#hdr-Benchmarks) that is baked into the language. This will give you confidence that, as you make changes to your code, you are not affecting performance negatively without making a conscious decision that the trade-offs are acceptable.
 
