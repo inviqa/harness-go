@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set +e
-
 bench_compare() {
   if ! hash benchstat 2>/dev/null
   then
