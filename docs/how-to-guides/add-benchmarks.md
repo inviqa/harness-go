@@ -23,7 +23,7 @@ This will provide a comparison of your current branch changes against your stabl
 
 #### Example output
 
-This will help you determine what effect your changes have had on the performance of your application. The "old" time is the performance on your stable branch, whereas the "new" time is the branch that you started the `ws go bench compare` command.
+This will help you determine what effect your changes have had on the performance of your application. The "old" time is the performance on your stable branch, whereas the "new" time is the branch where you started the `ws go bench compare` command.
 
 ```
 name             old time/op  new time/op  delta
@@ -33,7 +33,7 @@ UpdateReview-12  1.94ms ± 5%  1.59ms ± 7%  -18.02%  (p=0.008 n=5+5)
 
 ### `ws go bench current` (`ws go bench`)
 
-This will produce a performance profile for your current branch using a standard `go test -bench=./benchmarks` call. The numbers themselves do not provide much value, as they should be compared against a baseline, which is what `ws go bench compare` does for us. However, it can be useful to run this command when you are verifying that your benchmarks complete successfully.
+This will produce a performance profile for your current branch using a standard `go test -bench=./benchmarks` call. The numbers themselves do not provide much value, as they should be compared against a baseline, which is what `ws go bench compare` does for us. However, it can be useful to run this command when you are verifying that your benchmarks complete successfully, or when you do not have any benchmarks on your stable branch yet.
 
 This command will not touch your environment in any way, so it is especially useful in that respect.
 
