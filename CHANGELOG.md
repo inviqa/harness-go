@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.9.0](https://github.com/inviqa/harness-go/tree/0.9.0) (2021-05-25)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.8.0...0.9.0)
+
+**Implemented enhancements:**
+
+- Make it easy to add kafka to your local stack [\#114](https://github.com/inviqa/harness-go/issues/114)
+- Add gosec to the pipeline checks [\#112](https://github.com/inviqa/harness-go/issues/112)
+- Lock the go.version attribute immediately after project creation [\#111](https://github.com/inviqa/harness-go/issues/111)
+- Consider bringing dev tools into skeleton project as module dependencies. [\#85](https://github.com/inviqa/harness-go/issues/85)
+- Run CI jobs for MySQL and Postgres based projects [\#113](https://github.com/inviqa/harness-go/pull/113) ([jameshalsall](https://github.com/jameshalsall))
+
+**Closed issues:**
+
+- Add benchmarking tools [\#30](https://github.com/inviqa/harness-go/issues/30)
+
+**Merged pull requests:**
+
+- Lock go.version attribute on initial install [\#123](https://github.com/inviqa/harness-go/pull/123) ([jameshalsall](https://github.com/jameshalsall))
+- Improve the benchmark docs [\#122](https://github.com/inviqa/harness-go/pull/122) ([jameshalsall](https://github.com/jameshalsall))
+- Add benchmarking tools, commands and documentation [\#120](https://github.com/inviqa/harness-go/pull/120) ([jameshalsall](https://github.com/jameshalsall))
+- Kafka support [\#119](https://github.com/inviqa/harness-go/pull/119) ([jameshalsall](https://github.com/jameshalsall))
+- Add gosec to the Jenkins pipeline [\#117](https://github.com/inviqa/harness-go/pull/117) ([jameshalsall](https://github.com/jameshalsall))
+- Remove support for Go 1.15 [\#116](https://github.com/inviqa/harness-go/pull/116) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.8.0](https://github.com/inviqa/harness-go/tree/0.8.0) (2021-03-05)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.7.1...0.8.0)
@@ -41,11 +66,11 @@
 
 **Implemented enhancements:**
 
+- Add recompile command [\#31](https://github.com/inviqa/harness-go/issues/31)
 - Add workspace command for consistency with PHP harness' "ws console" [\#82](https://github.com/inviqa/harness-go/issues/82)
 - Make it easier to run `go install \<module\>` in the Docker image [\#69](https://github.com/inviqa/harness-go/issues/69)
 - Add ineffassign to the pipeline checks [\#66](https://github.com/inviqa/harness-go/issues/66)
 - Allow the use of goimports as an alternative to gofmt, if preferred [\#62](https://github.com/inviqa/harness-go/issues/62)
-- Add recompile command [\#31](https://github.com/inviqa/harness-go/issues/31)
 - Add "ws app" command for quick access to app container [\#94](https://github.com/inviqa/harness-go/pull/94) ([jameshalsall](https://github.com/jameshalsall))
 - Add ineffassign to pipeline checks [\#84](https://github.com/inviqa/harness-go/pull/84) ([jameshalsall](https://github.com/jameshalsall))
 - Add gocyclo [\#79](https://github.com/inviqa/harness-go/pull/79) ([jameshalsall](https://github.com/jameshalsall))
@@ -69,7 +94,6 @@
 **Merged pull requests:**
 
 - Add how-to guide on adding a database to a project [\#95](https://github.com/inviqa/harness-go/pull/95) ([jameshalsall](https://github.com/jameshalsall))
-- Update go command naming convention [\#90](https://github.com/inviqa/harness-go/pull/90) ([jbarton123](https://github.com/jbarton123))
 - Add command to run unit tests with coverage [\#88](https://github.com/inviqa/harness-go/pull/88) ([jbarton123](https://github.com/jbarton123))
 - Move module\_name attribute -\> go.module\_name [\#87](https://github.com/inviqa/harness-go/pull/87) ([jameshalsall](https://github.com/jameshalsall))
 - Correct the approach to executing project shell scripts in image build [\#75](https://github.com/inviqa/harness-go/pull/75) ([jameshalsall](https://github.com/jameshalsall))
@@ -77,6 +101,7 @@
 - Start writing docs [\#73](https://github.com/inviqa/harness-go/pull/73) ([jameshalsall](https://github.com/jameshalsall))
 - Add attribute to allow running arbitrary steps before go mod download [\#72](https://github.com/inviqa/harness-go/pull/72) ([jameshalsall](https://github.com/jameshalsall))
 - Add option for running steps after go mod download [\#71](https://github.com/inviqa/harness-go/pull/71) ([jameshalsall](https://github.com/jameshalsall))
+- Update go command naming convention [\#90](https://github.com/inviqa/harness-go/pull/90) ([jbarton123](https://github.com/jbarton123))
 
 ## [0.6.0](https://github.com/inviqa/harness-go/tree/0.6.0) (2021-02-01)
 
