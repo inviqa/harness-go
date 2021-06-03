@@ -29,6 +29,7 @@ attributes.default:
     root_pass: DV6RdNY3QcFsBk7V
 
   kafka:
+    host: "kafka:29092"
     version: latest
 
   docker:

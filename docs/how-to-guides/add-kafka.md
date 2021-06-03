@@ -34,12 +34,11 @@ The below guide shows how to add Kafka and Zookeeper to your application. In you
      app:
        services: [kafka]
    ```
-1. Set the `kafka.version` attribute with your desired Kafka version from the [`wurstmeister/kafka`] tags list, along with other basic connection info
+1. Set the `kafka.version` attribute with your desired Kafka version from the [`wurstmeister/kafka`] tags list:
    ```
    attributes:
      # ...
      kafka:
-       host: "kafka:29092"
        version: "2.13-2.7.0"
    ```
 1. Configure your app container's environment variables so that it knows how to connect to Kafka:
