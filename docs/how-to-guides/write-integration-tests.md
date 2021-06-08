@@ -90,7 +90,9 @@ The harness provides a few commands to make running integration tests easier.
 ### `ws go test integration`
 This runs your integration tests on your host machine, it will likely be the most frequent integration test command that you use.
 
->_NOTE: In order to run this command, make sure you have completed an initial `ws install`, so that it can connect to any services that it needs to (e.g. database, Kafka etc.)_
+In order to run this command, make sure you have completed an initial `ws install`, so that it can connect to any services that it needs to (e.g. database, Kafka etc.).
+
+>_NOTE: Any environment variables set in your `services.app.environment` attribute will automatically be passed to your integration test suite run on your host too._
 
 ### `ws go test integration <test-name>`
 Similar to the above command, this one executes a single test in isolation. It will set the `LOG_LEVEL=debug` env var value so that you can get a more detailed log output and see what is going on.
