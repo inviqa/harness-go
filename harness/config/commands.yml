@@ -127,11 +127,9 @@ command('go test integration <test-name>'):
     LOG_LEVEL=debug go test -count=1 -v --tags=integration ./integration/ -run ${TEST_NAME}
 
 command('go test integration'):
-  env:
-    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    LOG_LEVEL=error go test -count=1 -v --tags=integration ./integration/
+    source .my127ws/harness/scripts/integration/run.sh
 
 command('go bench compare'):
   exec: |
