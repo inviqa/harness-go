@@ -2,6 +2,10 @@
 
 This document highlights breaking changes in releases that will require some migration effort in your project. As we move towards a `1.0.0` release these will be restricted to major upgrades only, but currently, whilst the API is still being fleshed out in the `0.x` releases, they may be more frequent. 
 
+## 0.9.x -> 0.10.0
+
+* If you have integration test commands, you can probably remove them now in favour of the commands provided by this harness. See the [guide on adding integration tests](docs/how-to-guides/write-integration-tests.md) for more info.
+
 ## 0.8.x -> 0.9.0
 
 * Go version 1.15 is no longer supported, so make sure you are running 1.16+
