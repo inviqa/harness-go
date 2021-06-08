@@ -111,6 +111,26 @@ command('go test coverage'):
     #!bash(workspace:/)|@
     go test -coverprofile=cp.out ./... && go tool cover -html=cp.out
 
+command('go test integration docker'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/
+
+command('go test integration <test-name>'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+    TEST_NAME: = input.argument('test-name')
+  exec: |
+    #!bash(workspace:/)|@
+    LOG_LEVEL=debug go test -count=1 -v --tags=integration ./integration/ -run ${TEST_NAME}
+
+command('go test integration'):
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/integration/run.sh
+
 command('go bench compare'):
   exec: |
     #!bash(workspace:/)|@

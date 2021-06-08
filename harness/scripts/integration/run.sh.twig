@@ -1,0 +1,7 @@
+#!/bin/bash
+
+integration_run() {
+    {% for name, value in @('services.app.environment') -%}{{ name }}={{ value }} {% endfor %} LOG_LEVEL=error go test -count=1 -v --tags=integration ./integration/
+}
+
+integration_run

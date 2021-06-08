@@ -13,6 +13,7 @@ confd('harness:/'):
   - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }
   - { src: harness/scripts/mod_init.sh }
   - { src: harness/scripts/init.sh }
+  - { src: harness/scripts/integration/run.sh }
   - { src: helm/app/Chart.yaml }
   - { src: helm/app/values.yaml }
   - { src: helm/qa/Chart.yaml }

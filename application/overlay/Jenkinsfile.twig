@@ -21,6 +21,9 @@ pipeline {
                 stage('helm kubeval qa') { steps { sh 'ws helm kubeval qa' } }
             }
         }
+        stage('Integration Tests') {
+            steps { sh 'ws go test integration docker' }
+        }
         stage('Build for production') {
             steps {
                 sh 'ws build-prod'
