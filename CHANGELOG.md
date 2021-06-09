@@ -9,10 +9,10 @@
 - Add integration tests to the app skeleton [\#128](https://github.com/inviqa/harness-go/issues/128)
 - Define kafka.host in the harness [\#127](https://github.com/inviqa/harness-go/issues/127)
 - Add commands to the harness for running integration test suites [\#126](https://github.com/inviqa/harness-go/issues/126)
-- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
 
 **Merged pull requests:**
 
+- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
 - Set kafka.host automatically [\#129](https://github.com/inviqa/harness-go/pull/129) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.9.0](https://github.com/inviqa/harness-go/tree/0.9.0) (2021-05-25)
@@ -131,6 +131,7 @@
 
 **Fixed bugs:**
 
+- Fix bug in processing non-interactive sealed-secret input [\#61](https://github.com/inviqa/harness-go/pull/61) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Fix probe spec [\#60](https://github.com/inviqa/harness-go/pull/60) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.5.1](https://github.com/inviqa/harness-go/tree/0.5.1) (2020-09-03)
@@ -147,10 +148,6 @@
 ## [0.5.0](https://github.com/inviqa/harness-go/tree/0.5.0) (2020-09-01)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.4.0...0.5.0)
-
-**Fixed bugs:**
-
-- Fix bug in processing non-interactive sealed-secret input [\#61](https://github.com/inviqa/harness-go/pull/61) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 **Closed issues:**
 
@@ -181,6 +178,7 @@
 
 **Merged pull requests:**
 
+- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - MISC Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
 - Allow overriding of istio virtualservice gateway with template support [\#24](https://github.com/inviqa/harness-go/pull/24) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
@@ -190,7 +188,6 @@
 
 **Merged pull requests:**
 
-- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Rename helm lint to helm kubeval [\#27](https://github.com/inviqa/harness-go/pull/27) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Make liveness/readiness probes configurable [\#26](https://github.com/inviqa/harness-go/pull/26) ([jameshalsall](https://github.com/jameshalsall))
 - Add kubeval for linting the rendered helm templates against schema [\#25](https://github.com/inviqa/harness-go/pull/25) ([andytson-inviqa](https://github.com/andytson-inviqa))
@@ -211,7 +208,6 @@
 
 - Format Go code with gofmt [\#22](https://github.com/inviqa/harness-go/pull/22) ([jameshalsall](https://github.com/jameshalsall))
 - Update README.md for 0.2.0 harness [\#21](https://github.com/inviqa/harness-go/pull/21) ([jameshalsall](https://github.com/jameshalsall))
-- Reverse the log level configuration change as it's already configurable [\#11](https://github.com/inviqa/harness-go/pull/11) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.2.0](https://github.com/inviqa/harness-go/tree/0.2.0) (2020-02-19)
 
@@ -233,6 +229,7 @@
 - Support defining the k8s service name and protocol [\#16](https://github.com/inviqa/harness-go/pull/16) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - HOTFIX: remove type from ingress templates [\#13](https://github.com/inviqa/harness-go/pull/13) ([sgrichards](https://github.com/sgrichards))
 - Add a way to ensure external networks exist prior to enabling [\#12](https://github.com/inviqa/harness-go/pull/12) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Reverse the log level configuration change as it's already configurable [\#11](https://github.com/inviqa/harness-go/pull/11) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Add missing pipe to rebuild command definition [\#10](https://github.com/inviqa/harness-go/pull/10) ([richardmiller](https://github.com/richardmiller))
 - Make LOG\_LEVEL configurable, and vary by local/pipeline [\#8](https://github.com/inviqa/harness-go/pull/8) ([jameshalsall](https://github.com/jameshalsall))
 - BUG Fix helm persistence values [\#7](https://github.com/inviqa/harness-go/pull/7) ([jameshalsall](https://github.com/jameshalsall))
