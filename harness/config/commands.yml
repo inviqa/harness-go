@@ -124,7 +124,7 @@ command('go test integration <test-name>'):
     TEST_NAME: = input.argument('test-name')
   exec: |
     #!bash(workspace:/)|@
-    LOG_LEVEL=debug go test -count=1 -v --tags=integration ./integration/ -run ${TEST_NAME}
+    source .my127ws/harness/scripts/integration/run-one.sh ${TEST_NAME}
 
 command('go test integration'):
   exec: |
