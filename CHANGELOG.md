@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.3](https://github.com/inviqa/harness-go/tree/0.10.3) (2021-06-09)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.2...0.10.3)
+
+**Fixed bugs:**
+
+- Pass environment variables to all host integration test commands [\#137](https://github.com/inviqa/harness-go/pull/137) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.10.2](https://github.com/inviqa/harness-go/tree/0.10.2) (2021-06-09)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.1...0.10.2)
@@ -222,7 +230,6 @@
 
 **Merged pull requests:**
 
-- Format Go code with gofmt [\#22](https://github.com/inviqa/harness-go/pull/22) ([jameshalsall](https://github.com/jameshalsall))
 - Update README.md for 0.2.0 harness [\#21](https://github.com/inviqa/harness-go/pull/21) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.2.0](https://github.com/inviqa/harness-go/tree/0.2.0) (2020-02-19)
@@ -231,6 +238,7 @@
 
 **Merged pull requests:**
 
+- Format Go code with gofmt [\#22](https://github.com/inviqa/harness-go/pull/22) ([jameshalsall](https://github.com/jameshalsall))
 - Do not override existing project files on ws install [\#20](https://github.com/inviqa/harness-go/pull/20) ([jameshalsall](https://github.com/jameshalsall))
 - Add basic prometheus instrumentation [\#19](https://github.com/inviqa/harness-go/pull/19) ([jameshalsall](https://github.com/jameshalsall))
 
