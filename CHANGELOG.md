@@ -18,6 +18,10 @@
 - Add integration tests to the app skeleton [\#128](https://github.com/inviqa/harness-go/issues/128)
 - Define kafka.host in the harness [\#127](https://github.com/inviqa/harness-go/issues/127)
 
+**Fixed bugs:**
+
+- Use php escapeshellarg for escaping data inserted into bash scripts [\#136](https://github.com/inviqa/harness-go/pull/136) ([andytson-inviqa](https://github.com/andytson-inviqa))
+
 **Merged pull requests:**
 
 - Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
