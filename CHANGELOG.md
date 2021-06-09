@@ -1,15 +1,30 @@
 # Changelog
 
+## [0.10.0](https://github.com/inviqa/harness-go/tree/0.10.0) (2021-06-09)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.9.0...0.10.0)
+
+**Implemented enhancements:**
+
+- Add integration tests to the app skeleton [\#128](https://github.com/inviqa/harness-go/issues/128)
+- Define kafka.host in the harness [\#127](https://github.com/inviqa/harness-go/issues/127)
+- Add commands to the harness for running integration test suites [\#126](https://github.com/inviqa/harness-go/issues/126)
+
+**Merged pull requests:**
+
+- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
+- Set kafka.host automatically [\#129](https://github.com/inviqa/harness-go/pull/129) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.9.0](https://github.com/inviqa/harness-go/tree/0.9.0) (2021-05-25)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.8.0...0.9.0)
 
 **Implemented enhancements:**
 
-- Make it easy to add kafka to your local stack [\#114](https://github.com/inviqa/harness-go/issues/114)
 - Add gosec to the pipeline checks [\#112](https://github.com/inviqa/harness-go/issues/112)
-- Lock the go.version attribute immediately after project creation [\#111](https://github.com/inviqa/harness-go/issues/111)
 - Consider bringing dev tools into skeleton project as module dependencies. [\#85](https://github.com/inviqa/harness-go/issues/85)
+- Make it easy to add kafka to your local stack [\#114](https://github.com/inviqa/harness-go/issues/114)
+- Lock the go.version attribute immediately after project creation [\#111](https://github.com/inviqa/harness-go/issues/111)
 - Run CI jobs for MySQL and Postgres based projects [\#113](https://github.com/inviqa/harness-go/pull/113) ([jameshalsall](https://github.com/jameshalsall))
 
 **Closed issues:**
