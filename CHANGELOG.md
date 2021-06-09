@@ -1,14 +1,22 @@
 # Changelog
 
+## [0.10.1](https://github.com/inviqa/harness-go/tree/0.10.1) (2021-06-09)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.0...0.10.1)
+
+**Fixed bugs:**
+
+- Quote environment variables in integration/run.sh [\#135](https://github.com/inviqa/harness-go/pull/135) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.10.0](https://github.com/inviqa/harness-go/tree/0.10.0) (2021-06-09)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.9.0...0.10.0)
 
 **Implemented enhancements:**
 
+- Add commands to the harness for running integration test suites [\#126](https://github.com/inviqa/harness-go/issues/126)
 - Add integration tests to the app skeleton [\#128](https://github.com/inviqa/harness-go/issues/128)
 - Define kafka.host in the harness [\#127](https://github.com/inviqa/harness-go/issues/127)
-- Add commands to the harness for running integration test suites [\#126](https://github.com/inviqa/harness-go/issues/126)
 
 **Merged pull requests:**
 
