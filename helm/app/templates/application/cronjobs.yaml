@@ -1,0 +1,95 @@
+{{- range $serviceName, $service := .Values.docker.services -}}
+{{- if $service.extends -}}
+{{- $extended := (dict) -}}
+{{- range $service.extends -}}
+{{- $_ := mergeOverwrite $extended (index $.Values.docker.services .) -}}
+{{- end -}}
+{{- $service = mergeOverwrite $extended $service -}}
+{{- end -}}
+{{- if and (not (hasPrefix "." $serviceName)) $service.cronjobs -}}
+{{- range $cronName, $cronConfig := $service.cronjobs }}
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ print $.Values.resourcePrefix $cronName }}
+  {{- $cronMeta := pick $cronConfig "annotations" -}}
+  {{- if $cronMeta }}
+  {{- toYaml $cronMeta | nindent 2 }}
+  {{- end }}
+  labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ $cronName }}
+spec:
+  {{- pick $cronConfig "concurrencyPolicy" "failedJobsHistoryLimit" "schedule" "startingDeadlineSeconds" "successfulJobsHistoryLimit" "suspend" | toYaml | nindent 2 }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "chart.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: {{ $cronName }}
+    spec:
+      {{- $jobSpec := pick $cronConfig "activeDeadlineSeconds" "backoffLimit" "ttlSecondsAfterFinished" }}
+      {{- if $jobSpec }}
+      {{- $jobSpec | toYaml | nindent 6 }}
+      {{- end }}
+      template:
+        metadata:
+          labels:
+            {{- include "chart.labels" $ | nindent 12 }}
+            app.kubernetes.io/component: {{ $cronName }}
+        spec:
+          {{- $podSpec := pick $service "affinity" "hostAliases" "securityContext" }}
+          {{- if $podSpec }}
+          {{- $podSpec | toYaml | nindent 6 }}
+          {{- end }}
+          restartPolicy: Never
+          containers:
+            - name: app
+              {{- with $service.environment }}
+              env:
+              {{- range $key, $value := $service.environment }}
+              {{- $tp := typeOf $value }}
+                - name: {{ $key | quote }}
+                {{- if eq $tp "string" }}
+                  value: {{ tpl $value $ | quote }}
+                {{- else }}
+                  value: {{ $value | quote }}
+                {{- end }}
+              {{- end }}
+              {{- end }}
+              {{- if $service.environment_secrets }}
+              envFrom:
+                - secretRef:
+                    name: {{ print $.Values.resourcePrefix $serviceName }}
+              {{- end }}
+              image: {{ .image | quote }}
+              imagePullPolicy: Always
+              command: {{ $cronConfig.command | toJson }}
+              resources:
+                limits:
+                  memory: {{ ($cronConfig.resources | default (dict)).memory | default $service.resources.memory }}
+                requests:
+                  memory: {{($cronConfig.resources | default (dict)).memory | default $service.resources.memory }}
+              {{- with $cronConfig.volumes | default $service.volumes }}
+              volumeMounts:
+                {{- range . }}
+                - {{ tpl (toYaml (pick . "name" "mountPath" "readOnly")) $ | nindent 16 }}
+                {{- end }}
+              {{- end }}
+          enableServiceLinks: false
+{{- if .Values.docker.image_pull_config }}
+          imagePullSecrets:
+          - name: {{ .Values.resourcePrefix }}image-pull-config
+{{- end }}
+          {{- if $service.serviceAccountName }}
+          serviceAccountName: {{ tpl $service.serviceAccountName $ | quote }}
+          {{- end }}
+          {{- with $cronConfig.volumes | default $service.volumes }}
+          volumes:
+            {{- range . }}
+            - {{ tpl (toYaml (omit . "mountPath" "readOnly")) $ | nindent 12 }}
+            {{- end }}
+          {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

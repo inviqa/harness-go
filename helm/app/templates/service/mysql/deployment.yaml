@@ -1,34 +1,35 @@
-{{ if .Values.service.mysql }}
+{{- if .Values.service.mysql }}
+{{- with .Values.docker.services.mysql }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.resourcePrefix }}mysql
+  name: {{ $.Values.resourcePrefix }}mysql
   labels:
-    app.service: {{ .Values.resourcePrefix }}mysql
+    app.service: {{ $.Values.resourcePrefix }}mysql
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.service: {{ .Values.resourcePrefix }}mysql
+      app.service: {{ $.Values.resourcePrefix }}mysql
   template:
     metadata:
       labels:
-        app.service: {{ .Values.resourcePrefix }}mysql
+        app.service: {{ $.Values.resourcePrefix }}mysql
     spec:
       containers:
       - name: mysql
         enableServiceLinks: false
         env:
-        {{- range $key, $value := .Values.docker.services.mysql.environment }}
+        {{- range $key, $value := .environment }}
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
-        {{- if .Values.docker.services.mysql.environment_secrets }}
+        {{- if .environment_secrets }}
         envFrom:
           - secretRef:
-              name: {{ .Values.resourcePrefix }}mysql
+              name: {{ $.Values.resourcePrefix }}mysql
         {{- end }}
-        image: mysql:5.7
+        image: {{ .image | quote }}
         imagePullPolicy: Always
         args:
         - --ignore-db-dir
@@ -37,25 +38,26 @@ spec:
         - containerPort: 3306
         resources:
           limits:
-            memory: {{ .Values.resources.limits.memory.mysql }}
+            memory: {{ .resources.memory }}
           requests:
-            memory: {{ .Values.resources.requests.memory.mysql }}
+            memory: {{ .resources.memory }}
         readinessProbe:
           tcpSocket:
             port: 3306
           initialDelaySeconds: 5
           periodSeconds: 10
         volumeMounts:
-        - {{ .Values.resourcePrefix }}name: mysql-persistent-storage
+        - {{ $.Values.resourcePrefix }}name: mysql-persistent-storage
           mountPath: /var/lib/mysql
       restartPolicy: Always
       volumes:
-      - {{ .Values.resourcePrefix }}name: mysql-persistent-storage
-{{- if .Values.persistence.mysql.enabled }}
+      - {{ $.Values.resourcePrefix }}name: mysql-persistent-storage
+{{- if $.Values.persistence.mysql.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Values.resourcePrefix }}mysql-pv-claim
+          claimName: {{ $.Values.resourcePrefix }}mysql-pv-claim
 {{- else }}
         emptyDir: {}
 {{- end }}
 status: {}
-{{ end }}
+{{- end }}
+{{- end }}

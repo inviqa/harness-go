@@ -112,6 +112,8 @@ function('filter_local_services', [services]): |
       switch ($key) {
         case 'environment':
         case 'enabled':
+        case 'image':
+        case 'resources':
           $filteredService[$key] = $value;
       }
     }

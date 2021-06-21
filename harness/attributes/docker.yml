@@ -1,10 +1,14 @@
 attributes:
   services:
     app:
+      image: = @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version')
       environment:
         LOG_LEVEL: debug
         APP_HOST: = @('hostname')
+      resources:
+        memory: 100Mi
     mysql:
+      image: = 'mysql:' ~ @('services.mysql.version')
       version: 5.7
       environment:
         MYSQL_DATABASE: = @('database.name')
@@ -12,7 +16,10 @@ attributes:
       environment_secrets:
         MYSQL_PASSWORD: = @('database.pass')
         MYSQL_ROOT_PASSWORD: = @('database.root_pass')
+      resources:
+        memory: 512Mi
     postgres:
+      image: = 'postgres:' ~ @('services.postgres.version')
       version: 9.6
       environment:
         POSTGRES_DB: = @('database.name')
@@ -20,6 +27,8 @@ attributes:
         PGDATA: /var/lib/postgresql/data/pgdata
       environment_secrets:
         POSTGRES_PASSWORD: = @('database.pass')
+      resources:
+        memory: 512Mi
 
   pipeline:
     publish:

@@ -8,9 +8,6 @@ docker:
       filter_local_services(@('services')),
       @('pipeline.base.services')
     ]), 2, 4) | raw }}
-  image:
-    app: {{ @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version') }}
-
 
 service:
   mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
@@ -19,9 +16,6 @@ service:
 persistence: {{ to_nice_yaml(@('persistence'), 2, 2) | raw }}
 
 prometheus: {{ to_nice_yaml(@('pipeline.base.prometheus'), 2, 2) | raw }}
-
-resources:
-{% include blocks ~ 'resources.yml.twig' %}
 
 sealed_secrets:
   scope: {{ @('helm.sealed_secrets.scope') | json_encode | raw }}
