@@ -1,41 +1,47 @@
+{{- with .Values.docker.services.app }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.resourcePrefix }}app
+  name: {{ $.Values.resourcePrefix }}app
   labels:
-    app.service: {{ .Values.resourcePrefix }}app
+    app.service: {{ $.Values.resourcePrefix }}app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.service: {{ .Values.resourcePrefix }}app
+      app.service: {{ $.Values.resourcePrefix }}app
   template:
     metadata:
       labels:
-        app.service: {{ .Values.resourcePrefix }}app
+        app.service: {{ $.Values.resourcePrefix }}app
     spec:
       containers:
       - name: app
         enableServiceLinks: false
         env:
-        {{- range $key, $value := .Values.docker.services.app.environment }}
+        {{- range $key, $value := .environment }}
         - name: {{ $key | quote }}
           value: {{ $value | quote }}
         {{- end }}
-        {{- if .Values.docker.services.app.environment_secrets }}
+        {{- if .environment_secrets }}
         envFrom:
           - secretRef:
-              name: {{ .Values.resourcePrefix }}app
+              name: {{ $.Values.resourcePrefix }}app
         {{- end }}
-        image: {{ .Values.docker.image.app }}
+        image: {{ .image | quote }}
         imagePullPolicy: Always
         ports:
-        {{- include "container.ports" . | indent 8 }}
-        resources: {}
-        {{- include "probes" . | indent 8 }}
-{{- if .Values.docker.image_pull_config }}
+        {{- include "container.ports" $ | indent 8 }}
+        resources:
+          limits:
+            memory: {{ .resources.memory }}
+          requests:
+            memory: {{ .resources.memory }}
+        {{- include "probes" $ | indent 8 }}
+{{- if $.Values.docker.image_pull_config }}
       imagePullSecrets:
-      - name: {{ .Values.resourcePrefix }}image-pull-config
+      - name: {{ $.Values.resourcePrefix }}image-pull-config
 {{- end }}
       restartPolicy: Always
 status: {}
+{{- end }}

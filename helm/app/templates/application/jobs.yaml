@@ -1,0 +1,89 @@
+{{- range $serviceName, $service := .Values.docker.services -}}
+{{- if $service.extends -}}
+{{- $extended := (dict) -}}
+{{- range $service.extends -}}
+{{- $_ := mergeOverwrite $extended (index $.Values.docker.services .) -}}
+{{- end -}}
+{{- $service = mergeOverwrite $extended $service -}}
+{{- end -}}
+{{- if and (not (hasPrefix "." $serviceName)) $service.jobs -}}
+{{- range $jobName, $jobConfig := $service.jobs }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ print $.Values.resourcePrefix $jobName }}
+  {{- $jobMeta := pick $jobConfig "annotations" -}}
+  {{- if $jobMeta }}
+  {{- toYaml $jobMeta | nindent 2 }}
+  {{- end }}
+  labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: {{ $jobConfig.component | default $jobName }}
+spec:
+  {{- $jobSpec := pick $jobConfig "activeDeadlineSeconds" "backoffLimit" "ttlSecondsAfterFinished" }}
+  {{- if $jobSpec }}
+  {{- $jobSpec | toYaml | nindent 2 }}
+  {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- include "chart.selectors" $ | nindent 8 }}
+        app.kubernetes.io/component: {{ $jobConfig.component | default $jobName }}
+    spec:
+      {{- $podSpec := pick $service "affinity" "hostAliases" "securityContext" }}
+      {{- if $podSpec }}
+      {{- $podSpec | toYaml | nindent 6 }}
+      {{- end }}
+      restartPolicy: Never
+      containers:
+        - name: app
+          {{- with $service.environment }}
+          env:
+          {{- range $key, $value := . }}
+            {{- $tp := typeOf $value }}
+            - name: {{ $key | quote }}
+            {{- if eq $tp "string" }}
+              value: {{ tpl $value $ | quote }}
+            {{- else }}
+              value: {{ $value | quote }}
+            {{- end }}
+          {{- end }}
+          {{- end }}
+          {{- if $service.environment_secrets }}
+          envFrom:
+            - secretRef:
+                name: {{ print $.Values.resourcePrefix $serviceName }}
+          {{- end }}
+          image: {{ .image | quote }}
+          imagePullPolicy: Always
+          command: {{ $jobConfig.command | toJson }}
+          resources:
+            limits:
+              memory: {{ ($jobConfig.resources | default (dict)).memory | default $service.resources.memory }}
+            requests:
+              memory: {{ ($jobConfig.resources | default (dict)).memory | default $service.resources.memory }}
+          {{- with $jobConfig.volumes | default $service.volumes }}
+          volumeMounts:
+            {{- range . }}
+            - {{ tpl (toYaml (pick . "name" "mountPath" "readOnly")) $ | nindent 16 }}
+            {{- end }}
+          {{- end }}
+      enableServiceLinks: false
+{{- if .Values.docker.image_pull_config }}
+      imagePullSecrets:
+      - name: {{ .Values.resourcePrefix }}image-pull-config
+{{- end }}
+      restartPolicy: Never
+      {{- if $service.serviceAccountName }}
+      serviceAccountName: {{ tpl $service.serviceAccountName $ | quote }}
+      {{- end }}
+      {{- with $jobConfig.volumes | default $service.volumes }}
+      volumes:
+        {{- range . }}
+        - {{ tpl (toYaml (omit . "mountPath" "readOnly")) $ | nindent 12 }}
+        {{- end }}
+      {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
