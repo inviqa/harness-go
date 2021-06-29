@@ -15,9 +15,9 @@ spec:
       labels:
         app.service: {{ $.Values.resourcePrefix }}app
     spec:
+      enableServiceLinks: false
       containers:
       - name: app
-        enableServiceLinks: false
         env:
         {{- range $key, $value := .environment }}
         - name: {{ $key | quote }}
