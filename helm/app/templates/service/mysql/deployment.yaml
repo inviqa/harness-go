@@ -16,9 +16,9 @@ spec:
       labels:
         app.service: {{ $.Values.resourcePrefix }}mysql
     spec:
+      enableServiceLinks: false
       containers:
       - name: mysql
-        enableServiceLinks: false
         env:
         {{- range $key, $value := .environment }}
         - name: {{ $key | quote }}
