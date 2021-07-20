@@ -44,11 +44,11 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 10
         volumeMounts:
-        - name: {{ $.Values.resourcePrefix }}postgres-persistent-storage
+        - name: postgres-persistent-storage
           mountPath: /var/lib/postgresql/data
       restartPolicy: Always
       volumes:
-      - name: {{ $.Values.resourcePrefix }}postgres-persistent-storage
+      - name: postgres-persistent-storage
 {{- if $.Values.persistence.postgres.enabled }}
         persistentVolumeClaim:
           claimName: {{ $.Values.resourcePrefix }}postgres-pv-claim
