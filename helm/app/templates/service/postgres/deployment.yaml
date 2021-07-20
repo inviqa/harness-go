@@ -16,9 +16,9 @@ spec:
       labels:
         app.service: {{ $.Values.resourcePrefix }}postgres
     spec:
+      enableServiceLinks: false
       containers:
       - name: postgres
-        enableServiceLinks: false
         env:
         {{- range $key, $value := .environment }}
         - name: {{ $key | quote }}
