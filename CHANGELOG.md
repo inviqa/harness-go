@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.10.4](https://github.com/inviqa/harness-go/tree/0.10.4) (2021-07-30)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.3...0.10.4)
+
+**Fixed bugs:**
+
+- Ensure benchmarks run in isolation [\#146](https://github.com/inviqa/harness-go/pull/146) ([jameshalsall](https://github.com/jameshalsall))
+- Quote sub-shell output in 'ws go docker fmt check' [\#141](https://github.com/inviqa/harness-go/pull/141) ([jameshalsall](https://github.com/jameshalsall))
+- Fix location of enableServiceLinks [\#140](https://github.com/inviqa/harness-go/pull/140) ([dantleech](https://github.com/dantleech))
+- Quote environment variables in integration/run.sh [\#135](https://github.com/inviqa/harness-go/pull/135) ([jameshalsall](https://github.com/jameshalsall))
+
+**Merged pull requests:**
+
+- Fix remaining enableServiceLinks [\#145](https://github.com/inviqa/harness-go/pull/145) ([dantleech](https://github.com/dantleech))
+- Use consistent pod volume name patterns for postgres [\#144](https://github.com/inviqa/harness-go/pull/144) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Fix volume mount name key [\#143](https://github.com/inviqa/harness-go/pull/143) ([dantleech](https://github.com/dantleech))
+- Add support for Jobs, CronJobs and memory limits [\#139](https://github.com/inviqa/harness-go/pull/139) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.10.3](https://github.com/inviqa/harness-go/tree/0.10.3) (2021-06-09)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.2...0.10.3)
@@ -20,10 +39,6 @@
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.0...0.10.1)
 
-**Fixed bugs:**
-
-- Quote environment variables in integration/run.sh [\#135](https://github.com/inviqa/harness-go/pull/135) ([jameshalsall](https://github.com/jameshalsall))
-
 ## [0.10.0](https://github.com/inviqa/harness-go/tree/0.10.0) (2021-06-09)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.9.0...0.10.0)
@@ -36,7 +51,6 @@
 
 **Merged pull requests:**
 
-- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
 - Set kafka.host automatically [\#129](https://github.com/inviqa/harness-go/pull/129) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.9.0](https://github.com/inviqa/harness-go/tree/0.9.0) (2021-05-25)
@@ -77,7 +91,6 @@
 - Install dev tools in modules:before step [\#104](https://github.com/inviqa/harness-go/pull/104) ([jameshalsall](https://github.com/jameshalsall))
 - Bump default Go version to 1.16 [\#103](https://github.com/inviqa/harness-go/pull/103) ([jameshalsall](https://github.com/jameshalsall))
 - Output diff of go.mod/sum when mod check fails [\#102](https://github.com/inviqa/harness-go/pull/102) ([jameshalsall](https://github.com/jameshalsall))
-- Add 'ws use prod' command to switch to production build [\#101](https://github.com/inviqa/harness-go/pull/101) ([jameshalsall](https://github.com/jameshalsall))
 
 **Fixed bugs:**
 
@@ -110,6 +123,7 @@
 - Make it easier to run `go install \<module\>` in the Docker image [\#69](https://github.com/inviqa/harness-go/issues/69)
 - Add ineffassign to the pipeline checks [\#66](https://github.com/inviqa/harness-go/issues/66)
 - Allow the use of goimports as an alternative to gofmt, if preferred [\#62](https://github.com/inviqa/harness-go/issues/62)
+- Add 'ws use prod' command to switch to production build [\#101](https://github.com/inviqa/harness-go/pull/101) ([jameshalsall](https://github.com/jameshalsall))
 - Add "ws app" command for quick access to app container [\#94](https://github.com/inviqa/harness-go/pull/94) ([jameshalsall](https://github.com/jameshalsall))
 - Add ineffassign to pipeline checks [\#84](https://github.com/inviqa/harness-go/pull/84) ([jameshalsall](https://github.com/jameshalsall))
 - Add gocyclo [\#79](https://github.com/inviqa/harness-go/pull/79) ([jameshalsall](https://github.com/jameshalsall))
@@ -230,6 +244,7 @@
 
 **Merged pull requests:**
 
+- Format Go code with gofmt [\#22](https://github.com/inviqa/harness-go/pull/22) ([jameshalsall](https://github.com/jameshalsall))
 - Update README.md for 0.2.0 harness [\#21](https://github.com/inviqa/harness-go/pull/21) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.2.0](https://github.com/inviqa/harness-go/tree/0.2.0) (2020-02-19)
@@ -238,7 +253,6 @@
 
 **Merged pull requests:**
 
-- Format Go code with gofmt [\#22](https://github.com/inviqa/harness-go/pull/22) ([jameshalsall](https://github.com/jameshalsall))
 - Do not override existing project files on ws install [\#20](https://github.com/inviqa/harness-go/pull/20) ([jameshalsall](https://github.com/jameshalsall))
 - Add basic prometheus instrumentation [\#19](https://github.com/inviqa/harness-go/pull/19) ([jameshalsall](https://github.com/jameshalsall))
 
