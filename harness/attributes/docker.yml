@@ -34,9 +34,18 @@ attributes:
     publish:
       enabled: no
     preview:
-      enabled: no
-      namespace: = @('workspace.name') ~ '-' ~ slugify(branch())
-      hostname:  = @('pipeline.preview.namespace') ~ '.example.com'
+      services:
+        console:
+          enabled: false
+          resources:
+            memory: "1024Mi"
+        mysql:
+          resources:
+            memory: "512Mi"
+        postgres:
+          resources:
+            memory: "512Mi"
+            
     base:
       resourcePrefix: ~
       hostname: = @('pipeline.base.namespace') ~ '.example.com'
@@ -55,7 +64,7 @@ attributes:
             - port: = @('app.default_port.name')
     qa:
       enabled: no
-      namespace: = @('workspace.name') 
+      namespace: = @('workspace.name')
       hostname: = @('pipeline.qa.namespace') ~ '.' ~ @('domain')
       resourcePrefix: ~
       services:

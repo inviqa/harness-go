@@ -17,6 +17,8 @@ confd('harness:/'):
   - { src: harness/scripts/integration/run-one.sh }
   - { src: helm/app/Chart.yaml }
   - { src: helm/app/values.yaml }
+  - { src: helm/app/values-production.yaml }
+  - { src: helm/app/values-preview.yaml }
   - { src: helm/qa/Chart.yaml }
   - { src: helm/qa/requirements.yaml }
   - { src: helm/qa/values.yaml }
