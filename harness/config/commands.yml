@@ -69,7 +69,7 @@ command('go docker vet'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec -T app go vet ./...
+    passthru docker-compose exec -T app go vet -tags=benchmarks ./...
 
 command('go docker gocyclo'):
   env:
