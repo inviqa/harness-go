@@ -5,7 +5,7 @@ bench_report() {
 
   local file
   file="$(git branch --show-current).txt"
-  go test -count=5 -bench=. --tags=benchmarks -benchmem ./... > ./benchmarks/reports/"${file}"
+  go test -count=5 -bench=. --tags=benchmarks -benchmem ./benchmarks/ > ./benchmarks/reports/"${file}"
 }
 
 bench_report
