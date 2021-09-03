@@ -77,9 +77,9 @@ spec:
                 {{- end }}
               {{- end }}
           enableServiceLinks: false
-{{- if .Values.docker.image_pull_config }}
+{{- if $.Values.docker.image_pull_config }}
           imagePullSecrets:
-          - name: {{ .Values.resourcePrefix }}image-pull-config
+          - name: {{ $.Values.resourcePrefix }}image-pull-config
 {{- end }}
           {{- if $service.serviceAccountName }}
           serviceAccountName: {{ tpl $service.serviceAccountName $ | quote }}
