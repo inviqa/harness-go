@@ -1,4 +1,5 @@
 FROM golang:{{ @('go.version')}} AS golang
+LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 {% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}
 ENV {{ envName }}={{ envValue }}

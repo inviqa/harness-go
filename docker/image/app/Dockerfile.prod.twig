@@ -1,4 +1,5 @@
 FROM {{ @('docker.repository')}}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} AS source
+LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 FROM scratch
 
