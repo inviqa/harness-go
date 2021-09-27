@@ -4,7 +4,7 @@ command('build-prod'): |
 
 command('app publish'): |
   #!bash(workspace:/)|@
-  run docker login -u="@('docker.registry.username')" -p="@('docker.registry.password')" @('docker.registry.url')
+  echo '@('docker.registry.password')' | run docker login --username='@('docker.registry.username')' --password-stdin '@('docker.registry.url')'
   run docker push @('docker.repository'):@('docker.tagPrefix')@('app.version')
   run docker logout @('docker.registry.url')
 
