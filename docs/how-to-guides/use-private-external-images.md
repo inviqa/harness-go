@@ -21,8 +21,8 @@ You will need a username and password for a robot/machine user in your desired r
       image: quay.io/my_images/foo:latest
       environment:
         FOO: "bar"
-    networks:
-      private: {}
+      networks:
+        private: {}
    ```
 4. Add your  to the `app.services` attribute:
    ```
