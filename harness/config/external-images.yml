@@ -38,25 +38,25 @@ command('external-images config [--skip-exists]'):
 
 command('external-images pull'):
   env:
-    EXTERNAL_REGISTRIES: json_encode(@('docker.external_image_registries'))
+    EXTERNAL_REGISTRIES: = json_encode(@('docker.external_image_registries'))
   exec: |
     #!php
     foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
       $pass = escapeshellarg($registry['password']);
       $user = escapeshellarg($registry['username']);
       $url = escapeshellarg($registry['url']);
-      shell_exec("echo $pass | run docker login --username=$user --password-stdin $url");
+      shell_exec("echo $pass | docker login --username=$user --password-stdin $url");
     }
 
     $confArgs = [];
-    if (strlen(@$env['CI']) > 0 || strlen(@$env['BUILD_ID']) {
+    if (strlen(@$env['CI']) > 0 || strlen(@$env['BUILD_ID']) > 0) {
       $confArgs[] = "--skip-exists";
     }
     $confArgs = escapeshellarg(join(' ', $confArgs));
 
-    shell_exec("passthru \"ws external-images config $confArgs | docker-compose -f - pull\"");
+    shell_exec("ws external-images config $confArgs | docker-compose -f - pull");
 
     foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
       $url = escapeshellarg($registry['url']);
-      shell_exec("run docker logout $url");
+      shell_exec("docker logout $url");
     }
