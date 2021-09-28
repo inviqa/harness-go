@@ -54,7 +54,7 @@ command('external-images pull'):
     if (strlen(@$env['CI']) > 0 || strlen(@$env['BUILD_ID']) > 0) {
       $confArgs[] = "--skip-exists";
     }
-    $confArgs = escapeshellarg(join(' ', $confArgs));
+    $confArgs = join(' ', array_map('escapeshellarg', $confArgs));
 
     $command = "ws external-images config $confArgs | docker-compose -f - pull";
     echo $command . PHP_EOL;
