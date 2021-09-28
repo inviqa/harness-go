@@ -45,7 +45,9 @@ command('external-images pull'):
       $pass = escapeshellarg($registry['password']);
       $user = escapeshellarg($registry['username']);
       $url = escapeshellarg($registry['url']);
-      shell_exec("echo $pass | docker login --username=$user --password-stdin $url");
+      $command = "docker login --username=$user --password-stdin $url";
+      echo $command . PHP_EOL;
+      passthru("echo $pass | $command");
     }
 
     $confArgs = [];
@@ -54,9 +56,13 @@ command('external-images pull'):
     }
     $confArgs = escapeshellarg(join(' ', $confArgs));
 
-    shell_exec("ws external-images config $confArgs | docker-compose -f - pull");
+    $command = "ws external-images config $confArgs | docker-compose -f - pull";
+    echo $command . PHP_EOL;
+    passthru($command);
 
     foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
       $url = escapeshellarg($registry['url']);
-      shell_exec("docker logout $url");
+      $command = "docker logout $url";
+      echo $command . PHP_EOL;
+      passthru($command);
     }
