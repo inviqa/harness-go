@@ -13,4 +13,5 @@ This is the documentation for the Go harness.
     * [How to add benchmarks to your app](how-to-guides/add-benchmarks.md)
     * [How to add Kafka (and Zookeeper)](how-to-guides/add-kafka.md)
     * [How to test a production image build locally](how-to-guides/test-production-image-build-locally.md)
+    * [How to use private external images](how-to-guides/use-private-external-images.md)
     * [How to write integration tests](how-to-guides/write-integration-tests.md)

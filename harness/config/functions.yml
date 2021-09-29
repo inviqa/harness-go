@@ -193,3 +193,7 @@ function('go_mod_exists', [modulePath]): |
 function('escapeshellarg', [value]): |
   #!php
   = escapeshellarg($value);
+
+function('json_encode', [value]): |
+  #!php
+  = json_encode($value);

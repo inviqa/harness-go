@@ -36,11 +36,33 @@ command('external-images config [--skip-exists]'):
     }
     echo \Symfony\Component\Yaml\Yaml::dump($compose, 100, 2);
 
-command('external-images pull'): |
-  #!bash(workspace:/)|@
-  CONF_ARGS=()
-  if [ -n "${CI:-}" ] || [ -n "${BUILD_ID:-}" ]; then
-    CONF_ARGS+=(--skip-exists)
-  fi
+command('external-images pull'):
+  env:
+    EXTERNAL_REGISTRIES: = json_encode(@('docker.external_image_registries'))
+  exec: |
+    #!php
+    foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
+      $pass = escapeshellarg($registry['password']);
+      $user = escapeshellarg($registry['username']);
+      $url = escapeshellarg($registry['url']);
+      $command = "docker login --username=$user --password-stdin $url";
+      echo $command . PHP_EOL;
+      passthru("echo $pass | $command");
+    }
 
-  passthru "ws external-images config $(printf '%q ' "${CONF_ARGS[@]}") | docker-compose -f - pull"
+    $confArgs = [];
+    if (strlen(@$env['CI']) > 0 || strlen(@$env['BUILD_ID']) > 0) {
+      $confArgs[] = "--skip-exists";
+    }
+    $confArgs = join(' ', array_map('escapeshellarg', $confArgs));
+
+    $command = "ws external-images config $confArgs | docker-compose -f - pull";
+    echo $command . PHP_EOL;
+    passthru($command);
+
+    foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
+      $url = escapeshellarg($registry['url']);
+      $command = "docker logout $url";
+      echo $command . PHP_EOL;
+      passthru($command);
+    }
