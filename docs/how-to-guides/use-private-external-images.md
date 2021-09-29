@@ -24,7 +24,7 @@ You will need a username and password for a robot/machine user in your desired r
       networks:
         private: {}
    ```
-4. Add your  to the `app.services` attribute:
+3. Add your  to the `app.services` attribute:
    ```
    attributes:
      app:
