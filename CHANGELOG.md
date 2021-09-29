@@ -1,23 +1,45 @@
 # Changelog
 
+## [0.11.0](https://github.com/inviqa/harness-go/tree/0.11.0) (2021-09-29)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.5-alpha...0.11.0)
+
+**Implemented enhancements:**
+
+- Add support for external image registries [\#155](https://github.com/inviqa/harness-go/pull/155) ([jameshalsall](https://github.com/jameshalsall))
+
+**Fixed bugs:**
+
+- Avoid leaking docker passwords in CI logs [\#154](https://github.com/inviqa/harness-go/pull/154) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Fix missing imagePullSecrets in jobs and cronjobs [\#152](https://github.com/inviqa/harness-go/pull/152) ([andytson-inviqa](https://github.com/andytson-inviqa))
+
+**Merged pull requests:**
+
+- Cleanup built docker images in Jenkins [\#153](https://github.com/inviqa/harness-go/pull/153) ([kierenevans](https://github.com/kierenevans))
+- Fix benchmark report and vet commands [\#149](https://github.com/inviqa/harness-go/pull/149) ([hgajjar](https://github.com/hgajjar))
+- Switch changelog generator docker image [\#148](https://github.com/inviqa/harness-go/pull/148) ([kierenevans](https://github.com/kierenevans))
+- Fix for Values reference [\#147](https://github.com/inviqa/harness-go/pull/147) ([g-foster2](https://github.com/g-foster2))
+
+## [0.10.5-alpha](https://github.com/inviqa/harness-go/tree/0.10.5-alpha) (2021-08-11)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.4...0.10.5-alpha)
+
 ## [0.10.4](https://github.com/inviqa/harness-go/tree/0.10.4) (2021-07-30)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.3...0.10.4)
 
+**Implemented enhancements:**
+
+- Use consistent pod volume name patterns for postgres [\#144](https://github.com/inviqa/harness-go/pull/144) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Add support for Jobs, CronJobs and memory limits [\#139](https://github.com/inviqa/harness-go/pull/139) ([andytson-inviqa](https://github.com/andytson-inviqa))
+
 **Fixed bugs:**
 
 - Ensure benchmarks run in isolation [\#146](https://github.com/inviqa/harness-go/pull/146) ([jameshalsall](https://github.com/jameshalsall))
+- Fix remaining enableServiceLinks [\#145](https://github.com/inviqa/harness-go/pull/145) ([dantleech](https://github.com/dantleech))
+- Fix volume mount name key [\#143](https://github.com/inviqa/harness-go/pull/143) ([dantleech](https://github.com/dantleech))
 - Quote sub-shell output in 'ws go docker fmt check' [\#141](https://github.com/inviqa/harness-go/pull/141) ([jameshalsall](https://github.com/jameshalsall))
 - Fix location of enableServiceLinks [\#140](https://github.com/inviqa/harness-go/pull/140) ([dantleech](https://github.com/dantleech))
-- Quote environment variables in integration/run.sh [\#135](https://github.com/inviqa/harness-go/pull/135) ([jameshalsall](https://github.com/jameshalsall))
-
-**Merged pull requests:**
-
-- Fix remaining enableServiceLinks [\#145](https://github.com/inviqa/harness-go/pull/145) ([dantleech](https://github.com/dantleech))
-- Use consistent pod volume name patterns for postgres [\#144](https://github.com/inviqa/harness-go/pull/144) ([andytson-inviqa](https://github.com/andytson-inviqa))
-- Fix volume mount name key [\#143](https://github.com/inviqa/harness-go/pull/143) ([dantleech](https://github.com/dantleech))
-- Add support for Jobs, CronJobs and memory limits [\#139](https://github.com/inviqa/harness-go/pull/139) ([andytson-inviqa](https://github.com/andytson-inviqa))
-- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.10.3](https://github.com/inviqa/harness-go/tree/0.10.3) (2021-06-09)
 
@@ -39,6 +61,10 @@
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.0...0.10.1)
 
+**Fixed bugs:**
+
+- Quote environment variables in integration/run.sh [\#135](https://github.com/inviqa/harness-go/pull/135) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.10.0](https://github.com/inviqa/harness-go/tree/0.10.0) (2021-06-09)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.9.0...0.10.0)
@@ -51,6 +77,7 @@
 
 **Merged pull requests:**
 
+- Add integration test support [\#130](https://github.com/inviqa/harness-go/pull/130) ([jameshalsall](https://github.com/jameshalsall))
 - Set kafka.host automatically [\#129](https://github.com/inviqa/harness-go/pull/129) ([jameshalsall](https://github.com/jameshalsall))
 
 ## [0.9.0](https://github.com/inviqa/harness-go/tree/0.9.0) (2021-05-25)
@@ -91,6 +118,7 @@
 - Install dev tools in modules:before step [\#104](https://github.com/inviqa/harness-go/pull/104) ([jameshalsall](https://github.com/jameshalsall))
 - Bump default Go version to 1.16 [\#103](https://github.com/inviqa/harness-go/pull/103) ([jameshalsall](https://github.com/jameshalsall))
 - Output diff of go.mod/sum when mod check fails [\#102](https://github.com/inviqa/harness-go/pull/102) ([jameshalsall](https://github.com/jameshalsall))
+- Add 'ws use prod' command to switch to production build [\#101](https://github.com/inviqa/harness-go/pull/101) ([jameshalsall](https://github.com/jameshalsall))
 
 **Fixed bugs:**
 
@@ -120,10 +148,9 @@
 
 - Add recompile command [\#31](https://github.com/inviqa/harness-go/issues/31)
 - Add workspace command for consistency with PHP harness' "ws console" [\#82](https://github.com/inviqa/harness-go/issues/82)
-- Make it easier to run `go install \<module\>` in the Docker image [\#69](https://github.com/inviqa/harness-go/issues/69)
+- Make it easier to run `go install <module>` in the Docker image [\#69](https://github.com/inviqa/harness-go/issues/69)
 - Add ineffassign to the pipeline checks [\#66](https://github.com/inviqa/harness-go/issues/66)
 - Allow the use of goimports as an alternative to gofmt, if preferred [\#62](https://github.com/inviqa/harness-go/issues/62)
-- Add 'ws use prod' command to switch to production build [\#101](https://github.com/inviqa/harness-go/pull/101) ([jameshalsall](https://github.com/jameshalsall))
 - Add "ws app" command for quick access to app container [\#94](https://github.com/inviqa/harness-go/pull/94) ([jameshalsall](https://github.com/jameshalsall))
 - Add ineffassign to pipeline checks [\#84](https://github.com/inviqa/harness-go/pull/84) ([jameshalsall](https://github.com/jameshalsall))
 - Add gocyclo [\#79](https://github.com/inviqa/harness-go/pull/79) ([jameshalsall](https://github.com/jameshalsall))
@@ -209,16 +236,13 @@
 - Deduce the docker registry\_url from repository [\#37](https://github.com/inviqa/harness-go/pull/37) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Disable k8s service links to reduce unused environment variables [\#36](https://github.com/inviqa/harness-go/pull/36) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Make versions for DB image attributes that can be easily overrided [\#33](https://github.com/inviqa/harness-go/pull/33) ([jameshalsall](https://github.com/jameshalsall))
+- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- MISC Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
+- Allow overriding of istio virtualservice gateway with template support [\#24](https://github.com/inviqa/harness-go/pull/24) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.4.0](https://github.com/inviqa/harness-go/tree/0.4.0) (2020-04-22)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.3.0...0.4.0)
-
-**Merged pull requests:**
-
-- Replace prometheus annotations with operator podmonitor [\#29](https://github.com/inviqa/harness-go/pull/29) ([andytson-inviqa](https://github.com/andytson-inviqa))
-- MISC Do not hardcode a version number in readme [\#28](https://github.com/inviqa/harness-go/pull/28) ([jameshalsall](https://github.com/jameshalsall))
-- Allow overriding of istio virtualservice gateway with template support [\#24](https://github.com/inviqa/harness-go/pull/24) ([andytson-inviqa](https://github.com/andytson-inviqa))
 
 ## [0.3.0](https://github.com/inviqa/harness-go/tree/0.3.0) (2020-02-24)
 
