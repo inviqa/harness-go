@@ -14,6 +14,7 @@ attributes.default:
       type: standard
       protocol: = @('app.default_port.protocol')
     bundle_certs: no
+    mount_volume: false
     packages: []
 
   domain: my127.site
