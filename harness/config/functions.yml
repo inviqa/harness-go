@@ -197,3 +197,10 @@ function('escapeshellarg', [value]): |
 function('json_encode', [value]): |
   #!php
   = json_encode($value);
+
+function('sanitize_additional_binary_path', [path]): |
+  #!php
+  if (strpos($path, "/") === 0) {
+      trigger_error(sprintf("Your additional_binary path (%s) contains a leading slash, please remove it.", $path), E_USER_ERROR);
+  }
+  = str_replace("/", "-", $path);
