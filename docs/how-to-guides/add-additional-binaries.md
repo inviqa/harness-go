@@ -3,8 +3,10 @@
 The Go harness will always produce a main binary for your application. This is your `main.go` file, usually in the root of your project directory. However, sometimes you may want to produce more than one binary on the final docker image. A good example of when you would want to do this is creating commands that can be executed on the container. A common Go pattern from the community is to place commands inside a `cmd` directory inside a `main.go` file, such as `cmd/foo/main.go`. Having these additional binaries compiled and copied into the root of the final production Docker image allows you to execute them fairly intuitively, for example:
 
 ```bash
-$ docker-compose exec app cmd/foo --dry-run
+$ docker-compose exec app cmd-foo --dry-run
 ```
+
+>_NOTE: When the binaries are built and copied into place on the Docker image, slashes are replaced with `-`, so `cmd/foo` is executed as `cmd-foo`._
 
 ## Defining your additional binaries
 
@@ -18,7 +20,12 @@ attributes:
       - "cmd/sync"
 ```
 
-This would produce two binaries on the built Docker image: `/cmd/cleanup` and `/cmd/sync`.
+This would produce two binaries on the built Docker image, that will be under the `$PATH`: `cmd-cleanup` and `cmd-sync`. These could be executed locally under `docker-compose` as follows:
+
+```bash
+$ docker-compose exec app cmd-cleanup
+$ docker-compose exec app cmd-sync
+```
 
 ## Go modules
 
