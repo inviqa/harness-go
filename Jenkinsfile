@@ -23,6 +23,22 @@ pipeline {
                     agent { label "my127ws" }
                     steps { sh './test develop-with-kafka 1.16' }
                 }
+                stage('(go=1.17 mode=production)') {
+                    agent { label "my127ws" }
+                    steps { sh './test production 1.17' }
+                }
+                stage('(go=1.17 mode=develop-with-mysql)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-mysql 1.17' }
+                }
+                stage('(go=1.17 mode=develop-with-postgres)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-postgres 1.17' }
+                }
+                stage('(go=1.17 mode=develop-with-kafka)') {
+                    agent { label "my127ws" }
+                    steps { sh './test develop-with-kafka 1.17' }
+                }
             }
         }
     }
