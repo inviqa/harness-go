@@ -9,6 +9,10 @@ ENV PATH="/"
 COPY --from=source /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 {% endif %}
 
+{% if @('app.bundle_timezone_info') %}
+COPY --from=source /usr/share/zoneinfo /usr/share/zoneinfo
+{% endif %}
+
 COPY --chown=0:0 --from=source /go/bin/{{ @('app.binary') }} /
 
 {% for binaryPath in @('app.additional_binaries') %}
