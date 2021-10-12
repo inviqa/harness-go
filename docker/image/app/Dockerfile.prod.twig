@@ -3,11 +3,19 @@ LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 FROM scratch
 
+ENV PATH="/"
+
 {% if @('app.bundle_certs') == 'yes' %}
 COPY --from=source /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 {% endif %}
 
 COPY --chown=0:0 --from=source /go/bin/{{ @('app.binary') }} /
+
+{% for binaryPath in @('app.additional_binaries') %}
+{% set sanitizedName = sanitize_additional_binary_path(binaryPath) %}
+COPY --chown=0:0 --from=source /go/bin/{{ sanitizedName }} /{{ sanitizedName }}
+{% endfor %}
+
 ENTRYPOINT ["/{{ @('app.binary') }}"]
 EXPOSE {{ @('app.default_port.port') }}
 EXPOSE {{ @('app.health_port') }}
