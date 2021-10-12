@@ -10,8 +10,11 @@ $ docker-compose exec app cmd-foo --dry-run
 
 ## Defining your additional binaries
 
-The harness has an `app.additional_binaries` array attribute, that can be populated with as many additional binaries as you like. These will be compiled during the Docker build phase and copied into the final image. The location of the copied binary is the directory path of the binary that you defined, e.g.
+The harness has an `app.additional_binaries` array attribute, that can be populated with as many additional binaries as you like. These will be compiled during the Docker build phase and copied into the final image. The location of the copied binary is the directory path of the binary that you defined, with slashes replaced with `-`.
 
+### Example
+
+With configuration of:
 ```yaml
 attributes:
   app:
@@ -20,7 +23,7 @@ attributes:
       - "cmd/sync"
 ```
 
-Your source code would look something like this:
+Your source code for the `cleanup` command would look something like this:
 
 `cmd/cleanup/main.go`:
 ```go
