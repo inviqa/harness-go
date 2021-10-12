@@ -44,10 +44,16 @@ COPY . .
 RUN go generate
 
 {% if @('app.build') == 'production' %}
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+    {% set goBuildFlags = '-ldflags="-w -s"' %}
 {% else %}
-RUN GOOS=linux GOARCH=amd64 go build -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+    {% set goBuildFlags = '' %}
 {% endif %}
+
+RUN GOOS=linux GOARCH=amd64 go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+
+{% for binaryPath in @('app.additional_binaries') %}
+RUN GOOS=linux GOARCH=amd64 go build {{ goBuildFlags }} -o /go/bin/{{ binaryPath }} {{ binaryPath }}
+{% endfor %}
 
 ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
 EXPOSE {{ @('app.default_port.port') }}

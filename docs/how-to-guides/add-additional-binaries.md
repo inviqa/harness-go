@@ -1,0 +1,25 @@
+# How to add additional binaries to your app
+
+The Go harness will always produce a main binary for your application. This is your `main.go` file, usually in the root of your project directory. However, sometimes you may want to produce more than one binary on the final docker image. A good example of when you would want to do this is creating commands that can be executed on the container. A common Go pattern from the community is to place commands inside a `cmd` directory inside a `main.go` file, such as `cmd/foo/main.go`. Having these additional binaries compiled and copied into the root of the final production Docker image allows you to execute them fairly intuitively, for example:
+
+```bash
+$ docker-compose exec app cmd/foo --dry-run
+```
+
+## Defining your additional binaries
+
+The harness has an `app.additional_binaries` array attribute, that can be populated with as many additional binaries as you like. These will be compiled during the Docker build phase and copied into the final image. The location of the copied binary is the directory path of the binary that you defined, e.g.
+
+```yaml
+attributes:
+  app:
+    additional_binaries:
+      - "cmd/cleanup"
+      - "cmd/sync"
+```
+
+This would produce two binaries on the built Docker image: `/cmd/cleanup` and `/cmd/sync`.
+
+## Go modules
+
+Even though your additional binaries have their own `main.go`, they will use the same `go.mod|sum` files as the main application, so you should not need to specify separate `go.mod|sum` files in the directories of your additional binaries.

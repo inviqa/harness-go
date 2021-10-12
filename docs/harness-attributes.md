@@ -99,6 +99,7 @@ These attributes control how the app container is built or how it behaves after 
         protocol: = @('app.default_port.protocol')
       bundle_certs: no
       mount_volume: false
+      additional_binaries: []
       packages: []
 
 #### `binary`
@@ -146,6 +147,18 @@ This allows us to enable the bundling of certificates when the production image 
 #### `mount_volume`
 
 When set to `true`, the `app` container will share a volume with the host operating system. Defaults to `false`, which isolates the `app` container filesystem from the host, meaning the developer will run all standard Go workflow commands on the host machine rather than in the `app` container.
+
+#### `additional_binaries`
+
+An array attribute which, when populated, will instruct the harness to build binaries from the provided directories. These binaries will be copied to the production image also. For example:
+
+```yaml
+additional_binaries:
+  - "cmd/foo"
+  - "tool/bar"
+```
+
+See [the guide](/docs/how-to-guides/add-additional-binaries.md) for more on how to add additional binaries, and why you may need them.
 
 #### `packages`
 
