@@ -118,6 +118,8 @@ attributes.default:
       size: 4Gi
 
   pipeline:
+    stages:
+      integration_tests: "ws go test integration docker"
     publish:
       enabled: no
     preview:

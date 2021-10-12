@@ -172,3 +172,30 @@ This array attribute allows you to define an arbitrary number of `apt` packages 
 [`gofmt`]: https://pkg.go.dev/cmd/gofmt
 [`goimports`]: https://pkg.go.dev/golang.org/x/tools/cmd/goimports
 [`gocyclo`]: https://github.com/fzipp/gocyclo
+
+
+### `pipeline` attributes
+
+>_NOTE: This section is not complete, and only a small portion of attributes are documented_
+
+    pipeline:
+       stages:
+         integration_tests: "ws go test integration docker"
+       publish:
+         enabled: no
+       preview:
+         enabled: no
+         namespace: = @('workspace.name') ~ '-' ~ slugify(branch())
+         hostname:  = @('pipeline.preview.namespace') ~ '.example.com'
+       base:
+         resourcePrefix: ~
+         hostname: = @('pipeline.base.namespace') ~ '.example.com'
+       qa:
+         enabled: no
+         namespace: = @('workspace.name')
+         hostname: = @('pipeline.qa.namespace') ~ '.' ~ @('domain')
+         resourcePrefix: ~
+
+#### `stages.integration_tests`
+
+Allows you to override the command that is executed for integration tests in the generated `Jenkinsfile`. Defaults to `ws go test integration docker`, which is fine for most cases when following the [how to guide](how-to-guides/write-integration-tests.md) on writing integration tests.

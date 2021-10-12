@@ -22,7 +22,7 @@ pipeline {
             }
         }
         stage('Integration Tests') {
-            steps { sh 'ws go test integration docker' }
+            steps { sh '{{ @('pipeline.stages.integration_tests') }}' }
         }
         stage('Build for production') {
             steps {
