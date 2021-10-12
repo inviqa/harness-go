@@ -144,6 +144,10 @@ These settings are related to changing the ingress used for your application. Va
 
 This allows us to enable the bundling of certificates when the production image is being built. This will not affect your local development, because we do not use the production image locally, however, when CI pipelines prepare the production image (based on [Docker's scratch image](https://hub.docker.com/_/scratch/)), we will need to set this value to `'yes'` if we communicate with any services that use TLS. Without these, the application will not be able to complete a TLS handshake with those services. See [development and production](development-and-production.md) for more info.
 
+#### `bundle_timezone_info`
+
+This allows the bundling of timezone info when the production image is being built. This will not affect your local development, because we do not use the production image locally, however, when CI pipelines prepare the production image (based on [Docker's scratch image](https://hub.docker.com/_/scratch/)), we will need to set this value to `true` if we want to access timezone info. Generally, this is only required if you want to operate across multiple timezones.
+
 #### `mount_volume`
 
 When set to `true`, the `app` container will share a volume with the host operating system. Defaults to `false`, which isolates the `app` container filesystem from the host, meaning the developer will run all standard Go workflow commands on the host machine rather than in the `app` container.
