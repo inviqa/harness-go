@@ -20,7 +20,22 @@ attributes:
       - "cmd/sync"
 ```
 
-This would produce two binaries on the built Docker image, that will be under the `$PATH`: `cmd-cleanup` and `cmd-sync`. These could be executed locally under `docker-compose` as follows:
+Your source code would look something like this:
+
+`cmd/cleanup/main.go`:
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Running cleanup...")
+	// ...
+	fmt.Println("Done.")
+}
+```
+
+Now, when you run `ws install` or next rebuild your `app` container, two binaries will be available on the built Docker image, that will be under the `$PATH`: `cmd-cleanup` and `cmd-sync`. These could be executed locally under `docker-compose` as follows:
 
 ```bash
 $ docker-compose exec app cmd-cleanup
