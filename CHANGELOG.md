@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.12.0](https://github.com/inviqa/harness-go/tree/0.12.0) (2021-10-13)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.11.0...0.12.0)
+
+**Implemented enhancements:**
+
+- Add Go 1.17 support [\#159](https://github.com/inviqa/harness-go/issues/159)
+- Make it easier to add multiple binaries in development + production image [\#151](https://github.com/inviqa/harness-go/issues/151)
+- Make it possible to mount app volume [\#161](https://github.com/inviqa/harness-go/pull/161) ([jameshalsall](https://github.com/jameshalsall))
+
+**Closed issues:**
+
+- Missing timezone data in production image [\#150](https://github.com/inviqa/harness-go/issues/150)
+
+**Merged pull requests:**
+
+- Add option to bundle /usr/share/zoneinfo in prod image [\#164](https://github.com/inviqa/harness-go/pull/164) ([jameshalsall](https://github.com/jameshalsall))
+- Add Go 1.17 to the CI pipeline [\#163](https://github.com/inviqa/harness-go/pull/163) ([jameshalsall](https://github.com/jameshalsall))
+- Add support for additional binaries [\#162](https://github.com/inviqa/harness-go/pull/162) ([jameshalsall](https://github.com/jameshalsall))
+- Use recreate stategy for MySQL and Postgres Deployment [\#160](https://github.com/inviqa/harness-go/pull/160) ([kierenevans](https://github.com/kierenevans))
+
 ## [0.11.0](https://github.com/inviqa/harness-go/tree/0.11.0) (2021-09-29)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.10.5-alpha...0.11.0)
