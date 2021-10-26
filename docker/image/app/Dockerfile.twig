@@ -49,10 +49,10 @@ RUN go generate
     {% set goBuildFlags = '' %}
 {% endif %}
 
-RUN GOOS=linux GOARCH=amd64 go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+RUN go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
 
 {% for binaryPath in @('app.additional_binaries') %}
-RUN GOOS=linux GOARCH=amd64 go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
+RUN go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
 {% endfor %}
 
 ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
