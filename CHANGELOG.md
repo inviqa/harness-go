@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.1](https://github.com/inviqa/harness-go/tree/0.12.1) (2021-10-28)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.12.0...0.12.1)
+
+**Fixed bugs:**
+
+- Do not specify GOOS or GOARCH during build [\#169](https://github.com/inviqa/harness-go/pull/169) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.12.0](https://github.com/inviqa/harness-go/tree/0.12.0) (2021-10-13)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.11.0...0.12.0)
