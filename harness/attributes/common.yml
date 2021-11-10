@@ -104,6 +104,9 @@ attributes.default:
   jenkins:
     credentials:
       my127ws_key: = @('workspace.name') ~ '-my127ws-key'
+    docker:
+      buildkit:
+        enabled: true
 
   # these settings are only relevant when the respective service is enabled in
   # app.services
