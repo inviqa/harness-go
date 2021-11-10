@@ -33,7 +33,7 @@ command('networks external'):
 command('build'): |
   #!bash(workspace:/)|@
   ws external-images pull
-  passthru docker buildx build app
+  passthru docker buildx build -f ./.my127ws/docker/image/app/Dockerfile .
 
 command('rebuild'): |
   #!php
