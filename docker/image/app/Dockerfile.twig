@@ -1,4 +1,4 @@
-FROM golang:{{ @('go.version')}} AS golang
+FROM --platform=$BUILDPLATFORM golang:{{ @('go.version')}} AS golang
 LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 {% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}
@@ -20,6 +20,8 @@ COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin
 RUN chmod +x /usr/local/bin/helper
 
+ARG TARGETOS
+ARG TARGETARCH
 {% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
 {% for argName, argValue in config.buildArgs|default({}) %}
 ARG {{ argName }}=
@@ -49,7 +51,7 @@ RUN go generate
     {% set goBuildFlags = '' %}
 {% endif %}
 
-RUN go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+RUN GOOS="$TARGETOS" GOARCH="$TARGETARCH" go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
 
 {% for binaryPath in @('app.additional_binaries') %}
 RUN go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
