@@ -43,7 +43,7 @@ pipeline {
             when {
                 not { triggeredBy 'TimerTrigger' }
                 anyOf {
-                    branch 'master'
+                    branch '{{ @('git.main_branch') }}'
                 }
             }
             steps { sh 'ws app publish' }
