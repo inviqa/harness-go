@@ -30,10 +30,14 @@ command('networks external'):
       fi
     done
 
-command('build'): |
-  #!bash(workspace:/)|@
-  ws external-images pull
-  passthru docker-compose build app
+command('build'):
+  env:
+    COMPOSE_DOCKER_CLI_BUILD:  "1"
+    DOCKER_BUILDKIT: "1"
+  exec: |
+    #!bash(workspace:/)|@
+    ws external-images pull
+    passthru docker-compose build
 
 command('rebuild'): |
   #!php

@@ -1,11 +1,20 @@
 pipeline {
     agent { label "my127ws" }
     environment {
+        COMPOSE_DOCKER_CLI_BUILD = {{ @('jenkins.docker.buildkit.enabled') ? '1' : '0' }}
+        DOCKER_BUILDKIT = {{ @('jenkins.docker.buildkit.enabled') ? '1' : '0' }}
         MY127WS_KEY = credentials('{{ @('jenkins.credentials.my127ws_key') }}')
         MY127WS_ENV = "pipeline"
     }
     triggers { cron(env.BRANCH_NAME == '{{ @('git.main_branch') }}' ? 'H H(0-6) * * *' : '') }
     stages {
+        stage('Setup') {
+            steps {
+                script {
+                    env.CONTEXT = sh(script: 'docker buildx create --use', returnStdout: true).trim()
+                }
+            }
+        }
         stage('Build') {
             steps { sh 'ws install' }
         }
@@ -31,7 +40,12 @@ pipeline {
         }
 {% if @('pipeline.publish.enabled') == 'yes' %}
         stage('Publish') {
-            when { not { triggeredBy 'TimerTrigger' } }
+            when {
+                not { triggeredBy 'TimerTrigger' }
+                anyOf {
+                    branch '{{ @('git.main_branch') }}'
+                }
+            }
             steps { sh 'ws app publish' }
         }
 {% endif %}
@@ -61,6 +75,7 @@ pipeline {
     post {
         always {
             sh 'ws destroy'
+            sh 'docker buildx rm "${CONTEXT}"'
             cleanWs()
         }
     }

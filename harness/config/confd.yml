@@ -3,7 +3,6 @@ confd('harness:/'):
   - { src: application/skeleton/README.md }
   - { src: application/skeleton/.gitignore }
   - { src: docker/image/app/Dockerfile }
-  - { src: docker/image/app/Dockerfile.prod }
   - { src: docker/image/app/root/lib/task/gocyclo.sh }
   - { src: docker/image/app/root/lib/task/gosec.sh }
   - { src: docker/image/app/root/lib/task/fmt/check.sh }
@@ -11,6 +10,7 @@ confd('harness:/'):
   - { src: docker/image/app/root/lib/task/modules/before.sh }
   - { src: docker/image/app/root/lib/task/modules/check.sh }
   - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }
+  - { src: docker-bake.hcl, dst: workspace:/docker-bake.hcl }
   - { src: harness/scripts/mod_init.sh }
   - { src: harness/scripts/init.sh }
   - { src: harness/scripts/integration/run.sh }

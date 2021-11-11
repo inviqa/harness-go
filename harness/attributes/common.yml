@@ -48,6 +48,10 @@ attributes.default:
     external_image_registries: []
     repository: = @("workspace.name")
     tagPrefix: = ''
+    production:
+      platforms:
+      - "linux/amd64"
+      additional_tags: []
 
   git:
     config_global:
@@ -104,6 +108,9 @@ attributes.default:
   jenkins:
     credentials:
       my127ws_key: = @('workspace.name') ~ '-my127ws-key'
+    docker:
+      buildkit:
+        enabled: true
 
   # these settings are only relevant when the respective service is enabled in
   # app.services

@@ -3,6 +3,7 @@
     build:
       context: ./
       dockerfile: .my127ws/docker/image/app/Dockerfile
+      target: base
       args: {{ to_nice_yaml(@('git.config_global') | reduce(
           (carry, config) => carry | merge(
               ((config.when is not defined) or config.when) ? config.buildArgs : []
