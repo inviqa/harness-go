@@ -1,6 +1,6 @@
 command('build-prod'): |
   #!bash(workspace:/)|@
-  passthru docker build -t @('docker.repository'):@('docker.tagPrefix')@('app.version') -f .my127ws/docker/image/app/Dockerfile.prod .
+  passthru docker buildx bake -f docker-bake.hcl
 
 command('app publish'): |
   #!bash(workspace:/)|@

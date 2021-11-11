@@ -40,8 +40,12 @@ function test()
     ws disable
     ws enable
 
-    sleep 5
+    local build_prod="../${ci_test_path}/.build-prod"
+    if [[ -f "${build_prod}" ]]; then
+        ws build-prod
+    fi
 
+    sleep 5
     verify_and_exit "${path_test}" "${ci_test_path}"
 )
 

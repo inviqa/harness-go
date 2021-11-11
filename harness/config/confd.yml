@@ -10,6 +10,7 @@ confd('harness:/'):
   - { src: docker/image/app/root/lib/task/modules/before.sh }
   - { src: docker/image/app/root/lib/task/modules/check.sh }
   - { src: docker-compose.yml, dst: workspace:/docker-compose.yml }
+  - { src: _twig/docker-bake.hcl, dst: workspace:/docker-bake.hcl }
   - { src: harness/scripts/mod_init.sh }
   - { src: harness/scripts/init.sh }
   - { src: harness/scripts/integration/run.sh }
