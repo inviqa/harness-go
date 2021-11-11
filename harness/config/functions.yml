@@ -146,7 +146,6 @@ function('docker_service_images'): |
   $configRaw = shell_exec('docker-compose config');
   $config = \Symfony\Component\Yaml\Yaml::parse($configRaw);
   $images = [];
-  $excluded = ['scratch'];
 
   foreach ($config['services'] as $serviceName => $service) {
     $imageSpec = [
@@ -173,11 +172,11 @@ function('docker_service_images'): |
 
       foreach ($matches as $match) {
         // Skip FROM <existing-alias>, as only the upstream images needed
-        if (in_array($match[2], $aliases) || in_array($match[2], $excluded)) {
+        if (in_array($match[2], $aliases)) {
           continue;
         }
         // Docker uses :latest tag if no explicit tag listed
-        if (strpos($match[2], ':') === false) {
+        if ($match[2] != 'scratch' && strpos($match[2], ':') === false) {
           $match[2] .= ':latest';
         }
         if (isset($match[3])) {
