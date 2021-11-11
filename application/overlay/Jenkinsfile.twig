@@ -40,7 +40,12 @@ pipeline {
         }
 {% if @('pipeline.publish.enabled') == 'yes' %}
         stage('Publish') {
-            when { not { triggeredBy 'TimerTrigger' } }
+            when {
+                not { triggeredBy 'TimerTrigger' }
+                anyOf {
+                    branch 'master'
+                }
+            }
             steps { sh 'ws app publish' }
         }
 {% endif %}
