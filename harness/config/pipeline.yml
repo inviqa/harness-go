@@ -1,11 +1,11 @@
 command('build-prod'): |
   #!bash(workspace:/)|@
-  passthru docker buildx bake -f docker-bake.hcl
+  passthru docker buildx bake --file docker-bake.hcl
 
 command('app publish'): |
   #!bash(workspace:/)|@
   echo '@('docker.registry.password')' | run docker login --username='@('docker.registry.username')' --password-stdin '@('docker.registry.url')'
-  run docker push @('docker.repository'):@('docker.tagPrefix')@('app.version')
+  passthru docker buildx bake --file docker-bake.hcl --push
   run docker logout @('docker.registry.url')
 
 command('app deploy <environment>'):
