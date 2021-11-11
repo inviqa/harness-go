@@ -17,7 +17,7 @@ target "app" {
     target = "prod"
     platforms = PLATFORMS
     tags = [
-        "{{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }}"
+        "{{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }}",
 {% for tag in @('docker.production.additional_tags') %}
         "{{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ tag }}"
 {% endfor %}
