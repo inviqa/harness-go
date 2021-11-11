@@ -1,0 +1,62 @@
+FROM --platform=$BUILDPLATFORM golang:{{ @('go.version')}} AS base
+LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
+
+{% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}
+ENV {{ envName }}={{ envValue }}
+{% endfor %}
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+     unzip \
+{% if @('app.bundle_certs') == 'yes' %}
+     ca-certificates \
+{% endif %}
+{% for package in @('app.packages') %}
+     {{ package|raw }} \
+{% endfor %}
+&& rm -rf /var/lib/apt/lists/*
+
+COPY .my127ws/docker/image/app/root /
+COPY .my127ws/docker/image/app/bin /usr/local/bin
+RUN chmod +x /usr/local/bin/helper
+
+ARG TARGETOS
+ARG TARGETARCH
+{% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
+{% for argName, argValue in config.buildArgs|default({}) %}
+ARG {{ argName }}=
+{% endfor %}
+RUN git config --global "{{ config.key }}" "{{ config.value }}"
+{% endfor %}
+
+RUN [ -z "${SSH_DEPLOY_KEY:-}" ] || bash /ssh-keys.sh
+
+WORKDIR /app
+
+RUN helper modules:before
+
+COPY {{ @('app.module_path') }}/go.mod .
+COPY {{ @('app.module_path') }}/go.sum .
+RUN go mod download
+
+RUN helper modules:after
+
+COPY . .
+
+RUN go generate
+
+{% if @('app.build') == 'production' %}
+{% set goBuildFlags = '-ldflags="-w -s"' %}
+{% else %}
+{% set goBuildFlags = '' %}
+{% endif %}
+
+RUN GOOS="$TARGETOS" GOARCH="$TARGETARCH" go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+
+{% for binaryPath in @('app.additional_binaries') %}
+RUN go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
+{% endfor %}
+
+ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
+EXPOSE {{ @('app.default_port.port') }}
+EXPOSE {{ @('app.health_port') }}

@@ -1,0 +1,22 @@
+FROM scratch AS prod
+
+ENV PATH="/"
+
+{% if @('app.bundle_certs') == 'yes' %}
+COPY --from=base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+{% endif %}
+
+{% if @('app.bundle_timezone_info') %}
+COPY --from=base /usr/share/zoneinfo /usr/share/zoneinfo
+{% endif %}
+
+COPY --chown=0:0 --from=base /go/bin/{{ @('app.binary') }} /
+
+{% for binaryPath in @('app.additional_binaries') %}
+{% set sanitizedName = sanitize_additional_binary_path(binaryPath) %}
+COPY --chown=0:0 --from=base /go/bin/{{ sanitizedName }} /{{ sanitizedName }}
+{% endfor %}
+
+ENTRYPOINT ["/{{ @('app.binary') }}"]
+EXPOSE {{ @('app.default_port.port') }}
+EXPOSE {{ @('app.health_port') }}
