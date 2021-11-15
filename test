@@ -45,7 +45,7 @@ function test()
         ws build-prod
     fi
 
-    sleep 10
+    sleep 5
     verify_and_exit "${path_test}" "${ci_test_path}"
 )
 
