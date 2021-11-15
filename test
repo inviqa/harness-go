@@ -64,6 +64,7 @@ function verify_and_exit() {
       if [ ! "$(docker ps -q -f name=ci-go-sample_"$container")" ]; then
         echo "The ${container} container is not running, but it should be."
         docker-compose logs --tail 25 "$container"
+        docker-compose ps -a
         exit 1
       fi
     done < "${expected_containers}"
