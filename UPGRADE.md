@@ -4,7 +4,8 @@ This document highlights breaking changes in releases that will require some mig
 
 ## `0.12.x` -> `0.13.0`
 
-* The default Kafka and Zookeeper images have been switched to [bitnami/kafka](https://hub.docker.com/r/bitnami/kafka) and [bitnami/zookeeper](https://hub.docker.com/r/bitnami/zookeeper), respectively. If you want to continue using the legacy wurstmeister images, you will need to specify this in your `kafka.image` and `zookeeper.image` attributes.  
+* The Dockerfiles have been restructured to make multi-platform images easier. You may need to restructure your own template overrides if you use a custom `Dockerfile` or `Dockerfile.prod`, as they have now been moved, see [here](https://github.com/inviqa/harness-go/tree/master/docker/image/app/include).
+* The default Kafka and Zookeeper images have been switched to [bitnami/kafka](https://hub.docker.com/r/bitnami/kafka) and [bitnami/zookeeper](https://hub.docker.com/r/bitnami/zookeeper), respectively. If you want to continue using the legacy wurstmeister images, you will need to specify this in your `kafka.image` and `zookeeper.image` attributes.
 
 ## `0.9.x` -> `0.10.0`
 
