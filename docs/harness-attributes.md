@@ -101,6 +101,7 @@ These attributes control how the app container is built or how it behaves after 
       mount_volume: false
       additional_binaries: []
       packages: []
+      copy_files: []
 
 #### `binary`
 
@@ -167,6 +168,15 @@ See [the guide](/docs/how-to-guides/add-additional-binaries.md) for more on how 
 #### `packages`
 
 This array attribute allows you to define an arbitrary number of `apt` packages to be installed when the Docker image is being built. Please note that these packages are only installed on the development image, and not the production image.
+
+#### `copy_files`
+
+An array attribute that lets you specify additional file paths that should be copied onto the final production image. These files should be built on the base development image first, as they will be copied from that layer in the production docker build. The format for each entry is `from_path:to_path`, where `from_path` is the path on the base image layer. For example:
+
+```yaml
+copy_files:
+  - "/go/bin/grpc_health_probe:/"
+```
 
 [overriding harness templates]: overriding-files.md
 [`gofmt`]: https://pkg.go.dev/cmd/gofmt

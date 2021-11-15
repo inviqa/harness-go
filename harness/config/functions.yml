@@ -231,3 +231,16 @@ function('sanitize_additional_binary_path', [path]): |
       trigger_error(sprintf("Your additional_binary path (%s) contains a leading slash, please remove it.", $path), E_USER_ERROR);
   }
   = str_replace("/", "-", $path);
+
+function('path_split', [paths]): |
+  #!php
+  $splitPaths = [];
+  array_walk($paths, function($path) use (&$splitPaths) {
+      $parts = explode(":", $path);
+      if (count($parts) != 2) {
+          return;
+      }
+      $splitPaths[$parts[0]] = $parts[1];
+  });
+
+  = $splitPaths;

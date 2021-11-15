@@ -11,6 +11,9 @@ COPY --from=base /usr/share/zoneinfo /usr/share/zoneinfo
 {% endif %}
 
 COPY --chown=0:0 --from=base /go/bin/{{ @('app.binary') }} /
+{% for from, to in path_split(@('app.copy_files')) %}
+COPY --chown=0:0 --from=base {{ from }} {{ to }}
+{% endfor %}
 
 {% for binaryPath in @('app.additional_binaries') %}
 {% set sanitizedName = sanitize_additional_binary_path(binaryPath) %}
