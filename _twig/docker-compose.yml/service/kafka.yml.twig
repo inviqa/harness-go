@@ -11,6 +11,8 @@
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
     networks:
       private: {}
+    depends_on:
+      - zookeeper
 
   zookeeper:
     image: {{ @('zookeeper.image') }}:{{ @('zookeeper.version') }}
