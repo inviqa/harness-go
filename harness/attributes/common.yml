@@ -32,7 +32,11 @@ attributes.default:
     root_pass: DV6RdNY3QcFsBk7V
 
   kafka:
+    image: bitnami/kafka
     host: "kafka:29092"
+    version: latest
+  zookeeper:
+    image: bitnami/zookeeper
     version: latest
 
   docker:
