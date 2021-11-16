@@ -2,9 +2,13 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+{{- with .Values.ingress.annotations }}
+  annotations:
+    {{- . | toYaml | nindent 4 }}
+{{- end }}
   creationTimestamp: null
   labels:
-{{- if .Values.ingress.protocol }}  
+{{- if .Values.ingress.protocol }}
     ingress.kubernetes.io/protocol: {{ .Values.ingress.protocol }}
 {{- end }}
     app.service: {{ .Values.resourcePrefix }}app
@@ -17,6 +21,10 @@ spec:
       - backend:
           serviceName: {{ .Values.resourcePrefix }}app
           servicePort: {{ .Values.default_port.port }}
+{{- if .Values.ingress.tls }}
+  tls:
+  {{- toYaml .Values.ingress.tls | nindent 4 }}
+{{- end }}
 status:
   loadBalancer: {}
 {{ end }}
