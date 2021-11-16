@@ -18,6 +18,7 @@ attributes.default:
     mount_volume: false
     additional_binaries: []
     packages: []
+    copy_files: []
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')
