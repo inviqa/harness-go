@@ -5,15 +5,13 @@ workspace('ci-go-sample'):
 attributes:
   app:
     build: production
-    copy_files:
-      - "/tmp/foo:/"
   go:
     module_name: ci-go-sample
     version: 1.17
   docker:
     experimental:
-      multiplatform_build: "yes"
-      production:
+      multiplatform_build:
+        enabled: "yes"
         platforms:
           - "linux/amd64"
           - "linux/arm64"
