@@ -71,7 +71,6 @@ pipeline {
     post {
         always {
             sh 'ws destroy'
-            sh 'docker buildx rm "${CONTEXT}"'
             cleanWs()
         }
     }
