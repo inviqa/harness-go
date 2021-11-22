@@ -4,11 +4,11 @@ function docker_publish() {
     echo '{{ @('docker.registry.password') }}' | run docker login --username='{{ @('docker.registry.username') }}' --password-stdin '{{ @('docker.registry.url') }}'
 
     if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
-    passthru docker buildx bake --file docker-bake.hcl --push
-    {% else %}
-    run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ @('app.version') }}
-    run docker logout {{ @('docker.registry.url') }}
-    {% endif %}
+        passthru docker buildx bake --file docker-bake.hcl --push
+    else
+        run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ @('app.version') }}
+        run docker logout {{ @('docker.registry.url') }}
+    fi
 
     run docker logout {{ @('docker.registry.url') }}
 }
