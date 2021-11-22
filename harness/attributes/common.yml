@@ -54,8 +54,8 @@ attributes.default:
     repository: = @("workspace.name")
     tagPrefix: = ''
     experimental:
-      multiplatform_build: "no"
-      production:
+      multiplatform_build:
+        enabled: "no"
         platforms:
         - "linux/amd64"
         additional_tags: []
