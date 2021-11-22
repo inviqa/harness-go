@@ -26,15 +26,6 @@ function test()
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
 
-    local multiplatform="../${ci_test_path}/.multiplatform"
-    local harness_docker_context=""
-    if [[ -f "${multiplatform}" ]]; then
-        harness_docker_context=$(docker buildx create --use)
-    fi
-
-    # shellcheck disable=SC2064
-    trap "clean '${harness_docker_context}'" EXIT
-
     ws install
 
     local lockedversion
@@ -83,16 +74,12 @@ function verify_or_exit() {
 function clean()
 {
     local path_test="./.tmp-test"
-    local docker_context="$1"
 
     if [ -d "$path_test" ]; then
         (cd $path_test && ws destroy)
         rm -rf $path_test
     fi
-
-    if [ "${docker_context}" != "" ]; then
-      docker buildx rm "$docker_context"
-    fi
 }
 
+trap 'clean' EXIT
 main "$@"
