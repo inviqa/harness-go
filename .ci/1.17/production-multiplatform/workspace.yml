@@ -1,0 +1,19 @@
+workspace('ci-go-sample'):
+  description: generated local workspace for ci-go-sample.
+  harness: inviqa/go
+
+attributes:
+  app:
+    build: production
+    copy_files:
+      - "/tmp/foo:/"
+  go:
+    module_name: ci-go-sample
+    version: 1.17
+  docker:
+    experimental:
+      multiplatform_build: "yes"
+      production:
+        platforms:
+          - "linux/amd64"
+          - "linux/arm64"

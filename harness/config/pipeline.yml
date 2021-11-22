@@ -1,6 +1,14 @@
-command('build-prod'): |
-  #!bash(workspace:/)|@
-  passthru docker buildx bake --file docker-bake.hcl
+command('build-prod'):
+  env:
+    MULTIPLATFORM_BUILD: @('docker.experimental.multiplatform_build')
+  exec: |
+    #!bash(workspace:/)|=
+    set -o pipefail
+    if [$MULTIPLATFORM_BUILD == "yes"];then
+      passthru docker buildx bake --file docker-bake.hcl
+    else
+      passthru docker build --tag @('docker.repository'):@('docker.tagPrefix')@('app.version') --file .my127ws/docker/image/app/Dockerfile --target prod .
+    fi
 
 command('app publish'): |
   #!bash(workspace:/)|@
