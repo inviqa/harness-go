@@ -1,10 +1,7 @@
 command('build-prod'): |
   #!bash(workspace:/)|@
-  source .my127ws/harness/scripts/docker/build-prod.sh
-
-command('docker build-context'): |
-  #!bash(workspace:/)|@
   source .my127ws/harness/scripts/docker/build-context.sh
+  source .my127ws/harness/scripts/docker/build-prod.sh
 
 command('app publish'): |
   #!bash(workspace:/)|@
