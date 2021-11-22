@@ -13,7 +13,9 @@ confd('harness:/'):
   - { src: docker-bake.hcl, dst: workspace:/docker-bake.hcl }
   - { src: harness/scripts/mod_init.sh }
   - { src: harness/scripts/init.sh }
+  - { src: harness/scripts/docker/build-context.sh }
   - { src: harness/scripts/docker/build-prod.sh }
+  - { src: harness/scripts/docker/publish.sh }
   - { src: harness/scripts/integration/run.sh }
   - { src: harness/scripts/integration/run-one.sh }
   - { src: helm/app/Chart.yaml }

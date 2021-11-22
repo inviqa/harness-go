@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function set_docker_build_context {
+    {% if @('docker.experimental.multiplatform_build.enabled') %}
+    export CONTEXT=$(docker buildx create --use)
+    {% else %}
+    :
+    {% endif %}
+}
+
+set_docker_build_context
