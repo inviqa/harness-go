@@ -29,7 +29,7 @@ pipeline {
                     agent { label "my127ws" }
                     steps { sh './test production 1.17' }
                 }
-                stage('(go=1.17 mode=production)') {
+                stage('(go=1.17 mode=production-multiplatform)') {
                     agent { label "my127ws" }
                     steps { sh './test production-multiplatform 1.17' }
                 }
