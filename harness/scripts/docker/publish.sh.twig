@@ -10,7 +10,6 @@ function docker_publish() {
         {% for tag in @('docker.production.additional_tags') %}
         run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ tag }}
         {% endfor %}
-        run docker logout {{ @('docker.registry.url') }}
     fi
 
     run docker logout {{ @('docker.registry.url') }}
