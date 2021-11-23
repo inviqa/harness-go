@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -o pipefail
+
+function docker_build_prod {
+{% if @('docker.experimental.multiplatform_build.enabled') == "yes" %}
+    local context=$(docker buildx create --use)
+{% endif %}
+
+  trap "clean '${context}'" EXIT
+
+  if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
+    passthru docker buildx bake --file docker-bake.hcl
+  else
+    passthru docker build --tag {{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} --file .my127ws/docker/image/app/Dockerfile --target prod .
+  fi
+}
+
+function clean() {
+    context="$1"
+    if [[ "$context" != "" ]]; then
+      docker buildx rm "${CONTEXT}"
+    fi
+}
+
+docker_build_prod

@@ -40,21 +40,22 @@ function test()
     ws disable
     ws enable
 
+    sleep 5
+    verify_or_exit "${path_test}" "${ci_test_path}"
+
     local build_prod="../${ci_test_path}/.build-prod"
     if [[ -f "${build_prod}" ]]; then
         ws build-prod
     fi
-
-    sleep 5
-    verify_and_exit "${path_test}" "${ci_test_path}"
 )
 
-function verify_and_exit() {
+function verify_or_exit() {
   local path_test="$1"
   local ci_test_path="$2"
   local expected_containers="../${ci_test_path}/.expected_containers"
 
-  if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ]; then
+  # in docker-compose v2, underscores were replaced with dashes as a separator in container names
+  if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ] && [ ! "$(docker ps -q -f name=ci-go-sample-app)" ]; then
       echo "The app container has stopped running unexpectedly."
       exit 1
   fi

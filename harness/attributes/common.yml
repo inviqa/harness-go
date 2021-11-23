@@ -53,10 +53,12 @@ attributes.default:
     external_image_registries: []
     repository: = @("workspace.name")
     tagPrefix: = ''
-    production:
-      platforms:
-      - "linux/amd64"
-      additional_tags: []
+    experimental:
+      multiplatform_build:
+        enabled: "no"
+        platforms:
+        - "linux/amd64"
+        additional_tags: []
 
   git:
     config_global:

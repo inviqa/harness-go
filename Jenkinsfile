@@ -29,6 +29,10 @@ pipeline {
                     agent { label "my127ws" }
                     steps { sh './test production 1.17' }
                 }
+                stage('(go=1.17 mode=production-multiplatform)') {
+                    agent { label "my127ws" }
+                    steps { sh './test production-multiplatform 1.17' }
+                }
                 stage('(go=1.17 mode=develop-with-mysql)') {
                     agent { label "my127ws" }
                     steps { sh './test develop-with-mysql 1.17' }
