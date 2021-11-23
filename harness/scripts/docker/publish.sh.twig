@@ -7,6 +7,9 @@ function docker_publish() {
         passthru docker buildx bake --file docker-bake.hcl --push
     else
         run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ @('app.version') }}
+        {% for tag in @('docker.production.additional_tags') %}
+        run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ tag }}
+        {% endfor %}
         run docker logout {{ @('docker.registry.url') }}
     fi
 

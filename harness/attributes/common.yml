@@ -58,7 +58,8 @@ attributes.default:
         enabled: "no"
         platforms:
         - "linux/amd64"
-        additional_tags: []
+    production:
+      additional_tags: []
 
   git:
     config_global:
