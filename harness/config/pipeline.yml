@@ -12,7 +12,7 @@ command('app publish'):
     DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/docker/publish.sh
+    source .my127ws/harness/scripts/docker/publish.sh @('docker.registry.url') @('docker.registry.username') @('docker.registry.password')
 
 command('app deploy <environment>'):
   env:
