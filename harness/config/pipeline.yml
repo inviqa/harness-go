@@ -1,10 +1,18 @@
-command('build-prod'): |
-  #!bash(workspace:/)|@
-  source .my127ws/harness/scripts/docker/build-prod.sh
+command('build-prod'):
+  env:
+    COMPOSE_DOCKER_CLI_BUILD: "1"
+    DOCKER_BUILDKIT: "1"
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/docker/build-prod.sh
 
-command('app publish'): |
-  #!bash(workspace:/)|@
-  source .my127ws/harness/scripts/docker/publish.sh
+command('app publish'):
+  env:
+    COMPOSE_DOCKER_CLI_BUILD: "1"
+    DOCKER_BUILDKIT: "1"
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/docker/publish.sh
 
 command('app deploy <environment>'):
   env:
