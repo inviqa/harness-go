@@ -12,7 +12,13 @@ function docker_build_prod {
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
     passthru docker buildx bake --file docker-bake.hcl
   else
-    passthru docker build --tag {{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} --file .my127ws/docker/image/app/Dockerfile --target prod .
+    passthru docker build --tag {{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} \
+{% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
+{% for argName, argValue in config.buildArgs|default({}) %}
+        --build-arg {{ argName }}={{ argValue }} \
+{% endfor %}
+{% endfor %}
+        --file .my127ws/docker/image/app/Dockerfile --target prod .
   fi
 }
 
