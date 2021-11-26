@@ -8,8 +8,9 @@ attributes:
       resources:
         memory: 100Mi
     mysql:
-      image: = 'mysql:' ~ @('services.mysql.version')
-      version: 5.7
+      # prefer native platform mysql image. _/mysql doesn't have arm64 images
+      image: "= host_architecture() == 'amd64' ? 'mysql' : 'mysql/mysql-server'"
+      version: 8.0
       environment:
         MYSQL_DATABASE: = @('database.name')
         MYSQL_USER: = @('database.user')

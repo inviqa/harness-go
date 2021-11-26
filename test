@@ -62,7 +62,8 @@ function verify_or_exit() {
 
   if [[ -f "${expected_containers}" ]]; then
     while read -r container; do
-      if [ ! "$(docker ps -q -f name=ci-go-sample_"$container")" ]; then
+      # in docker-compose v2, underscores were replaced with dashes as a separator in container names
+      if [ ! "$(docker ps -q -f name=ci-go-sample_"$container")" ] && [ ! "$(docker ps -q -f name=ci-go-sample-"$container")" ]; then
         echo "The ${container} container is not running, but it should be."
         COMPOSE_PROJECT_NAME=ci-go-sample docker-compose logs --tail 100 "$container"
         exit 1
