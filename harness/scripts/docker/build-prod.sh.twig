@@ -4,7 +4,7 @@ set -o pipefail
 
 function docker_build_prod {
 {% if @('docker.experimental.multiplatform_build.enabled') == "yes" %}
-    local context=$(docker buildx create --use)
+  local context=$(docker buildx create --use)
 {% endif %}
 
   trap "clean '${context}'" EXIT
