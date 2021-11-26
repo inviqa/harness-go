@@ -8,7 +8,7 @@ function destroy() {
     if [[ "$builder" != "" ]]; then
       run docker buildx rm "${builder}"
     fi
- fi
+  fi
 
   passthru ws cleanup built-images
   run rm -f .my127ws/.flag-built
