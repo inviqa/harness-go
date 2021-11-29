@@ -33,12 +33,13 @@ attributes:
     kafka-outbox-relay:
       image: quay.io/inviqa_images/kafka-outbox-relay
       version: v1
+      db_driver: "postgres" # supported values: "postgres", "mysql"
       environment:
         DB_HOST: = @('database.host')
         DB_PORT: = @('database.port')
         DB_USER: = @('database.user')
         DB_NAME: = @('database.name')
-        DB_DRIVER: "postgres"
+        DB_DRIVER: @('services.kafka-outbox-relay.db_driver')
         LOG_LEVEL: "info"
         POLLING_DISABLED: "true"
       environment_secrets:

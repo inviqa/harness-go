@@ -18,23 +18,15 @@ In order to add the outbox relay, you need to specify a few attributes in your `
      app:
        services: [kafka-outbox-relay]
    ```
-2. Set the `services.kafka-outbox-relay.version` attribute with your desired version. This is optional, as it defaults to `v1`.
+2. Set the `services.kafka-outbox-relay.version` and `services.kafka-outbox-relay.db_driver` attributes. The version is optional, as it defaults to `v1`.
    ```yaml
    attributes:
      services:
        kafka-outbox-relay:
          version: v1
+         db_driver: "postgres" # can also be "mysql"
    ```
-3. Set the outbox relay DB driver via its environment variables, either "postgres" or "mysql" are supported. It should match your application's database server:
-   ```yaml
-   attributes:
-     services:
-       kafka-outbox-relay:
-         # ...
-         environment:
-           DB_DRIVER: "postgres"
-   ```
-5. You will now need to configure your machine user so that the image can be pulled from [quay.io]
+3. You will now need to configure your machine user so that the image can be pulled from [quay.io]
    ```yaml
    attributes:
      # ...
