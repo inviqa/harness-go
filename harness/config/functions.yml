@@ -244,3 +244,23 @@ function('path_split', [paths]): |
   });
 
   = $splitPaths;
+
+function('host_architecture', [style]): |
+  #!php
+  $arch = php_uname('m');
+  if ($style == 'native') {
+    $result = $arch;
+  } else if (empty($style) || $style == 'go') {
+    $goArchMap = [
+        'i386' => '386',
+        'x86_64' => 'amd64',
+        'aarch64' => 'arm64',
+        'armv7l' => 'arm',
+        'armv6l' => 'arm',
+    ];
+    $result = $goArchMap[$arch] ?? $arch;
+  } else {
+    throw new \Exception(sprintf('error: unknown host_architecture style "%s"', $style));
+  }
+
+  = $result;
