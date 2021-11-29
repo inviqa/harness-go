@@ -4,10 +4,8 @@ function destroy() {
   run docker-compose down --rmi local --volumes --remove-orphans
 
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
-    builder=$(docker buildx inspect | grep Name: | head -n 1 | awk '{print $2}')
-    if [[ "$builder" != "" ]]; then
-      run docker buildx rm "${builder}"
-    fi
+    local builder="{{ @('app.version') }}-{{ @('app.namespace') }}"
+    run docker buildx rm "${builder}"
   fi
 
   passthru ws cleanup built-images
