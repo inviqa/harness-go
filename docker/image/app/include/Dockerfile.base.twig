@@ -54,7 +54,7 @@ RUN go generate
 RUN GOOS="$TARGETOS" GOARCH="$TARGETARCH" go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
 
 {% for binaryPath in @('app.additional_binaries') %}
-RUN go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
+RUN GOOS="$TARGETOS" GOARCH="$TARGETARCH" go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
 {% endfor %}
 
 ENTRYPOINT ["/go/bin/{{ @('app.binary') }}"]
