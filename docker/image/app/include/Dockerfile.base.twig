@@ -22,6 +22,7 @@ RUN chmod +x /usr/local/bin/helper
 
 ARG TARGETOS
 ARG TARGETARCH
+ENV GOOS=$TARGETOS GOARCH=$TARGETARCH 
 {% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
 {% for argName, argValue in config.buildArgs|default({}) %}
 ARG {{ argName }}=
@@ -51,7 +52,7 @@ RUN go generate
 {% set goBuildFlags = '' %}
 {% endif %}
 
-RUN GOOS="$TARGETOS" GOARCH="$TARGETARCH" go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
+RUN go build {{ goBuildFlags }} -o /go/bin/{{ @('app.binary') }} {{ @('app.src_path') }}
 
 {% for binaryPath in @('app.additional_binaries') %}
 RUN go build {{ goBuildFlags }} -o /go/bin/{{ sanitize_additional_binary_path(binaryPath) }} ./{{ binaryPath }}
