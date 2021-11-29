@@ -1,5 +1,5 @@
   kafka-outbox-relay:
-    image: {{ @('kafka-outbox-relay.image') }}:{{ kafka-outbox-relay.version }}
+    image: {{ @('kafka-outbox-relay.image') }}:{{ @('kafka-outbox-relay.version') }}
     environment:
       DB_HOST: {{ @('database.host') }}
       DB_PORT: {{ @('database.port') }}
