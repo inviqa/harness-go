@@ -5,8 +5,8 @@ set -o pipefail
 function docker_build_prod {
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
     local builder="{{ @('namespace') }}"
-    run docker buildx create --name ${builder}
-    passthru docker buildx bake --file docker-bake.hcl --builder ${builder}
+    run docker buildx create --name "${builder}"
+    passthru docker buildx bake --file docker-bake.hcl --builder "${builder}"
   else
     passthru docker build --tag {{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} \
 {% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
