@@ -5,7 +5,7 @@ function destroy() {
 
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
     local builder="{{ @('app.version') }}-{{ @('app.namespace') }}"
-    run docker buildx rm "${builder}"
+    run docker buildx rm "${builder}" || true
   fi
 
   passthru ws cleanup built-images
