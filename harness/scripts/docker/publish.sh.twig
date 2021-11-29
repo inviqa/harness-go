@@ -8,7 +8,7 @@ function docker_publish() {
     echo "${password}" | run docker login --username="${username}" --password-stdin "${registryUrl}"
 
     if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
-        passthru docker buildx bake --file docker-bake.hcl --push
+        passthru docker buildx bake --file docker-bake.hcl --push --builder "${builder}"
     else
         run docker push {{ @('docker.repository') }}:{{ @('docker.tagPrefix')}}{{ @('app.version') }}
 {% for tag in @('docker.production.additional_tags') %}
