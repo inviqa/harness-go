@@ -30,6 +30,19 @@ attributes:
         POSTGRES_PASSWORD: = @('database.pass')
       resources:
         memory: 512Mi
+    kafka-outbox-relay:
+      image: quay.io/inviqa_images/kafka-outbox-relay
+      version: v1
+      environment:
+        DB_HOST: = @('database.host')
+        DB_PORT: = @('database.port')
+        DB_USER: = @('database.user')
+        DB_NAME: = @('database.name')
+        DB_DRIVER: "postgres"
+        LOG_LEVEL: "info"
+        POLLING_DISABLED: "true"
+      environment_secrets:
+        DB_PASS: = @('database.pass')
 
   pipeline:
     publish:
