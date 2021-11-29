@@ -54,16 +54,14 @@ function verify_or_exit() {
   local ci_test_path="$2"
   local expected_containers="../${ci_test_path}/.expected_containers"
 
-  # in docker-compose v2, underscores were replaced with dashes as a separator in container names
-  if [ ! "$(docker ps -q -f name=ci-go-sample_app)" ] && [ ! "$(docker ps -q -f name=ci-go-sample-app)" ]; then
+  if [ ! "$(COMPOSE_PROJECT_NAME=ci-go-sample docker-compose ps -q app)" ]; then
       echo "The app container has stopped running unexpectedly."
       exit 1
   fi
 
   if [[ -f "${expected_containers}" ]]; then
     while read -r container; do
-      # in docker-compose v2, underscores were replaced with dashes as a separator in container names
-      if [ ! "$(docker ps -q -f name=ci-go-sample_"$container")" ] && [ ! "$(docker ps -q -f name=ci-go-sample-"$container")" ]; then
+      if [ ! "$(COMPOSE_PROJECT_NAME=ci-go-sample docker-compose ps -q "$container")" ]; then
         echo "The ${container} container is not running, but it should be."
         COMPOSE_PROJECT_NAME=ci-go-sample docker-compose logs --tail 100 "$container"
         exit 1
