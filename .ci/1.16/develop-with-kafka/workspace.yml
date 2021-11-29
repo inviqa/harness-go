@@ -9,6 +9,3 @@ attributes:
   go:
     module_name: ci-go-sample
     version: 1.16
-  services:
-    kafka:
-      version: 2.13-2.7.0
