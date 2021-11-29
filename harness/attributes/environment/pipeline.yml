@@ -1,5 +1,5 @@
 attributes:
-  namespace: =exec("git log -n 1 --pretty=format:'%H'")
+  namespace: =@('workspace.name') ~ '-' ~ exec("git rev-parse --short HEAD")
   app:
     version: =exec("git log -n 1 --pretty=format:'%H'")
     build: production
