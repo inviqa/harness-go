@@ -40,6 +40,10 @@ attributes.default:
     image: bitnami/zookeeper
     version: latest
 
+  kafka-outbox-relay:
+    image: quay.io/inviqa_images/kafka-outbox-relay
+    version: v1
+
   docker:
     config: null # deprecated
     # If using gitops helm chart repositories, it's recommended to put this configuration

@@ -1,0 +1,13 @@
+  kafka-outbox-relay:
+    image: {{ @('kafka-outbox-relay.image') }}:{{ kafka-outbox-relay.version }}
+    environment:
+      DB_HOST: {{ @('database.host') }}
+      DB_PORT: {{ @('database.port') }}
+      DB_USER: {{ @('database.user') }}
+      DB_PASS: {{ @('database.pass') }}
+      DB_NAME: {{ @('database.name') }}
+      DB_DRIVER: "postgres"
+      LOG_LEVEL: "info"
+      POLLING_DISABLED: "true"
+    networks:
+      private: {}
