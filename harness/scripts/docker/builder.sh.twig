@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function builder_name() {
+  local namespace="{{ @('app.namespace') }}"
+  if [[ $namespace == "" ]]; then
+    namespace="unknown"
+  fi
+
+  echo "$namespace-{{ @('app.version') }}"
+}

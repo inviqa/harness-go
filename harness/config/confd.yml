@@ -14,6 +14,7 @@ confd('harness:/'):
   - { src: harness/scripts/mod_init.sh }
   - { src: harness/scripts/destroy.sh }
   - { src: harness/scripts/init.sh }
+  - { src: harness/scripts/docker/builder.sh }
   - { src: harness/scripts/docker/build-prod.sh }
   - { src: harness/scripts/docker/publish.sh }
   - { src: harness/scripts/integration/run.sh }

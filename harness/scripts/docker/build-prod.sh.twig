@@ -2,10 +2,12 @@
 
 set -o pipefail
 
+source ./.my127ws/harness/scripts/docker/builder.sh
+
 function docker_build_prod {
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
-    local builder="{{ @('app.version') }}-{{ @('app.namespace') }}"
-    docker buildx create --name ${builder}
+    local builder="$(builder_name)"
+    run docker buildx create --name ${builder}
     passthru docker buildx bake --file docker-bake.hcl --builder ${builder}
   else
     passthru docker build --tag {{ @('docker.repository') }}:{{ @('docker.tagPrefix') }}{{ @('app.version') }} \
