@@ -1,0 +1,10 @@
+  kafka-outbox-relay:
+    image: {{ @('services.kafka-outbox-relay.image') }}:{{ @('services.kafka-outbox-relay.version') }}
+    labels:
+      - traefik.enable=false
+    environment: {{ to_nice_yaml(deep_merge([
+        @('services.kafka-outbox-relay.environment'),
+        @('services.kafka-outbox-relay.environment_secrets')
+      ]), 2, 6) | raw }}
+    networks:
+      private: {}

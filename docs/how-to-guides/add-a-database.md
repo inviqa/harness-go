@@ -36,6 +36,7 @@ The below guide shows how to add the MySQL database to your application. In your
    attributes:
      # ...
      database:
+       platform: "mysql"
        name: my_database
        host: mysql
        user: db-user

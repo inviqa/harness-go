@@ -4,7 +4,7 @@ Sometimes we may want to write a Go service that consumes data from Kafka. In a 
 
 ## Kafka versions supported
 
-You can configure your `kafka.version` attribute (see below) to use one of the available image tags on the [`wurstmeister/kafka`] image.
+You can configure your `kafka.version` attribute (see below) to use one of the available image tags on the [`bitnami/kafka`] image.
 
 The format for the tags on this image is `X-Y`, where version `X` is the Scala version, and `Y` is the Kafka version.
 
@@ -15,6 +15,8 @@ The default version used by this harness, if the implementing service does not d
 When you run Kafka, you usually run it in a cluster made up of several nodes. Zookeeper is needed as an orchestrator for these nodes, a place they can store their metadata such as topics, partitions and other configuration.
 
 In local development environments, we only run a single Kafka node, but we still need Zookeeper. When you enable Kafka as detailed below, Zookeeper will automatically be configured as well.
+
+You can configure your `zookeeper.version` attribute to use one of the available image tags on the [`bitnami/zookeeper`] image. It always defaults to `latest`.
 
 >_NOTE: In the future, it may well be the case that Kafka [no longer needs Zookeeper](https://www.confluent.io/blog/removing-zookeeper-dependency-in-kafka/)._
 
@@ -59,5 +61,6 @@ Now that you have configured the harness correctly, you just need to do a `ws re
 [CQRS]: https://microservices.io/patterns/data/cqrs.html
 [domain event]: https://microservices.io/patterns/data/domain-event.html
 [event sourcing]: https://microservices.io/patterns/data/event-sourcing.html
-[`wurstmeister/kafka`]: https://hub.docker.com/r/wurstmeister/kafka/tags
+[`bitnami/kafka`]: https://hub.docker.com/r/bitnami/kafka/tags
+[`bitnami/zookeeper`]: https://hub.docker.com/r/bitnami/zookeeper/tags
 [`github.com/Shopify/sarama`]: https://github.com/Shopify/sarama
