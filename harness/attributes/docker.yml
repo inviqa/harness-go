@@ -39,7 +39,7 @@ attributes:
         DB_PORT: = @('database.port')
         DB_USER: = @('database.user')
         DB_NAME: = @('database.name')
-        DB_DRIVER: @('services.kafka-outbox-relay.db_driver')
+        DB_DRIVER: = @('services.kafka-outbox-relay.db_driver')
         LOG_LEVEL: "info"
         POLLING_DISABLED: "true"
       environment_secrets:
