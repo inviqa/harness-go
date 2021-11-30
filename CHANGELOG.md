@@ -1,5 +1,39 @@
 # Changelog
 
+## [0.13.0](https://github.com/inviqa/harness-go/tree/0.13.0) (2021-11-30)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.12.1...0.13.0)
+
+**Implemented enhancements:**
+
+- Consider switching to bitnami/kafka and bitnami/zookeeper images [\#171](https://github.com/inviqa/harness-go/issues/171)
+- Make it easy to use https://github.com/inviqa/kafka-outbox-relay in local stack [\#167](https://github.com/inviqa/harness-go/issues/167)
+- Add option to copy additional arbitrary files to production image [\#175](https://github.com/inviqa/harness-go/pull/175) ([jameshalsall](https://github.com/jameshalsall))
+- Switch Kafka and Zookeeper images to bitnami variants [\#173](https://github.com/inviqa/harness-go/pull/173) ([jameshalsall](https://github.com/jameshalsall))
+
+**Fixed bugs:**
+
+- ws go fmt check passes when there are syntax errors [\#133](https://github.com/inviqa/harness-go/issues/133)
+- Provide GOOS/GOARCH by default [\#192](https://github.com/inviqa/harness-go/pull/192) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Bump docker-compose.yml version to 3.7 [\#177](https://github.com/inviqa/harness-go/pull/177) ([jameshalsall](https://github.com/jameshalsall))
+- Wait longer in CI for containers to start before verifying [\#174](https://github.com/inviqa/harness-go/pull/174) ([jameshalsall](https://github.com/jameshalsall))
+- Correctly detect CI env in 'external-images pull' command [\#172](https://github.com/inviqa/harness-go/pull/172) ([jameshalsall](https://github.com/jameshalsall))
+
+**Closed issues:**
+
+- Add support for gRPC health probe [\#168](https://github.com/inviqa/harness-go/issues/168)
+
+**Merged pull requests:**
+
+- Move Kafka and Zookeeper config to services attribute [\#191](https://github.com/inviqa/harness-go/pull/191) ([jameshalsall](https://github.com/jameshalsall))
+- Make it easier to use inviqa/kafka-outbox-relay [\#187](https://github.com/inviqa/harness-go/pull/187) ([jameshalsall](https://github.com/jameshalsall))
+- Use workspace name and short git ref for namespace attribute [\#185](https://github.com/inviqa/harness-go/pull/185) ([jameshalsall](https://github.com/jameshalsall))
+- Use mysql/mysql-server image for arm64 architecture [\#184](https://github.com/inviqa/harness-go/pull/184) ([jameshalsall](https://github.com/jameshalsall))
+- Simplify Jenkinsfile for docker buildkit usage [\#181](https://github.com/inviqa/harness-go/pull/181) ([jameshalsall](https://github.com/jameshalsall))
+- Hide multiplatform builds behind an experimental attribute [\#178](https://github.com/inviqa/harness-go/pull/178) ([jameshalsall](https://github.com/jameshalsall))
+- Support TLS in the harness [\#176](https://github.com/inviqa/harness-go/pull/176) ([dantleech](https://github.com/dantleech))
+- Make it easier to do cross-platform builds in pipelines [\#170](https://github.com/inviqa/harness-go/pull/170) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.12.1](https://github.com/inviqa/harness-go/tree/0.12.1) (2021-10-28)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.12.0...0.12.1)
@@ -315,13 +349,13 @@
 
 **Merged pull requests:**
 
-- Add missing "." from directory [\#18](https://github.com/inviqa/harness-go/pull/18) ([richardmiller](https://github.com/richardmiller))
+- Add missing "." from directory [\#18](https://github.com/inviqa/harness-go/pull/18) ([richardmiller-zz](https://github.com/richardmiller-zz))
 - Test harness and allow projects not using go modules [\#17](https://github.com/inviqa/harness-go/pull/17) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Support defining the k8s service name and protocol [\#16](https://github.com/inviqa/harness-go/pull/16) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - HOTFIX: remove type from ingress templates [\#13](https://github.com/inviqa/harness-go/pull/13) ([sgrichards](https://github.com/sgrichards))
 - Add a way to ensure external networks exist prior to enabling [\#12](https://github.com/inviqa/harness-go/pull/12) ([andytson-inviqa](https://github.com/andytson-inviqa))
 - Reverse the log level configuration change as it's already configurable [\#11](https://github.com/inviqa/harness-go/pull/11) ([andytson-inviqa](https://github.com/andytson-inviqa))
-- Add missing pipe to rebuild command definition [\#10](https://github.com/inviqa/harness-go/pull/10) ([richardmiller](https://github.com/richardmiller))
+- Add missing pipe to rebuild command definition [\#10](https://github.com/inviqa/harness-go/pull/10) ([richardmiller-zz](https://github.com/richardmiller-zz))
 - Make LOG\_LEVEL configurable, and vary by local/pipeline [\#8](https://github.com/inviqa/harness-go/pull/8) ([jameshalsall](https://github.com/jameshalsall))
 - BUG Fix helm persistence values [\#7](https://github.com/inviqa/harness-go/pull/7) ([jameshalsall](https://github.com/jameshalsall))
 - Add build-prod step for building production image [\#6](https://github.com/inviqa/harness-go/pull/6) ([jameshalsall](https://github.com/jameshalsall))
