@@ -4,11 +4,11 @@ Sometimes we may want to write a Go service that consumes data from Kafka. In a 
 
 ## Kafka versions supported
 
-You can configure your `kafka.version` attribute (see below) to use one of the available image tags on the [`bitnami/kafka`] image.
+You can configure your `services.kafka.tag` attribute (see below) to use one of the available image tags on the [`bitnami/kafka`] image.
 
 The format for the tags on this image is `X-Y`, where version `X` is the Scala version, and `Y` is the Kafka version.
 
-The default version used by this harness, if the implementing service does not define one, will always be `latest`. Therefore, it is recommended that you define a fixed version in the `kafka.version` attribute in your repository.
+The default version used by this harness, if the implementing service does not define one, will always be `latest`. Therefore, it is recommended that you define a fixed version in the `services.kafka.tag` attribute in your repository.
 
 ## Zookeeper
 
@@ -16,7 +16,7 @@ When you run Kafka, you usually run it in a cluster made up of several nodes. Zo
 
 In local development environments, we only run a single Kafka node, but we still need Zookeeper. When you enable Kafka as detailed below, Zookeeper will automatically be configured as well.
 
-You can configure your `zookeeper.version` attribute to use one of the available image tags on the [`bitnami/zookeeper`] image. It always defaults to `latest`.
+You can configure your `services.zookeeper.tag` attribute to use one of the available image tags on the [`bitnami/zookeeper`] image. It always defaults to `latest`.
 
 >_NOTE: In the future, it may well be the case that Kafka [no longer needs Zookeeper](https://www.confluent.io/blog/removing-zookeeper-dependency-in-kafka/)._
 
@@ -36,12 +36,15 @@ The below guide shows how to add Kafka and Zookeeper to your application. In you
      app:
        services: [kafka]
    ```
-1. Set the `kafka.version` attribute with your desired Kafka version from the [`wurstmeister/kafka`] tags list:
+1. Set the `services.kafka.tag` and `services.zookeeper.tag` attributes with your desired versions from the [`bitnami/kafka`] tags list:
    ```
    attributes:
      # ...
-     kafka:
-       version: "2.13-2.7.0"
+     services:
+       kafka:
+         tag: "3.0.0"
+       zookeeper:
+         tag: "3.5.9"
    ```
 1. Configure your app container's environment variables so that it knows how to connect to Kafka:
    ```

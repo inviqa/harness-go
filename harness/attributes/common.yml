@@ -32,14 +32,6 @@ attributes.default:
     name: app
     root_pass: DV6RdNY3QcFsBk7V
 
-  kafka:
-    image: bitnami/kafka
-    host: "kafka:29092"
-    version: latest
-  zookeeper:
-    image: bitnami/zookeeper
-    version: latest
-
   docker:
     config: null # deprecated
     # If using gitops helm chart repositories, it's recommended to put this configuration

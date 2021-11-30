@@ -31,9 +31,8 @@ attributes:
       resources:
         memory: 512Mi
     kafka-outbox-relay:
-      image: quay.io/inviqa_images/kafka-outbox-relay
-      version: v1
-      db_driver: "postgres" # supported values: "postgres", "mysql"
+      repository: quay.io/inviqa_images/kafka-outbox-relay
+      tag: v1
       environment:
         DB_HOST: = @('database.host')
         DB_PORT: = @('database.port')
@@ -44,6 +43,13 @@ attributes:
         POLLING_DISABLED: "true"
       environment_secrets:
         DB_PASS: = @('database.pass')
+    kafka:
+      repository: bitnami/kafka
+      host: "kafka:29092"
+      tag: latest
+    zookeeper:
+      repository: bitnami/zookeeper
+      tag: latest
 
   pipeline:
     publish:

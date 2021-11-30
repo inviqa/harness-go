@@ -1,5 +1,5 @@
   kafka:
-    image: {{ @('kafka.image') }}:{{ @('kafka.version') }}
+    image: {{ @('services.kafka.repository') }}:{{ @('services.kafka.tag') }}
     ports:
     - 9092
     environment:
@@ -15,7 +15,7 @@
       - zookeeper
 
   zookeeper:
-    image: {{ @('zookeeper.image') }}:{{ @('zookeeper.version') }}
+    image: {{ @('services.zookeeper.repository') }}:{{ @('services.zookeeper.tag') }}
     environment:
       ALLOW_ANONYMOUS_LOGIN: "yes"
       ZOO_SERVERS: zk-node-1:2888:3888::1
