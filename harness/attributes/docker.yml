@@ -31,7 +31,7 @@ attributes:
       resources:
         memory: 512Mi
     kafka-outbox-relay:
-      image: quay.io/inviqa_images/kafka-outbox-relay
+      repository: quay.io/inviqa_images/kafka-outbox-relay
       version: v1
       environment:
         DB_HOST: = @('database.host')
@@ -44,11 +44,11 @@ attributes:
       environment_secrets:
         DB_PASS: = @('database.pass')
     kafka:
-      image: bitnami/kafka
+      repository: bitnami/kafka
       host: "kafka:29092"
       version: latest
     zookeeper:
-      image: bitnami/zookeeper
+      repository: bitnami/zookeeper
       version: latest
 
   pipeline:
