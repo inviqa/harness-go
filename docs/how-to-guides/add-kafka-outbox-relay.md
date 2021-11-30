@@ -24,12 +24,12 @@ In order to add the outbox relay, you need to specify a few attributes in your `
      database:
        platform: "postgres" # can also be "mysql"
    ```
-4. Set the `services.kafka-outbox-relay.version` attribute. This is optional, as it defaults to `v1`.
+4. Set the `services.kafka-outbox-relay.tag` attribute. This is optional, as it defaults to `v1`.
    ```yaml
    attributes:
      services:
        kafka-outbox-relay:
-         version: v1
+         tag: v1
    ```
 5. You will now need to configure your machine user so that the image can be pulled from [quay.io]
    ```yaml
