@@ -53,7 +53,7 @@ The below guide shows how to add Kafka and Zookeeper to your application. In you
      services:
        app:
          environment:
-           KAFKA_HOST: = @('kafka.host')
+           KAFKA_HOST: = @('services.kafka.host')
    ```
 
 Now that you have configured the harness correctly, you just need to do a `ws rebuild`. Your local environment should now have running `kafka` and `zookeeper` containers, alongside your `app` container (check this with `docker-compose ps`).
