@@ -54,56 +54,56 @@ command('console'): |
   #!php
   $ws->run('app');
 
-command('go docker generate'):
+command('go generate'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go generate
 
-command('go docker test'):
+command('go test'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go test ./...
 
-command('go docker vet'):
+command('go vet'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go vet -tags=benchmarks ./...
 
-command('go docker gocyclo'):
+command('go gocyclo'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper gocyclo
 
-command('go docker gosec'):
+command('go gosec'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper gosec
 
-command('go docker ineffassign'):
+command('go ineffassign'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app helper ineffassign
 
-command('go docker fmt check'):
+command('go fmt check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru test -z "$(docker-compose exec -T app helper fmt:check)"
 
-command('go docker mod check'):
+command('go mod check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
@@ -113,14 +113,29 @@ command('go docker mod check'):
 command('go test coverage'):
   exec: |
     #!bash(workspace:/)|@
-    go test -coverprofile=cp.out ./... && go tool cover -html=cp.out
+    passthru docker-compose exec -T app go test -coverprofile=cp.out ./...
+    go tool cover -html=cp.out
 
-command('go test integration docker'):
+command('go test integration'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/
+
+# todo: is this host version required?
+command('go test integration host'):
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/integration/run.sh
+
+command('go test integration host <test-name>'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+    TEST_NAME: = input.argument('test-name')
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
 
 command('go test integration <test-name>'):
   env:
@@ -128,27 +143,22 @@ command('go test integration <test-name>'):
     TEST_NAME: = input.argument('test-name')
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/integration/run-one.sh ${TEST_NAME}
-
-command('go test integration'):
-  exec: |
-    #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/integration/run.sh
+    passthru docker-compose exec -T app .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
 
 command('go bench compare'):
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/bench/compare.sh
+    passthru docker-compose exec -T app .my127ws/harness/scripts/bench/compare.sh
 
 command('go bench report'):
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/bench/report.sh
+    passthru docker-compose exec -T app .my127ws/harness/scripts/bench/report.sh
 
 command('go bench current'):
   exec: |
     #!bash(workspace:/)|@
-    go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
+    passthru docker-compose exec -T app go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
 
 command('go bench'):
   exec: |
@@ -158,14 +168,15 @@ command('go bench'):
 command('go fmt'):
   exec: |
     #!bash(workspace:/)|@
-    @('go.formatter') -w -l .
+    passthru docker-compose exec -T app @('go.formatter') -w -l .
 
 command('recompile'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru ws harness prepare && docker-compose up -d --build app
+    passthru docker-compose exec -T app go build -o /go/bin/app .
+    passthru docker-compose restart app
 
 command('use prod'):
   env:
@@ -174,7 +185,7 @@ command('use prod'):
     #!bash(workspace:/)|@
     passthru ws harness prepare
     passthru ws build-prod
-    passthru && docker-compose up -d app
+    passthru docker-compose up -d app
 
 # borrowed from https://github.com/inviqa/harness-base-php/blob/1.2.x/src/_base/harness/config/commands.yml#L179
 command('set <attribute> <value>'):
