@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.1](https://github.com/inviqa/harness-go/tree/0.13.1) (2021-12-01)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.13.0...0.13.1)
+
+**Fixed bugs:**
+
+- Fix the github token inclusion [\#198](https://github.com/inviqa/harness-go/pull/198) ([dantleech](https://github.com/dantleech))
+
 ## [0.13.0](https://github.com/inviqa/harness-go/tree/0.13.0) (2021-11-30)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.12.1...0.13.0)
