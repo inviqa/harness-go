@@ -19,6 +19,13 @@ attributes:
         MYSQL_ROOT_PASSWORD: = @('database.root_pass')
       resources:
         memory: 512Mi
+    pact-cli:
+      repository: pactfoundation/pact-cli
+      tag: 0.50.0.18
+      environment:
+        PACT_BROKER_BASE_URL: ~
+      environment_secrets:
+        PACT_BROKER_TOKEN: ~
     postgres:
       image: = 'postgres:' ~ @('services.postgres.version')
       version: 9.6

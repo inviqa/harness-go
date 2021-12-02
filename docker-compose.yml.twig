@@ -15,8 +15,13 @@ networks:
   shared:
     external:
       name: my127ws
-{% if dockersync %}
+{% if dockersync or @('pact.enabled') %}
 volumes:
+{% if @('pact.enabled') %}
+  pacts: ~
+{% endif %}
+{% if dockersync %}
   {{ @('workspace.name') }}-sync:
     external: true
+{% endif %}
 {% endif %}

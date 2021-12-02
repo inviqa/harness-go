@@ -204,3 +204,12 @@ command('get <attribute>'):
   exec: |
     #!bash(workspace:/)|@
     echo "$VALUE"
+
+command('pact publish <tag> <version>'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+    PACT_VERSION_TAG: = input.argument('tag')
+    PACT_VERSION: = input.argument('version')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T pact-cli pact-broker publish /app/pacts -a "${PACT_VERSION}" -t "${PACT_VERSION_TAG}"

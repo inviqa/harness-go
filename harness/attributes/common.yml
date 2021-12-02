@@ -111,6 +111,10 @@ attributes.default:
     docker:
       buildkit:
         enabled: true
+  
+  pact:
+    enabled: false
+    app_pact_path: /app/integration/pacts
 
   # these settings are only relevant when the respective service is enabled in
   # app.services

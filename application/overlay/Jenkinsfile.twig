@@ -29,6 +29,20 @@ pipeline {
                 sh 'ws build-prod'
             }
         }
+{% if @('pact.enabled') %}
+        stage('Pact PR Publish') {
+            when {
+                not {
+                    anyOf {
+                        branch '{{ @('git.main_branch') }}'
+                    }
+                }
+            }
+            steps {
+                sh 'ws pact publish "${BRANCH_NAME}" "get git ref"'
+            }
+        }
+{% endif %}
 {% if @('pipeline.publish.enabled') == 'yes' %}
         stage('Publish') {
             when {
@@ -37,7 +51,13 @@ pipeline {
                     branch '{{ @('git.main_branch') }}'
                 }
             }
-            steps { sh 'ws app publish' }
+            parallel {
+                stage("Docker Image") { steps { sh 'ws app publish' } }
+{% if @('pact.enabled') %}
+                stage("Pact") { steps { sh 'ws pact publish "latest" "get git ref"' } }
+{% endif %}
+            }
+           
         }
 {% endif %}
 {% if @('pipeline.preview.enabled') == 'yes' %}
