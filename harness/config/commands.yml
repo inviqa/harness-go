@@ -175,6 +175,7 @@ command('recompile'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
+    passthru docker-compose exec -T app go mod download
     passthru docker-compose exec -T app go build -o /go/bin/app .
     passthru docker-compose restart app
 
