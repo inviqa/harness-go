@@ -163,6 +163,8 @@ command('go fmt'):
 command('recompile'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
+    COMPOSE_DOCKER_CLI_BUILD: "1"
+    DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
     passthru ws harness prepare && docker-compose up -d --build app
