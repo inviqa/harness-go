@@ -1,0 +1,2 @@
+CREATE DATABASE `{{ @('database.name') }}_test`;
+GRANT ALL PRIVILEGES ON `{{ @('database.name') }}_test`.* TO `{{ @('database.user') }}`;

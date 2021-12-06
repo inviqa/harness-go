@@ -1,5 +1,6 @@
   mysql:
-    image: {{ @('services.mysql.image') }}
+    build:
+      context: .my127ws/docker/image/mysql
     labels:
       - traefik.enable=false
     environment: {{ to_nice_yaml(deep_merge([
