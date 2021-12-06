@@ -64,6 +64,12 @@ Now that we have configured the harness correctly, we just need to do a `ws rebu
 
 >_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database. Also, remember to import the correct Go module that supports your database driver, see the [recommended modules](#recommended-modules)._
 
+## Testing
+
+When writing integration tests, you will likely want to use an isolated database so that the main application does not interfere with your test data (if it is running in the background). If you are using a Postgres database, this is automatically created for you (with an `_test` suffix on your main database name). 
+
+>_NOTE: You will need to run migrations on the test database at the start of your integration test suite, just like you do in the main application._
+
 ## Example code
 
 ### Implementing connection retries to your database
