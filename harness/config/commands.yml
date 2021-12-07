@@ -116,14 +116,6 @@ command('go test coverage'):
     passthru docker-compose exec -T app go test -coverprofile=cp.out ./...
     go tool cover -html=cp.out
 
-command('go test integration'):
-  env:
-    COMPOSE_PROJECT_NAME: = @('namespace')
-  exec: |
-    #!bash(workspace:/)|@
-    passthru docker-compose exec -T -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/
-
-# todo: is this host version required?
 command('go test integration host'):
   exec: |
     #!bash(workspace:/)|@
@@ -137,6 +129,13 @@ command('go test integration host <test-name>'):
     #!bash(workspace:/)|@
     source .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
 
+command('go test integration'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec -T -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/
+
 command('go test integration <test-name>'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
@@ -146,26 +145,36 @@ command('go test integration <test-name>'):
     passthru docker-compose exec -T app .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
 
 command('go bench compare'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app .my127ws/harness/scripts/bench/compare.sh
 
 command('go bench report'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app .my127ws/harness/scripts/bench/report.sh
 
 command('go bench current'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
 
 command('go bench'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     ws go bench current
 
 command('go fmt'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     passthru docker-compose exec -T app @('go.formatter') -w -l .
