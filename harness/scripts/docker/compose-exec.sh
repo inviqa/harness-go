@@ -4,8 +4,7 @@ function compose_exec()
 {
   local noTtyFlag=""
 
-  tty -s;
-  if [ "0" != "$?" ]; then
+  if [ ! -t 1 ]; then
     noTtyFlag="-T"
   fi
 

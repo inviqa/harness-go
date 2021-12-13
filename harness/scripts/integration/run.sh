@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-integration_run() {
+function integration_run() {
   local noTtyFlag=""
   local testFlag=""
 
@@ -8,11 +8,11 @@ integration_run() {
     testFlag="-run $1"
   fi
 
-  tty -s;
-  if [ "0" != "$?" ]; then
+  if [ ! -t 1 ]; then
     noTtyFlag="-T"
   fi
 
+  echo "docker-compose exec $noTtyFlag -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/ $testFlag"
   docker-compose exec $noTtyFlag -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/ $testFlag
 }
 
