@@ -2,6 +2,11 @@
 
 This document highlights breaking changes in releases that will require some migration effort in your project. As we move towards a `1.0.0` release these will be restricted to major upgrades only, but currently, whilst the API is still being fleshed out in the `0.x` releases, they may be more frequent.
 
+## `0.13.x` -> `0.14.0`
+
+* The default development workflow has now changed from host to `app` container. Before, the `app` container was still the default way to run your app, but all `ws go ...` commands executed on the host by default. These now run in the `app` container instead.
+* The `ws recompile` command now does an in-place recompile, rather than rebuilding the whole `app` container.
+
 ## `0.12.x` -> `0.13.0`
 
 * The Dockerfiles have been restructured to make multi-platform images easier. You may need to restructure your own template overrides if you use a custom `Dockerfile` or `Dockerfile.prod`, as they have now been moved, see [here](https://github.com/inviqa/harness-go/tree/master/docker/image/app/include).
