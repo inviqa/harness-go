@@ -17,7 +17,6 @@ confd('harness:/'):
   - { src: harness/scripts/docker/build-prod.sh }
   - { src: harness/scripts/docker/publish.sh }
   - { src: harness/scripts/integration/host-run.sh }
-  - { src: harness/scripts/integration/host-run-one.sh }
   - { src: helm/app/Chart.yaml }
   - { src: helm/app/values.yaml }
   - { src: helm/app/values-production.yaml }
