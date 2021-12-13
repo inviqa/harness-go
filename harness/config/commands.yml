@@ -212,4 +212,5 @@ command('pact publish <tag> <version>'):
     PACT_VERSION: = input.argument('version')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec -T pact-cli pact-broker publish /app/pacts -a "${PACT_VERSION}" -t "${PACT_VERSION_TAG}"
+    # todo: use exec script when app volume mount changes are merged
+    passthru docker-compose exec -T app pact-broker publish @('pact.app_path') -a "${PACT_VERSION}" -t "${PACT_VERSION_TAG}"

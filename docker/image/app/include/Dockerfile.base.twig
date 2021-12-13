@@ -14,7 +14,12 @@ RUN apt-get update \
 {% for package in @('app.packages') %}
      {{ package|raw }} \
 {% endfor %}
-&& rm -rf /var/lib/apt/lists/*
+{% if @('pact.enabled') %}
+     ruby \
+     ruby-dev \
+     build-essential \
+{% endif %}
+&& apt-get auto-remove -qq -y && rm -rf /var/lib/apt/lists/*
 
 COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin
@@ -33,6 +38,13 @@ RUN git config --global "{{ config.key }}" "{{ config.value }}"
 RUN [ -z "${SSH_DEPLOY_KEY:-}" ] || bash /ssh-keys.sh
 
 WORKDIR /app
+
+{% if @('pact.enabled') %}
+RUN gem install --no-document pact-provider-verifier pact_broker-client
+RUN apt-get remove -qq -y ruby-dev build-essential \
+    && apt-get auto-remove -qq -y \
+    && apt-get clean
+{% endif %}
 
 RUN helper modules:before
 

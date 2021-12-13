@@ -39,7 +39,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'ws pact publish "${BRANCH_NAME}" "get git ref"'
+                sh 'ws pact publish "${BRANCH_NAME}" "${git rev-parse --short HEAD}"'
             }
         }
 {% endif %}
@@ -54,10 +54,9 @@ pipeline {
             parallel {
                 stage("Docker Image") { steps { sh 'ws app publish' } }
 {% if @('pact.enabled') %}
-                stage("Pact") { steps { sh 'ws pact publish "latest" "get git ref"' } }
+                stage("Pact") { steps { sh 'ws pact publish "latest" "${git rev-parse --short HEAD}"' } }
 {% endif %}
             }
-           
         }
 {% endif %}
 {% if @('pipeline.preview.enabled') == 'yes' %}

@@ -40,12 +40,9 @@
         @('services.app.environment'),
         @('services.app.environment_secrets'),
      ]), 2, 6) | raw }}
-{% if @('app.mount_volume') or @('pact.enabled') %}
+{% if @('app.mount_volume') %}
     volumes:
 {% if @('app.mount_volume') %}
       - .:/app
-{% endif %}
-{% if @('pact.enabled') %}
-      - pacts:@('pact.app_pact_path')
 {% endif %}
 {% endif %}
