@@ -59,67 +59,67 @@ command('go generate'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go generate
+    .my127ws/harness/scripts/docker/compose-exec.sh go generate
 
 command('go test'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go test ./...
+    .my127ws/harness/scripts/docker/compose-exec.sh go test ./...
 
 command('go vet'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go vet -tags=benchmarks ./...
+    .my127ws/harness/scripts/docker/compose-exec.sh go vet -tags=benchmarks ./...
 
 command('go gocyclo'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app helper gocyclo
+    .my127ws/harness/scripts/docker/compose-exec.sh helper gocyclo
 
 command('go gosec'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app helper gosec
+    .my127ws/harness/scripts/docker/compose-exec.sh helper gosec
 
 command('go ineffassign'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app helper ineffassign
+    .my127ws/harness/scripts/docker/compose-exec.sh helper ineffassign
 
 command('go fmt check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru test -z "$(docker-compose exec app helper fmt:check)"
+    passthru test -z "$(.my127ws/harness/scripts/docker/compose-exec.sh helper fmt:check)"
 
 command('go mod check'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app helper modules:check
+    .my127ws/harness/scripts/docker/compose-exec.sh helper modules:check
 
 command('go test coverage'):
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go test -coverprofile=cp.out ./...
+    .my127ws/harness/scripts/docker/compose-exec.sh go test -coverprofile=cp.out ./...
     go tool cover -html=cp.out
 
 command('go test integration host'):
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/integration/run.sh
+    source .my127ws/harness/scripts/integration/host-run.sh
 
 command('go test integration host <test-name>'):
   env:
@@ -127,14 +127,14 @@ command('go test integration host <test-name>'):
     TEST_NAME: = input.argument('test-name')
   exec: |
     #!bash(workspace:/)|@
-    source .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
+    source .my127ws/harness/scripts/integration/host-run.sh "${TEST_NAME}"
 
 command('go test integration'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec -e GO_TEST_MODE=docker -e LOG_LEVEL=error app go test -count=1 -v --tags=integration ./integration/
+    source .my127ws/harness/scripts/integration/run.sh
 
 command('go test integration <test-name>'):
   env:
@@ -142,28 +142,28 @@ command('go test integration <test-name>'):
     TEST_NAME: = input.argument('test-name')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app .my127ws/harness/scripts/integration/run-one.sh "${TEST_NAME}"
+    source .my127ws/harness/scripts/integration/run.sh "${TEST_NAME}"
 
 command('go bench compare'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app .my127ws/harness/scripts/bench/compare.sh
+    .my127ws/harness/scripts/docker/compose-exec.sh .my127ws/harness/scripts/bench/compare.sh
 
 command('go bench report'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app .my127ws/harness/scripts/bench/report.sh
+    .my127ws/harness/scripts/docker/compose-exec.sh .my127ws/harness/scripts/bench/report.sh
 
 command('go bench current'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
+    .my127ws/harness/scripts/docker/compose-exec.sh go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
 
 command('go bench'):
   env:
@@ -177,15 +177,15 @@ command('go fmt'):
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app @('go.formatter') -w -l .
+    .my127ws/harness/scripts/docker/compose-exec.sh @('go.formatter') -w -l .
 
 command('recompile'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    passthru docker-compose exec app go mod download
-    passthru docker-compose exec app go build -o /go/bin/app .
+    .my127ws/harness/scripts/docker/compose-exec.sh go mod download
+    .my127ws/harness/scripts/docker/compose-exec.sh go build -o /go/bin/app .
     passthru docker-compose restart app
 
 command('use prod'):
