@@ -7,7 +7,7 @@ This document highlights breaking changes in releases that will require some mig
 * The default development workflow has now changed from host to `app` container. Before, the `app` container was still the default way to run your app, but all `ws go ...` commands executed on the host by default. These now run in the `app` container instead.
 * The `ws recompile` command now does an in-place recompile, rather than rebuilding the whole `app` container.
 * The `.my127ws/harness/scripts/integration/run.sh` was renamed to `.my127ws/harness/scripts/integration/host-run.sh` to reflect that it runs on the host.
-* The `.my127ws/harness/scripts/integration/host-run-one.sh` file has been removed, as `.my127ws/harness/scripts/integration/host-run.sh` can handle both single and full integration suite test execution.
+* The `.my127ws/harness/scripts/integration/run-one.sh` file has been removed, as `.my127ws/harness/scripts/integration/host-run.sh` can handle both single and full integration suite test execution.
 
 ## `0.12.x` -> `0.13.0`
 
