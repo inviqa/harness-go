@@ -66,7 +66,7 @@ Now that we have configured the harness correctly, we just need to do a `ws rebu
 
 ## Testing
 
-When writing integration tests, you will likely want to use an isolated database so that the main application does not interfere with your test data (if it is running in the background). If you are using a Postgres database, this is automatically created for you (with an `_test` suffix on your main database name). 
+When writing integration tests, you will likely want to use an isolated database so that the main application does not interfere with your test data (if it is running in the background).This is automatically created for you (with an `_test` suffix on your main database name).
 
 >_NOTE: You will need to run migrations on the test database at the start of your integration test suite, just like you do in the main application._
 

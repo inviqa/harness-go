@@ -1,0 +1,3 @@
+FROM {{ @('services.mysql.image') }}
+
+COPY create-test-database.sql /docker-entrypoint-initdb.d/
