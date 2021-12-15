@@ -11,7 +11,7 @@ attributes:
     version: 1.17
   services:
     mysql:
-      version: 8
+      version: "8.0"
   database:
     name: my_database
     host: mysql

@@ -54,7 +54,7 @@ attributes.default:
 
   git:
     config_global:
-      - key: 'url.${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'
+      - key: 'url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'
         value: https://github.com/
         when: = @('github.token') != null
         buildArgs: 
