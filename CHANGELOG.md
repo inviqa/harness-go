@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.14.0](https://github.com/inviqa/harness-go/tree/0.14.0) (2021-12-15)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.13.1...0.14.0)
+
+**Implemented enhancements:**
+
+- Add support for installing Pact tooling [\#197](https://github.com/inviqa/harness-go/issues/197)
+- Create a test database in MySQL / Postgres for integration tests [\#188](https://github.com/inviqa/harness-go/issues/188)
+- Add option to use a volume mount between app container and host [\#156](https://github.com/inviqa/harness-go/issues/156)
+
+**Fixed bugs:**
+
+- Set buildkit env vars for ws recompile [\#201](https://github.com/inviqa/harness-go/pull/201) ([jameshalsall](https://github.com/jameshalsall))
+
+**Merged pull requests:**
+
+- Automatically create a dedicated test database for MySQL [\#202](https://github.com/inviqa/harness-go/pull/202) ([jameshalsall](https://github.com/jameshalsall))
+- Add pact support [\#200](https://github.com/inviqa/harness-go/pull/200) ([andytson-inviqa](https://github.com/andytson-inviqa))
+- Automatically create a dedicated test database for Postgres [\#199](https://github.com/inviqa/harness-go/pull/199) ([jameshalsall](https://github.com/jameshalsall))
+- Use a volume mount by default to run everything in docker [\#196](https://github.com/inviqa/harness-go/pull/196) ([jameshalsall](https://github.com/jameshalsall))
+
 ## [0.13.1](https://github.com/inviqa/harness-go/tree/0.13.1) (2021-12-01)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.13.0...0.13.1)
