@@ -18,5 +18,3 @@ attributes:
     user: db-user
     pass: db-pass
     port: 3306
-  pact:
-    enabled: true
