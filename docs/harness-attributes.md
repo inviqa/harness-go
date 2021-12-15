@@ -98,7 +98,6 @@ These attributes control how the app container is built or how it behaves after 
         type: standard
         protocol: = @('app.default_port.protocol')
       bundle_certs: no
-      mount_volume: false
       additional_binaries: []
       packages: []
       copy_files: []
@@ -148,10 +147,6 @@ This allows us to enable the bundling of certificates when the production image 
 #### `bundle_timezone_info`
 
 This allows the bundling of timezone info when the production image is being built. This will not affect your local development, because we do not use the production image locally, however, when CI pipelines prepare the production image (based on [Docker's scratch image](https://hub.docker.com/_/scratch/)), we will need to set this value to `true` if we want to access timezone info. Generally, this is only required if you want to operate across multiple timezones.
-
-#### `mount_volume`
-
-When set to `true`, the `app` container will share a volume with the host operating system. Defaults to `false`, which isolates the `app` container filesystem from the host, meaning the developer will run all standard Go workflow commands on the host machine rather than in the `app` container.
 
 #### `additional_binaries`
 

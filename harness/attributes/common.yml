@@ -15,7 +15,6 @@ attributes.default:
       protocol: = @('app.default_port.protocol')
     bundle_certs: no # todo: this should be standardised as a boolean, rather than "no"/"yes"
     bundle_timezone_info: false
-    mount_volume: false
     additional_binaries: []
     packages: []
     copy_files: []
