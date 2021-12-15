@@ -1,0 +1,13 @@
+#!/bin/bash
+
+integration_run() {
+  local testFlag=""
+
+  if [ "" != "$1" ]; then
+    testFlag="-run $1"
+  fi
+
+  env -- {% for name, value in @('services.app.environment') -%}{{ escapeshellarg(name) }}={{ escapeshellarg(value) }} {% endfor %} LOG_LEVEL=error go test -count=1 -v --tags=integration ./integration/ $testFlag
+}
+
+integration_run "$1"

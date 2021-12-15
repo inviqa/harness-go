@@ -11,18 +11,18 @@ pipeline {
         }
         stage('Test')  {
             parallel {
-                stage('go mod check') { steps { sh 'ws go docker mod check' } }
-                stage('go fmt') { steps { sh 'ws go docker fmt check' } }
-                stage('go test') { steps { sh 'ws go docker test' } }
-                stage('go vet') { steps { sh 'ws go docker vet' } }
-                stage('go gocyclo') { steps { sh 'ws go docker gocyclo' } }
-                stage('go ineffassign') { steps { sh 'ws go docker ineffassign' } }
-                stage('go gosec') { steps { sh 'ws go docker gosec' } }
+                stage('go mod check') { steps { sh 'ws go mod check' } }
+                stage('go fmt') { steps { sh 'ws go fmt check' } }
+                stage('go test') { steps { sh 'ws go test' } }
+                stage('go vet') { steps { sh 'ws go vet' } }
+                stage('go gocyclo') { steps { sh 'ws go gocyclo' } }
+                stage('go ineffassign') { steps { sh 'ws go ineffassign' } }
+                stage('go gosec') { steps { sh 'ws go gosec' } }
                 stage('helm kubeval qa') { steps { sh 'ws helm kubeval qa' } }
             }
         }
         stage('Integration Tests') {
-            steps { sh 'ws go test integration docker' }
+            steps { sh 'ws go test integration' }
         }
         stage('Build for production') {
             steps {

@@ -40,7 +40,7 @@
         @('services.app.environment'),
         @('services.app.environment_secrets'),
      ]), 2, 6) | raw }}
-{% if @('app.mount_volume') %}
+{% if @('app.build') != "production" %}
     volumes:
       - .:/app
 {% endif %}
