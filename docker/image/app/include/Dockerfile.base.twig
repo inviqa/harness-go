@@ -14,7 +14,14 @@ RUN apt-get update \
 {% for package in @('app.packages') %}
      {{ package|raw }} \
 {% endfor %}
-&& rm -rf /var/lib/apt/lists/*
+{% if @('pact.enabled') %}
+     ruby \
+     ruby-dev \
+     build-essential \
+  && gem install --no-document pact-provider-verifier pact_broker-client \
+  && apt-get remove -qq -y ruby-dev build-essential \
+{% endif %}
+  && apt-get auto-remove -qq -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY .my127ws/docker/image/app/root /
 COPY .my127ws/docker/image/app/bin /usr/local/bin

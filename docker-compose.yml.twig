@@ -15,8 +15,3 @@ networks:
   shared:
     external:
       name: my127ws
-{% if dockersync %}
-volumes:
-  {{ @('workspace.name') }}-sync:
-    external: true
-{% endif %}

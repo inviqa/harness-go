@@ -111,6 +111,13 @@ attributes.default:
       buildkit:
         enabled: true
 
+  pact:
+    enabled: false
+    app_path: /app/integration/pacts
+    broker:
+      base_url: ~
+      token: ~
+
   # these settings are only relevant when the respective service is enabled in
   # app.services
   persistence:
