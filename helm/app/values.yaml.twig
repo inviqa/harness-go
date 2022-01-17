@@ -9,9 +9,8 @@ docker:
       @('pipeline.base.services')
     ]), 2, 4) | raw }}
 
-service:
-  mysql: {{ ("mysql" in @('app.services')) ? 'true' : 'false' }}
-  postgres: {{ ("postgres" in @('app.services')) ? 'true' : 'false' }}
+# deprecated, this is replaced with docker.services.*.enabled and will be removed in a future release
+service: {}
 
 persistence: {{ to_nice_yaml(@('persistence'), 2, 2) | raw }}
 

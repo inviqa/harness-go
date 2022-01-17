@@ -4,6 +4,7 @@ attributes.default:
     src_path: .
     module_path: = @('app.src_path')
     health_port: 80
+    # deprecated, this is replaced with services.*.enabled and will be removed in a future release
     services: []
     default_port:
       name: http

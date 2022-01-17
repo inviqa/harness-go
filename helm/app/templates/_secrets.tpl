@@ -1,5 +1,5 @@
 {{- define "service.environment.secret" }}
-{{ if .service.environment_secrets }}
+{{ if and .service.enabled .service.environment_secrets }}
 {{ if .Values.feature.sealed_secrets }}
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret

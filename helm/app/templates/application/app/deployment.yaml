@@ -1,4 +1,5 @@
 {{- with .Values.docker.services.app }}
+{{- if .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -44,4 +45,5 @@ spec:
 {{- end }}
       restartPolicy: Always
 status: {}
+{{- end }}
 {{- end }}

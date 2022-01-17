@@ -6,7 +6,7 @@
 {{- end -}}
 {{- $service = mergeOverwrite $extended $service -}}
 {{- end -}}
-{{- if and (not (hasPrefix "." $serviceName)) $service.jobs -}}
+{{- if and (not (hasPrefix "." $serviceName)) $service.enabled $service.jobs -}}
 {{- range $jobName, $jobConfig := $service.jobs }}
 ---
 apiVersion: batch/v1

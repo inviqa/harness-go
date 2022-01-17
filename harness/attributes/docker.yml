@@ -1,6 +1,7 @@
 attributes:
   services:
     app:
+      enabled: true
       image: = @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version')
       environment:
         LOG_LEVEL: debug
@@ -8,6 +9,7 @@ attributes:
       resources:
         memory: 100Mi
     mysql:
+      enabled: "= 'mysql' in @('app.services')" 
       # prefer native platform mysql image. _/mysql doesn't have arm64 images
       image: "= (host_architecture() == 'amd64' ? 'mysql:' : 'mysql/mysql-server:') ~ @('services.mysql.version')"
       version: "8.0"
@@ -20,6 +22,7 @@ attributes:
       resources:
         memory: 512Mi
     postgres:
+      enabled: "= 'postgres' in @('app.services')" 
       image: = 'postgres:' ~ @('services.postgres.version')
       version: 9.6
       environment:
@@ -31,6 +34,7 @@ attributes:
       resources:
         memory: 512Mi
     kafka-outbox-relay:
+      enabled: "= 'kafka-outbox-relay' in @('app.services')" 
       repository: quay.io/inviqa_images/kafka-outbox-relay
       tag: v1
       environment:
@@ -44,10 +48,12 @@ attributes:
       environment_secrets:
         DB_PASS: = @('database.pass')
     kafka:
+      enabled: "= 'kafka' in @('app.services')" 
       repository: bitnami/kafka
       host: "kafka:29092"
       tag: latest
     zookeeper:
+      enabled: "= 'zookeeper' in @('app.services')" 
       repository: bitnami/zookeeper
       tag: latest
 
