@@ -6,6 +6,7 @@ This document highlights breaking changes in releases that will require some mig
 
 * app.services in workspace.yml is deprecated and replaced with services.*.enabled. It will still continue to function until obsoleted
 * .Values.service in helm values is deprecated and replaced with .Values.docker.services.*.enabled. It will still continue to function until obsoleted.
+* _twig/docker-compose.yml/application.yml.twig moved to _twig/docker-compose.yml/service/app.yml.twig, to match the same features as other services, enabled by default
 
 ## `0.13.x` -> `0.14.0`
 
