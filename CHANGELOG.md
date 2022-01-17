@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.15.0](https://github.com/inviqa/harness-go/tree/0.15.0) (2022-01-17)
+
+[Full Changelog](https://github.com/inviqa/harness-go/compare/0.14.0...0.15.0)
+
+**Implemented enhancements:**
+* Add horizontal pod autoscaler and pod disruption budgets by @andytson-inviqa in https://github.com/inviqa/harness-go/pull/206
+* Switch and deprecate app.services to services.*.enabled by @andytson-inviqa in https://github.com/inviqa/harness-go/pull/205
+
+
 ## [0.14.0](https://github.com/inviqa/harness-go/tree/0.14.0) (2021-12-15)
 
 [Full Changelog](https://github.com/inviqa/harness-go/compare/0.13.1...0.14.0)
