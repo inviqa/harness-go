@@ -8,6 +8,8 @@ metadata:
 {{- end }}
   creationTimestamp: null
   labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: app
 {{- if .Values.ingress.protocol }}
     ingress.kubernetes.io/protocol: {{ .Values.ingress.protocol }}
 {{- end }}

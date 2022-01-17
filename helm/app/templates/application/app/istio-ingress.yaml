@@ -2,21 +2,23 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
- name: {{ .Release.Namespace }}-{{ .Values.resourcePrefix }}app-virtualservice
- labels:
-   app: {{ .Values.resourcePrefix }}app
-   app.service: {{ .Values.resourcePrefix }}app
+  name: {{ .Release.Namespace }}-{{ .Values.resourcePrefix }}app-virtualservice
+  labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: app
+    app: {{ .Values.resourcePrefix }}app
+    app.service: {{ .Values.resourcePrefix }}app
 spec:
- hosts:
- - {{ .Values.docker.services.app.environment.APP_HOST }}
- gateways:
+  hosts:
+    - {{ .Values.docker.services.app.environment.APP_HOST }}
+  gateways:
 {{- range $key, $value := .Values.istio.gateways }}
- - {{ tpl $value $ | quote }}
+    - {{ tpl $value $ | quote }}
 {{- end }}
- http:
- - route:
-   - destination:
-       host: {{ .Values.resourcePrefix }}app
-       port:
-         number: {{ .Values.default_port.port }}
+  http:
+   - route:
+       - destination:
+           host: {{ .Values.resourcePrefix }}app
+           port:
+             number: {{ .Values.default_port.port }}
 {{ end }}

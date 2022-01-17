@@ -5,6 +5,8 @@ kind: Deployment
 metadata:
   name: {{ $.Values.resourcePrefix }}app
   labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: app
     app.service: {{ $.Values.resourcePrefix }}app
 spec:
   replicas: 1

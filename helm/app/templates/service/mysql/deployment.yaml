@@ -5,6 +5,8 @@ kind: Deployment
 metadata:
   name: {{ $.Values.resourcePrefix }}mysql
   labels:
+    {{- include "chart.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: mysql
     app.service: {{ $.Values.resourcePrefix }}mysql
 spec:
   replicas: 1
@@ -18,6 +20,8 @@ spec:
   template:
     metadata:
       labels:
+        {{- include "chart.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: postgres
         app.service: {{ $.Values.resourcePrefix }}mysql
     spec:
       enableServiceLinks: false
