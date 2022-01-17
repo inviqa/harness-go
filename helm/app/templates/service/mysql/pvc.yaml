@@ -1,7 +1,5 @@
-{{ if and .Values.service.mysql .Values.persistence.mysql.enabled -}}
-
-{{- with .Values.persistence.mysql -}}
-
+{{- with .Values.persistence.mysql }}
+{{- if and (hasKey $.Values.service "mysql" | ternary $.Values.service.mysql ($.Values.docker.services.mysql | default (dict)).enabled) .enabled }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -25,7 +23,5 @@ spec:
   selector:
   {{- .selector | toYaml | nindent 4 }}
 {{- end }}
-
 {{- end }}
-
 {{- end }}

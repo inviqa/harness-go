@@ -1,18 +1,22 @@
+{{- with .Values.docker.services.app }}
+{{- if .enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.service: {{ .Values.resourcePrefix }}app
-  name: {{ .Values.resourcePrefix }}app
+    app.service: {{ $.Values.resourcePrefix }}app
+  name: {{ $.Values.resourcePrefix }}app
 spec:
   ports:
-  - name: "{{ .Values.default_port.name | default .Values.default_port.port }}"
-    port: {{ .Values.default_port.port }}
-    targetPort: {{ .Values.default_port.port }}
-{{- if .Values.default_port.protocol }}
-    protocol: {{ .Values.default_port.protocol | quote }}
+  - name: "{{ $.Values.default_port.name | default $.Values.default_port.port }}"
+    port: {{ $.Values.default_port.port }}
+    targetPort: {{ $.Values.default_port.port }}
+{{- if $.Values.default_port.protocol }}
+    protocol: {{ $.Values.default_port.protocol | quote }}
 {{- end }}
   selector:
-    app.service: {{ .Values.resourcePrefix }}app
+    app.service: {{ $.Values.resourcePrefix }}app
 status:
   loadBalancer: {}
+{{- end }}
+{{- end }}

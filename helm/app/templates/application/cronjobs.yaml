@@ -6,7 +6,7 @@
 {{- end -}}
 {{- $service = mergeOverwrite $extended $service -}}
 {{- end -}}
-{{- if and (not (hasPrefix "." $serviceName)) $service.cronjobs -}}
+{{- if and (not (hasPrefix "." $serviceName)) $service.enabled $service.cronjobs -}}
 {{- range $cronName, $cronConfig := $service.cronjobs }}
 ---
 apiVersion: batch/v1beta1

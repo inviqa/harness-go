@@ -1,7 +1,5 @@
-{{ if and .Values.service.postgres .Values.persistence.postgres.enabled -}}
-
-{{- with .Values.persistence.postgres -}}
-
+{{- with .Values.persistence.postgres }}
+{{- if and (hasKey $.Values.service "postgres" | ternary $.Values.service.postgres ($.Values.docker.services.postgres | default (dict)).enabled) .enabled }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -25,7 +23,5 @@ spec:
   selector:
   {{- .selector | toYaml | nindent 4 }}
 {{- end }}
-
 {{- end }}
-
 {{- end }}

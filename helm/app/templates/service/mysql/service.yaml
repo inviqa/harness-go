@@ -1,17 +1,19 @@
-{{ if .Values.service.mysql }}
+{{- with .Values.docker.services.mysql }}
+{{- if hasKey $.Values.service "mysql" | ternary $.Values.service.mysql .enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.service: {{ .Values.resourcePrefix }}mysql
-  name: {{ .Values.resourcePrefix }}mysql
+    app.service: {{ $.Values.resourcePrefix }}mysql
+  name: {{ $.Values.resourcePrefix }}mysql
 spec:
   ports:
   - name: "3306"
     port: 3306
     targetPort: 3306
   selector:
-    app.service: {{ .Values.resourcePrefix }}mysql
+    app.service: {{ $.Values.resourcePrefix }}mysql
 status:
   loadBalancer: {}
-{{ end }}
+{{- end }}
+{{- end }}

@@ -1,5 +1,5 @@
-{{- if .Values.service.mysql }}
 {{- with .Values.docker.services.mysql }}
+{{- if hasKey $.Values.service "mysql" | ternary $.Values.service.mysql .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:

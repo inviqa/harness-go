@@ -2,6 +2,12 @@
 
 This document highlights breaking changes in releases that will require some migration effort in your project. As we move towards a `1.0.0` release these will be restricted to major upgrades only, but currently, whilst the API is still being fleshed out in the `0.x` releases, they may be more frequent.
 
+## `0.14.x` -> `0.15.0`
+
+* app.services in workspace.yml is deprecated and replaced with services.*.enabled. It will still continue to function until obsoleted
+* .Values.service in helm values is deprecated and replaced with .Values.docker.services.*.enabled. It will still continue to function until obsoleted.
+* _twig/docker-compose.yml/application.yml.twig moved to _twig/docker-compose.yml/service/app.yml.twig, to match the same features as other services, enabled by default
+
 ## `0.13.x` -> `0.14.0`
 
 * The default development workflow has now changed from host to `app` container. Before, the `app` container was still the default way to run your app, but all `ws go ...` commands executed on the host by default. These now run in the `app` container instead.

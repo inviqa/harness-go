@@ -1,5 +1,5 @@
-{{- if .Values.service.postgres }}
 {{- with .Values.docker.services.postgres }}
+{{- if hasKey $.Values.service "postgres" | ternary $.Values.service.postgres .enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
