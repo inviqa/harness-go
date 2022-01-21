@@ -21,7 +21,7 @@ spec:
     metadata:
       labels:
         {{- include "chart.labels" $ | nindent 8 }}
-        app.kubernetes.io/component: postgres
+        app.kubernetes.io/component: mysql
         app.service: {{ $.Values.resourcePrefix }}mysql
     spec:
       enableServiceLinks: false
