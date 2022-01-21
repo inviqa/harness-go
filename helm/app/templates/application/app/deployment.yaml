@@ -9,7 +9,9 @@ metadata:
     app.kubernetes.io/component: app
     app.service: {{ $.Values.resourcePrefix }}app
 spec:
-  replicas: 1
+{{- with (pick . "replicas") }}
+{{- . | toYaml | nindent 2 }}
+{{- end }}
   selector:
     matchLabels:
       app.service: {{ $.Values.resourcePrefix }}app
