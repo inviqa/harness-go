@@ -22,6 +22,14 @@ attributes:
     broker:
       base_url: https://my-team.pactflow.io/
       token: = decrypt('<encrypted broker token>')
+      
+  services:
+    app:
+      # ...
+      environment:
+        #...
+        PACT_BROKER_BASE_URL: = @('pact.broker.base_url')
+        PACT_BROKER_TOKEN: = @('pact.broker.token')
 ```
 
 Now, rebuild your application using `ws rebuild`. This will install the necessary tooling for Pact. Pact verification will also work as part of your Go tests, if you need it. Additionally, the default Jenkins pipeline will take care of publishing Pacts for you.
