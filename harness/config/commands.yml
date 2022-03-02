@@ -186,9 +186,9 @@ command('recompile'):
     DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
-    echo "go mod download"
+    echo "go mod download" >&2
     .my127ws/harness/scripts/docker/compose-exec.sh go mod download
-    echo "go build -o /go/bin/app"
+    echo "go build -o /go/bin/app" >&2
     .my127ws/harness/scripts/docker/compose-exec.sh go build -o /go/bin/app .
     passthru docker-compose restart app
 
