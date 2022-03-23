@@ -5,16 +5,15 @@ workspace('ci-go-sample'):
 attributes:
   app:
     build: develop
-    services: [postgres]
+    services: [mysql]
   go:
     module_name: ci-go-sample
-    version: 1.17
   services:
-    postgres:
-      version: alpine
+    mysql:
+      version: "8.0"
   database:
     name: my_database
-    host: postgres
+    host: mysql
     user: db-user
     pass: db-pass
-    port: 5432
+    port: 3306

@@ -4,7 +4,7 @@ workspace('ci-go-sample'):
 
 attributes:
   app:
-    build: production
+    build: develop
+    services: [kafka]
   go:
     module_name: ci-go-sample
-    version: 1.16

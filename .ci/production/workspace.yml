@@ -7,4 +7,3 @@ attributes:
     build: production
   go:
     module_name: ci-go-sample
-    version: 1.17

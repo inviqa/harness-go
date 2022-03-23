@@ -15,7 +15,7 @@ function test()
 
     local path_harness="."
     local path_test="./.tmp-test"
-    local ci_test_path="${path_harness}/.ci/${goversion}/${mode}"
+    local ci_test_path="${path_harness}/.ci/${mode}"
 
     if [ -d "${path_test}" ]; then
         rm -rf "${path_test}"
@@ -26,6 +26,7 @@ function test()
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
 
+    ws set go.version "${goversion}"
     ws install
 
     local lockedversion
