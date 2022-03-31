@@ -177,3 +177,26 @@ copy_files:
 [`gofmt`]: https://pkg.go.dev/cmd/gofmt
 [`goimports`]: https://pkg.go.dev/golang.org/x/tools/cmd/goimports
 [`gocyclo`]: https://github.com/fzipp/gocyclo
+
+
+### `git` attributes
+
+These attributes control how Git is used in your harness project. Attributes available (and their defaults) are as follows:
+
+    git:
+      main_branch: "master"
+      config_global:
+        - key: 'url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'
+          value: https://github.com/
+          when: = @('github.token') != null
+          buildArgs:
+            GITHUB_TOKEN: = @('github.token')
+        - key: 'url.ssh://git@github.com/.insteadOf'
+          value: https://github.com/
+          when: = @('github.ssh_deploy_key') != null
+          buildArgs:
+            SSH_PRIVATE_KEY: = @('github.ssh_deploy_key')
+
+#### `main_branch`
+
+This can be changed to match whatever main branch you decide to use in your project, e.g. `main` is becoming a more common branch name instead of `master`.

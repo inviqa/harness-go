@@ -16,7 +16,7 @@ bench_compare() {
     exit 1
   fi
 
-  stable_branch="master"
+  stable_branch="{{ @('git.main_branch') }}"
   read -p "What is your stable branch? (default: master) " -r stable_branch
   if [ "$stable_branch" == "" ]
   then
