@@ -16,7 +16,7 @@ metadata:
     app.service: {{ .Values.resourcePrefix }}app
   name: {{ .Values.resourcePrefix }}app
 spec:
-  {{- with (pick .Values.ingress "ingressClassName") }}
+  {{- with (pick .Values.ingress "ingressClassName" "tls") }}
   {{- . | toYaml | nindent 2 }}
   {{- end }}
   rules:
@@ -28,10 +28,6 @@ spec:
             name: {{ .Values.resourcePrefix }}app
             port:
               number: {{ .Values.default_port.port }}
-{{- if .Values.ingress.tls }}
-  tls:
-  {{- toYaml .Values.ingress.tls | nindent 4 }}
-{{- end }}
 status:
   loadBalancer: {}
 {{ end }}
