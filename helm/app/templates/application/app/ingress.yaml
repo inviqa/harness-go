@@ -1,5 +1,5 @@
 {{ if eq .Values.ingress.type "standard" }}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
 {{- with .Values.ingress.annotations }}
@@ -16,17 +16,20 @@ metadata:
     app.service: {{ .Values.resourcePrefix }}app
   name: {{ .Values.resourcePrefix }}app
 spec:
+  {{- with (pick .Values.ingress "ingressClassName" "tls") }}
+  {{- . | toYaml | nindent 2 }}
+  {{- end }}
   rules:
   - host: {{ .Values.docker.services.app.environment.APP_HOST }}
     http:
       paths:
-      - backend:
-          serviceName: {{ .Values.resourcePrefix }}app
-          servicePort: {{ .Values.default_port.port }}
-{{- if .Values.ingress.tls }}
-  tls:
-  {{- toYaml .Values.ingress.tls | nindent 4 }}
-{{- end }}
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Values.resourcePrefix }}app
+            port:
+              number: {{ .Values.default_port.port }}
 status:
   loadBalancer: {}
 {{ end }}
