@@ -2,6 +2,21 @@
 
 This document highlights breaking changes in releases that will require some migration effort in your project. As we move towards a `1.0.0` release these will be restricted to major upgrades only, but currently, whilst the API is still being fleshed out in the `0.x` releases, they may be more frequent.
 
+## `0.16.x` -> `0.17.0`
+
+### MySQL
+
+We are switching back to Docker Inc's official mysql for arm64 computers, as it now supports arm64 on 8.0-oracle tag. This was also done because Oracle's mysql-server repository changed it's image publishing structure to no longer be multi-platform images.
+
+You can switch to any of the previous settings setting:
+
+e.g. to Docker Inc's official mysql 5.7 (with no arm64 support)
+```
+attribute('services.mysql.version'): '5.7'
+# since it's a multi-platform image of only one platform
+attribute('services.mysql.platform'): linux/amd64 
+```
+
 ## `0.14.x` -> `0.15.0`
 
 * app.services in workspace.yml is deprecated and replaced with services.*.enabled. It will still continue to function until obsoleted
