@@ -186,7 +186,7 @@ command('recompile'):
     DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
-    if ! docker ps -q -f "status=running" --no-trunc | grep -Fxe "$(docker-compose ps -q app)" >/dev/null; then
+    if ! docker-compose ps --services --filter "status=running" | grep -Fxe app >/dev/null; then
       echo "rebuilding app container" >&2
       passthru docker-compose up -d --build app
     fi
