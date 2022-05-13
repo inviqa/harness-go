@@ -186,6 +186,10 @@ command('recompile'):
     DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
+    if docker-compose ps app | grep -q 'exited'; then
+      echo "rebuilding app container" >&2
+      passthru docker-compose up -d --build app
+    fi
     echo "go mod download" >&2
     .my127ws/harness/scripts/docker/compose-exec.sh go mod download
     echo "go build -o /go/bin/app" >&2
