@@ -196,6 +196,24 @@ command('recompile'):
     .my127ws/harness/scripts/docker/compose-exec.sh go build -o /go/bin/app .
     passthru docker-compose restart app
 
+command('recompile <binary>'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+    COMPOSE_DOCKER_CLI_BUILD: "1"
+    DOCKER_BUILDKIT: "1"
+    BINARAY: = input.argument('binary')
+    SANITISED_BINARY: = sanitize_additional_binary_path(input.argument('binary'))
+  exec: |
+    #!bash(workspace:/)|@
+    if ! docker-compose ps --services --filter "status=running" | grep -Fxe app >/dev/null; then
+      echo "rebuilding app container" >&2
+      passthru docker-compose up -d --build app
+    fi
+    echo "go mod download" >&2
+    .my127ws/harness/scripts/docker/compose-exec.sh go mod download
+    echo "go build -o /go/bin/$SANITISED_BINARY ./$BINARAY" >&2
+    .my127ws/harness/scripts/docker/compose-exec.sh go build -o "/go/bin/$SANITISED_BINARY" "./$BINARAY"
+
 command('use prod'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
