@@ -136,6 +136,14 @@ command('go test integration'):
     #!bash(workspace:/)|@
     source .my127ws/harness/scripts/integration/run.sh
 
+command('go test integration-coverage'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    source .my127ws/harness/scripts/integration/coverage-run.sh
+    go tool cover -html=cp.out
+
 command('go test integration <test-name>'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
