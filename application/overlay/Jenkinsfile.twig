@@ -1,5 +1,5 @@
 pipeline {
-    agent { label "my127ws" }
+    agent { label 'linux-amd64' }
     environment {
         MY127WS_KEY = credentials('{{ @('jenkins.credentials.my127ws_key') }}')
         MY127WS_ENV = "pipeline"
