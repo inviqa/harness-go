@@ -10,7 +10,11 @@
 {{- range $cronName, $cronConfig := $service.cronjobs }}
 ---
 apiVersion: batch/v1beta1
-kind: CronJob
+{{- if semverCompare ">=1.21-0" $.Capabilities.KubeVersion.Version }}
+apiVersion: batch/v1
+{{- else }}
+apiVersion: batch/v1beta1
+{{- end }}
 metadata:
   name: {{ print $.Values.resourcePrefix $cronName }}
   {{- $cronMeta := pick $cronConfig "annotations" -}}
