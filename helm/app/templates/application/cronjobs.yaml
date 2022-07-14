@@ -9,7 +9,6 @@
 {{- if and (not (hasPrefix "." $serviceName)) $service.enabled $service.cronjobs -}}
 {{- range $cronName, $cronConfig := $service.cronjobs }}
 ---
-apiVersion: batch/v1beta1
 {{- if semverCompare ">=1.21-0" $.Capabilities.KubeVersion.Version }}
 apiVersion: batch/v1
 {{- else }}
