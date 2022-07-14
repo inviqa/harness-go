@@ -14,6 +14,7 @@ apiVersion: batch/v1
 {{- else }}
 apiVersion: batch/v1beta1
 {{- end }}
+kind: CronJob
 metadata:
   name: {{ print $.Values.resourcePrefix $cronName }}
   {{- $cronMeta := pick $cronConfig "annotations" -}}
