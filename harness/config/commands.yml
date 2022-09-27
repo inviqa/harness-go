@@ -180,6 +180,13 @@ command('go bench'):
     #!bash(workspace:/)|@
     ws go bench current
 
+command('go vuln check'):
+  env:
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    .my127ws/harness/scripts/vuln/check.sh
+
 command('go fmt'):
   env:
     COMPOSE_PROJECT_NAME: = @('namespace')
