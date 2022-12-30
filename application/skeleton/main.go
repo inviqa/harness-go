@@ -1,3 +1,5 @@
+//go:generate sh tools/scripts/mockgen.sh
+
 package main
 
 import (

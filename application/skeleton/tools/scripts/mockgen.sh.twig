@@ -1,0 +1,23 @@
+#!/bin/sh
+
+{% apply spaceless %}
+{% for path in @('app.mockgen.paths') %}
+  {% if @('app.mockgen.mode') == "source" %}
+
+    {% set pathParts = path.source|split('/') %}
+    {% set package = path.package | default(pathParts[pathParts|length-2]) %}
+    {% set destination = path.destination | default(path.source|trim('.go', 'right') ~ '_mocks.go') %}
+
+    test {{ destination }} -nt {{ path.source }} || go run github.com/golang/mock/mockgen -source={{ path.source }} -package={{ package }} -destination={{ destination }}
+
+  {% elseif @('app.mockgen.mode') == "reflect" %}
+
+    {% set pathParts = path.import|split('/') %}
+    {% set package = path.package | default(pathParts|last) %}
+    {% set destination = path.destination | default(pathParts|slice(1)|join('/') ~ '/mocks.go') %}
+
+    go run github.com/golang/mock/mockgen -package={{ package }} -destination={{ destination }} {{ path.import }} {{ path.symbols }}
+
+  {% endif %}
+{% endfor %}
+{% endapply %}
