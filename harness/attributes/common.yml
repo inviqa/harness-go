@@ -23,14 +23,6 @@ attributes.default:
       mode: source
       paths:
         - source: "./test/example.go"
-    #          package: "test"
-    #          destination: "./test/example_mocks.go"
-    #      mode: reflect
-    #      paths:
-    #        - import: "ci-go-sample/test"
-    #          symbols: "Example"
-    #          package: "test"
-    #          destination: "./test/example_mocks.go"
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')
