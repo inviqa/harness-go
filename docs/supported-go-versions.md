@@ -2,9 +2,8 @@
 
 This harness is currently tested against the following Go versions in the Jenkins pipeline:
 
-* 1.17
-* 1.18 [default]
 * 1.19
+* 1.20
 
 > _NOTE: We can only guarantee harness functionality under the Go versions listed above._
 
