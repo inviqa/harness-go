@@ -27,7 +27,7 @@ pipeline {
                     agent { label 'linux-amd64' }
                     steps { sh './test develop-with-kafka 1.19' }
                 }
-                stage('(go=1.19 mode=production)') {
+                stage('(go=1.20 mode=production)') {
                     agent { label 'linux-amd64' }
                     steps { sh './test production 1.20' }
                 }
