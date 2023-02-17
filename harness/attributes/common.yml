@@ -19,6 +19,10 @@ attributes.default:
     additional_binaries: []
     packages: []
     copy_files: []
+    mockgen:
+      mode: source
+      paths:
+        - source: "./test/example.go"
 
   domain: my127.site
   hostname: = @('namespace') ~ '.' ~ @('domain')

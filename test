@@ -37,6 +37,8 @@ function test()
     fi
 
     ws helm kubeval qa
+    ws go generate
+    ws go test
 
     ws disable
     ws enable
