@@ -26,7 +26,7 @@ function test()
     mkdir "./.my127ws/"
     cp -ap "../${path_harness}/"* "./.my127ws/"
 
-    ws set go.version "${goversion}"
+    ws set go.version "\"${goversion}\""
     ws install
 
     local lockedversion
