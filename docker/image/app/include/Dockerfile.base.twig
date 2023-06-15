@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:{{ @('go.version')}}-{{ @('go.distro_codename') }} AS base
+FROM --platform=$BUILDPLATFORM {{ @('services.app.build.from') }} AS base
 LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 {% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}

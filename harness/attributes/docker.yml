@@ -2,6 +2,8 @@ attributes:
   services:
     app:
       enabled: true
+      build:
+        from: = "golang:" ~ @('go.version') ~ "-" ~ @('go.distro_codename')
       image: = @('docker.repository') ~ ':' ~ @('docker.tagPrefix') ~ @('app.version')
       environment:
         LOG_LEVEL: debug
@@ -9,7 +11,7 @@ attributes:
       resources:
         memory: 100Mi
     mysql:
-      enabled: "= 'mysql' in @('app.services')" 
+      enabled: "= 'mysql' in @('app.services')"
       image: "= 'mysql:' ~ @('services.mysql.version')"
       # arm64 support is currently in a different tag
       version: "= host_architecture() == 'amd64' ? '8.0' : '8.0-oracle'"
@@ -22,7 +24,7 @@ attributes:
       resources:
         memory: 512Mi
     postgres:
-      enabled: "= 'postgres' in @('app.services')" 
+      enabled: "= 'postgres' in @('app.services')"
       image: = 'postgres:' ~ @('services.postgres.version')
       version: 9.6
       environment:
@@ -34,7 +36,7 @@ attributes:
       resources:
         memory: 512Mi
     kafka-outbox-relay:
-      enabled: "= 'kafka-outbox-relay' in @('app.services')" 
+      enabled: "= 'kafka-outbox-relay' in @('app.services')"
       repository: quay.io/inviqa_images/kafka-outbox-relay
       tag: v1
       environment:
@@ -48,12 +50,12 @@ attributes:
       environment_secrets:
         DB_PASS: = @('database.pass')
     kafka:
-      enabled: "= 'kafka' in @('app.services')" 
+      enabled: "= 'kafka' in @('app.services')"
       repository: bitnami/kafka
       host: "kafka:29092"
       tag: latest
     zookeeper:
-      enabled: "= 'zookeeper' in @('app.services')" 
+      enabled: "= 'zookeeper' in @('app.services')"
       repository: bitnami/zookeeper
       tag: latest
 
@@ -72,7 +74,7 @@ attributes:
         postgres:
           resources:
             memory: "512Mi"
-            
+
     base:
       resourcePrefix: ~
       hostname: = @('pipeline.base.namespace') ~ '.example.com'
