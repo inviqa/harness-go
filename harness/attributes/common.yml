@@ -62,7 +62,7 @@ attributes.default:
       - key: 'url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/.insteadOf'
         value: https://github.com/
         when: = @('github.token') != null
-        buildArgs: 
+        buildArgs:
           GITHUB_TOKEN: = @('github.token')
       - key: 'url.ssh://git@github.com/.insteadOf'
         value: https://github.com/
@@ -83,6 +83,7 @@ attributes.default:
     formatter: gofmt
     gocyclo:
       threshold: 10
+    distro_codename: bullseye
 
   helm:
     additional_schema_locations: https://inviqa.github.io/kubernetes-json-schema/schema
@@ -110,7 +111,7 @@ attributes.default:
       # The scope under which a secret can be decrypted
       # Either cluster-wide, namespace-wide, or strict
       scope: "= @('helm.sealed_secrets.namespace') ? 'namespace-wide' : 'cluster-wide'"
-  
+
   jenkins:
     credentials:
       my127ws_key: = @('workspace.name') ~ '-my127ws-key'
@@ -149,6 +150,6 @@ attributes.default:
       hostname: = @('pipeline.base.namespace') ~ '.example.com'
     qa:
       enabled: no
-      namespace: = @('workspace.name') 
+      namespace: = @('workspace.name')
       hostname: = @('pipeline.qa.namespace') ~ '.' ~ @('domain')
       resourcePrefix: ~
