@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM golang:{{ @('go.version')}} AS base
+FROM --platform=$BUILDPLATFORM golang:{{ @('go.version')}}-{{ @('go.distro_codename') }} AS base
 LABEL build="{{ @('namespace') ~ ':' ~ @('app.version') }}"
 
 {% for envName, envValue in @('go.environment')|filter(v => v is not empty) %}
@@ -29,7 +29,7 @@ RUN chmod +x /usr/local/bin/helper
 
 ARG TARGETOS
 ARG TARGETARCH
-ENV GOOS=$TARGETOS GOARCH=$TARGETARCH 
+ENV GOOS=$TARGETOS GOARCH=$TARGETARCH
 {% for config in @('git.config_global')|filter(v => v is not empty and ((v.when is not defined) or v.when)) %}
 {% for argName, argValue in config.buildArgs|default({}) %}
 ARG {{ argName }}=
