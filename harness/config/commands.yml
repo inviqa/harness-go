@@ -1,5 +1,6 @@
 command('enable'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
@@ -7,6 +8,7 @@ command('enable'):
 
 command('disable'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
@@ -14,6 +16,7 @@ command('disable'):
 
 command('destroy'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
@@ -21,7 +24,7 @@ command('destroy'):
 
 command('networks external'):
   env:
-    NETWORKS: = get_docker_external_networks()
+    NETWORKS: = get_docker_external_networks(@('docker.compose.bin'))
   exec: |
     #!bash(workspace:/)
     for NETWORK in ${NETWORKS}; do
@@ -32,21 +35,27 @@ command('networks external'):
 
 command('build'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_DOCKER_CLI_BUILD:  "1"
+    COMPOSE_PROJECT_NAME: = @('namespace')
     DOCKER_BUILDKIT: "1"
   exec: |
     #!bash(workspace:/)|@
     ws external-images pull
-    passthru docker-compose build
+    passthru $COMPOSE_BIN build
 
 command('rebuild'): |
   #!php
   $ws->run('destroy');
   $ws->run('install');
 
-command('app'): |
-  #!bash(workspace:/)|@
-  passthru docker-compose exec app bash
+command('app'):
+  env:
+    COMPOSE_BIN: = @('docker.compose.bin')
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(workspace:/)|@
+    passthru docker-compose exec app bash
 
 # this is only here to make things easier for people who are familar with the other
 # harnesses, where `ws console` is used to quickly exec onto the main container
@@ -56,6 +65,7 @@ command('console'): |
 
 command('go generate'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -63,6 +73,7 @@ command('go generate'):
 
 command('go test'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -70,6 +81,7 @@ command('go test'):
 
 command('go vet'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -77,6 +89,7 @@ command('go vet'):
 
 command('go gocyclo'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -84,6 +97,7 @@ command('go gocyclo'):
 
 command('go gosec'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -91,6 +105,7 @@ command('go gosec'):
 
 command('go ineffassign'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -98,6 +113,7 @@ command('go ineffassign'):
 
 command('go fmt check'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -105,12 +121,16 @@ command('go fmt check'):
 
 command('go mod check'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     .my127ws/harness/scripts/docker/compose-exec.sh helper modules:check
 
 command('go test coverage'):
+  env:
+    COMPOSE_BIN: = @('docker.compose.bin')
+    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     .my127ws/harness/scripts/docker/compose-exec.sh go test -coverprofile=cp.out ./...
@@ -123,7 +143,6 @@ command('go test integration host'):
 
 command('go test integration host <test-name>'):
   env:
-    COMPOSE_PROJECT_NAME: = @('namespace')
     TEST_NAME: = input.argument('test-name')
   exec: |
     #!bash(workspace:/)|@
@@ -131,6 +150,7 @@ command('go test integration host <test-name>'):
 
 command('go test integration'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -138,6 +158,7 @@ command('go test integration'):
 
 command('go test integration-coverage'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -146,6 +167,7 @@ command('go test integration-coverage'):
 
 command('go test integration <test-name>'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
     TEST_NAME: = input.argument('test-name')
   exec: |
@@ -154,6 +176,7 @@ command('go test integration <test-name>'):
 
 command('go bench compare'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -161,6 +184,7 @@ command('go bench compare'):
 
 command('go bench report'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -168,27 +192,28 @@ command('go bench report'):
 
 command('go bench current'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     .my127ws/harness/scripts/docker/compose-exec.sh go test -count=5 -bench=. -benchmem --tags=benchmarks ./benchmarks/
 
 command('go bench'):
-  env:
-    COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
     ws go bench current
 
 command('go vuln check'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
-    .my127ws/harness/scripts/vuln/check.sh
+    .my127ws/harness/scripts/docker/compose-exec.sh .my127ws/harness/scripts/vuln/check.sh
 
 command('go fmt'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -196,6 +221,7 @@ command('go fmt'):
 
 command('recompile'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
     COMPOSE_DOCKER_CLI_BUILD: "1"
     DOCKER_BUILDKIT: "1"
@@ -213,8 +239,9 @@ command('recompile'):
 
 command('recompile <binary>'):
   env:
-    COMPOSE_PROJECT_NAME: = @('namespace')
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_DOCKER_CLI_BUILD: "1"
+    COMPOSE_PROJECT_NAME: = @('namespace')
     DOCKER_BUILDKIT: "1"
     BINARAY: = input.argument('binary')
     SANITISED_BINARY: = sanitize_additional_binary_path(input.argument('binary'))
@@ -231,6 +258,7 @@ command('recompile <binary>'):
 
 command('use prod'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)|@
@@ -269,6 +297,7 @@ command('get <attribute>'):
 
 command('pact publish <tag> <version>'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
     PACT_VERSION_TAG: = input.argument('tag')
     PACT_VERSION: = input.argument('version')

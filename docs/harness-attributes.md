@@ -128,7 +128,7 @@ This attribute is for adding additional services to your application stack. For 
        app:
          services: [kafka, zookeeper]
 
-1. Add `docker-compose` configuration for these under `tools/workspace/_twig/docker-compose.yml/services/kafka.yml.twig` (and `zookeeper.yml.twig`)
+1. Add `docker compose` configuration for these under `tools/workspace/_twig/docker-compose.yml/services/kafka.yml.twig` (and `zookeeper.yml.twig`)
 1. Run `ws harness prepare` to run the templating, and then check your `docker-compose.yml` to see if those services are now present.
 1. Run a `ws rebuild` to bring those services up
 

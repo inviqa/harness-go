@@ -56,7 +56,7 @@ The below guide shows how to add Kafka and Zookeeper to your application. In you
            KAFKA_HOST: = @('services.kafka.host')
    ```
 
-Now that you have configured the harness correctly, you just need to do a `ws rebuild`. Your local environment should now have running `kafka` and `zookeeper` containers, alongside your `app` container (check this with `docker-compose ps`).
+Now that you have configured the harness correctly, you just need to do a `ws rebuild`. Your local environment should now have running `kafka` and `zookeeper` containers, alongside your `app` container (check this with `docker compose ps`).
 
 >_NOTE: Now that you have Kafka running, you need to update your application to read the environment variables we defined above and connect to it. Also, remember to import the [`github.com/Shopify/sarama`] module._
 

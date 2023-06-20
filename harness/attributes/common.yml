@@ -38,6 +38,8 @@ attributes.default:
 
   docker:
     config: null # deprecated
+    compose:
+      bin: 'docker-compose'
     # If using gitops helm chart repositories, it's recommended to put this configuration
     # in the values.yml in there now instead of project application repositories
     image_pull_config: = @('docker.config')
