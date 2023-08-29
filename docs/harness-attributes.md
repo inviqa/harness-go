@@ -144,7 +144,9 @@ These settings are related to changing the ingress used for your application. Va
 
 This allows us to enable the bundling of certificates when the production image is being built. This will not affect your local development, because we do not use the production image locally, however, when CI pipelines prepare the production image (based on [Docker's scratch image](https://hub.docker.com/_/scratch/)), we will need to set this value to `'yes'` if we communicate with any services that use TLS. Without these, the application will not be able to complete a TLS handshake with those services. See [development and production](development-and-production.md) for more info.
 
-#### `bundle_timezone_info`
+#### `bundle_timezone_info` (deprecated)
+
+Deprecated, since go 1.15 you can `import _ "time/tzdata"` into the application itself to bundle tzdata in the binary.
 
 This allows the bundling of timezone info when the production image is being built. This will not affect your local development, because we do not use the production image locally, however, when CI pipelines prepare the production image (based on [Docker's scratch image](https://hub.docker.com/_/scratch/)), we will need to set this value to `true` if we want to access timezone info. Generally, this is only required if you want to operate across multiple timezones.
 
