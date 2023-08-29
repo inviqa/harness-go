@@ -123,9 +123,9 @@ function('filter_local_services', [services]): |
   }
   = $filteredServices;
 
-function('get_docker_external_networks'): |
+function('get_docker_external_networks', [compose_bin]): |
   #!php
-  $configRaw = shell_exec('docker-compose config');
+  $configRaw = shell_exec($compose_bin . ' config');
   $config = \Symfony\Component\Yaml\Yaml::parse($configRaw);
   $externalNetworks = [];
   if (isset($config['networks'])) {
@@ -141,9 +141,9 @@ function('get_docker_external_networks'): |
   }
   = join(" ", $externalNetworks);
 
-function('docker_service_images'): |
+function('docker_service_images', [compose_bin]): |
   #!php
-  $configRaw = shell_exec('docker-compose config');
+  $configRaw = shell_exec($compose_bin . ' config');
   $config = \Symfony\Component\Yaml\Yaml::parse($configRaw);
   $images = [];
 

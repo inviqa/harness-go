@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+COMPOSE_BIN=($COMPOSE_BIN)
+
 function compose_exec()
 {
   local noTtyFlag=""
@@ -8,7 +10,7 @@ function compose_exec()
     noTtyFlag="-T"
   fi
 
-  docker-compose exec $noTtyFlag app "$@"
+  "${COMPOSE_BIN[@]}" exec $noTtyFlag app "$@"
 }
 
 compose_exec "$@"

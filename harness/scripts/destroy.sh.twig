@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
+COMPOSE_BIN=($COMPOSE_BIN)
+
 function destroy() {
-  run docker-compose down --rmi local --volumes --remove-orphans
+  run "${COMPOSE_BIN[@]}" down --rmi local --volumes --remove-orphans
 
   if [ "{{ @('docker.experimental.multiplatform_build.enabled') }}" == "yes" ]; then
     run docker buildx rm "{{ @('namespace') }}" || true

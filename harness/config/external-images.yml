@@ -29,7 +29,7 @@ function('external_images', [services]): |
 
 command('external-images config [--skip-exists]'):
   env:
-    IMAGES: = external_images(docker_service_images())
+    IMAGES: = external_images(docker_service_images(@('docker.compose.bin')))
     SKIP_EXISTS: "= input.option('skip-exists') ? 1 : 0"
   exec: |
     #!php
@@ -49,6 +49,7 @@ command('external-images config [--skip-exists]'):
 command('external-images pull'):
   env:
     EXTERNAL_REGISTRIES: = json_encode(@('docker.external_image_registries'))
+    COMPOSE_BIN: = @('docker.compose.bin')
   exec: |
     #!php
     foreach (json_decode($env['EXTERNAL_REGISTRIES'], true) as $registry) {
@@ -66,7 +67,7 @@ command('external-images pull'):
     }
     $confArgs = join(' ', array_map('escapeshellarg', $confArgs));
 
-    $command = "ws external-images config $confArgs | docker-compose -f - pull";
+    $command = "ws external-images config $confArgs | $COMPOSE_BIN -f - pull";
     echo $command . PHP_EOL;
     passthru($command);
 

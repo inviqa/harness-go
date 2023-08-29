@@ -6,7 +6,7 @@ When the CI pipeline builds the `app` image and pushes it to the Docker image re
 
 ## Doing a production image build
 
-When you have your development environment running locally (e.g. after running `ws install`), you can run the following to do a production image build and automatically switch to it in your `docker-compose` stack:
+When you have your development environment running locally (e.g. after running `ws install`), you can run the following to do a production image build and automatically switch to it in your `docker compose` stack:
 
     ws use prod
 

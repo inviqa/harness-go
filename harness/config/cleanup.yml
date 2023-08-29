@@ -13,7 +13,7 @@ function('built_images', [services]): |
 command('cleanup built-images'):
   env:
     BUILD_LABEL: = @('namespace') ~ ':' ~ @('app.version')
-    IMAGES: = built_images(docker_service_images())
+    IMAGES: = built_images(docker_service_images(@('docker.compose.bin')))
   exec: |
     #!bash
     IMAGES=($IMAGES)

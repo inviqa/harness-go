@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-run docker-compose stop
+COMPOSE_BIN=($COMPOSE_BIN)
+
+run "${COMPOSE_BIN[@]}" stop

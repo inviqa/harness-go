@@ -60,7 +60,7 @@ The below guide shows how to add the MySQL database to your application. In your
    ```
    >_NOTE: The version number must match the docker image versions linked to in the [supported databases](#supported-databases) section above._
 
-Now that we have configured the harness correctly, we just need to do a `ws rebuild`. Your local environment should now have a running `mysql` container, alongside your `app` container (check this with `docker-compose ps`).
+Now that we have configured the harness correctly, we just need to do a `ws rebuild`. Your local environment should now have a running `mysql` container, alongside your `app` container (check this with `docker compose ps`).
 
 >_NOTE: Now that you have a running database, you need to update your application to read the environment variables we defined above and connect to the database. Also, remember to import the correct Go module that supports your database driver, see the [recommended modules](#recommended-modules)._
 

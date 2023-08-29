@@ -41,7 +41,7 @@ In order to add the outbox relay, you need to specify a few attributes in your `
          password: = decrypt('<your encrypted password>')
    ```
 
-Now that you have configured the harness correctly, you just need to do a `ws rebuild`. Your local environment should now have running `kafka-outbox-relay` container, alongside your `app` container (check this with `docker-compose ps`).
+Now that you have configured the harness correctly, you just need to do a `ws rebuild`. Your local environment should now have running `kafka-outbox-relay` container, alongside your `app` container (check this with `docker compose ps`).
 
 [Kafka Outbox Relay]: https://github.com/inviqa/kafka-outbox-relay
 [need a database]: add-a-database.md

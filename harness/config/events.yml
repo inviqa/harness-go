@@ -1,5 +1,6 @@
 after('harness.install'):
   env:
+    COMPOSE_BIN: = @('docker.compose.bin')
     COMPOSE_PROJECT_NAME: = @('namespace')
   exec: |
     #!bash(workspace:/)
@@ -7,8 +8,12 @@ after('harness.install'):
     source .my127ws/harness/scripts/init.sh
     ws enable
 
-after('harness.refresh'): |
-  #!bash(harness:/)|@
-  run docker-compose -p @('namespace') stop
-  run docker-compose -p @('namespace') pull
-  run docker-compose -p @('namespace') up -d --build
+after('harness.refresh'): 
+  env:
+    COMPOSE_BIN: = @('docker.compose.bin')
+    COMPOSE_PROJECT_NAME: = @('namespace')
+  exec: |
+    #!bash(harness:/)|@
+    run $COMPOSE_BIN stop
+    run $COMPOSE_BIN pull
+    run $COMPOSE_BIN up -d --build
