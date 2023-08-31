@@ -16,11 +16,11 @@ bench_compare() {
     exit 1
   fi
 
-  stable_branch="master"
-  read -p "What is your stable branch? (default: master) " -r stable_branch
+  stable_branch="{{ @('git.main_branch') }}"
+  read -p "What is your stable branch? (default: {{ @('git.main_branch') }}) " -r stable_branch
   if [ "$stable_branch" == "" ]
   then
-    stable_branch="master"
+    stable_branch="{{ @('git.main_branch') }}"
   fi
 
   if ! git rev-parse --verify $stable_branch > /dev/null 2>/dev/null
