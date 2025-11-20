@@ -16,6 +16,7 @@
         GITHUB_TOKEN: {{ @('github.oauth_token') }}
 {% endif %}
     labels:
+      # Traefik 1, deprecated
 {% if @('app.ingress.type') is null %}
       - traefik.enable=false
 {% else %}
@@ -25,6 +26,14 @@
       - traefik.port={{ @('app.default_port.port') }}
 {% if @('app.ingress.protocol') %}
       - traefik.protocol={{ @('app.ingress.protocol') }}
+{% endif %}
+      # Traefik 2
+      - traefik.enable=true
+      # - traefik.docker.network=my127ws
+      - traefik.http.routers.{{ @('workspace.name') }}.rule=Host(`{{ @('hostname') }}`)
+      - traefik.http.services.{{ @('workspace.name') }}.loadbalancer.server.port={ @('app.default_port.port') }}
+{% if @('app.ingress.protocol') %}
+      - traefik.http.services.{{ @('workspace.name') }}.loadbalancer.server.scheme={{ @('app.ingress.protocol') }}
 {% endif %}
 {% endif %}
     networks:
